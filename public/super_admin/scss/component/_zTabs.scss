@@ -1,0 +1,119 @@
+.zTabHead {
+    border-bottom: none;
+    flex-wrap: nowrap;
+    @media screen and (max-width: 575px) {
+        overflow-x: scroll;
+    }
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    .nav-link {
+        position: relative;
+        margin-bottom: 0;
+        border: none;
+        border-radius: 0 !important;
+        padding: 0 toRem(30) toRem(15);
+        @include fontFamily(16, $fw_medium, 20, $colorOne);
+        white-space: nowrap;
+        &.active {
+            color: $text-black;
+            &::after {
+                width: 100%;
+            }
+        }
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: toRem(1);
+            background-color: $text-black;
+            transition: all 0.3s;
+        }
+    }
+}
+.zTabContent {
+    border-top: toRem(1) solid $border-color;
+    padding-top: toRem(30);
+}
+
+.zTab {
+    &-reset {
+        --bs-nav-link-padding-x: 0;
+        --bs-nav-link-padding-y: 0;
+        --bs-nav-link-font-weight: 400;
+        --bs-nav-link-color: #fff;
+        --bs-nav-tabs-border-width: 0;
+        --bs-nav-tabs-border-color: #fff;
+        --bs-nav-tabs-border-radius: 0;
+        --bs-nav-tabs-link-active-color: #fff;
+        --bs-nav-tabs-link-active-bg: #fff;
+        flex-wrap: nowrap;
+        border-bottom: none;
+    }
+    &-one {
+        gap: toRem(10);
+        overflow-x: auto;
+        border-bottom: toRem(1) solid $stroke-color;
+        padding-bottom: toRem(20);
+        margin-bottom: toRem(20);
+        .nav {
+            &-link {
+                padding: toRem(8) toRem(24);
+                background-color: #f3f1ff;
+                border-radius: toRem(8);
+                white-space: nowrap;
+                @include fontFamily(14, $fw_semiBold, 24, $main-color);
+                &.active {
+                    background-color: $main-color;
+                    color: $white;
+                }
+            }
+        }
+    }
+    &-two {
+        gap: toRem(19);
+        justify-content: center;
+        flex-wrap: wrap;
+        .nav {
+            &-link {
+                padding: toRem(10) toRem(20);
+                background-color: transparent;
+                border: toRem(1) solid $white-15;
+                border-radius: toRem(120);
+                white-space: nowrap;
+                @include fontFamily(18, $fw_medium, 34, $white);
+                &:hover {
+                    border-color: $white-15;
+                }
+                &.active {
+                    background-color: $white;
+                    color: $text-black;
+                }
+            }
+        }
+        ~ .exploreFeatures-tabContent {
+            padding-top: toRem(38);
+        }
+    }
+    &-three {
+        padding: toRem(7);
+        background-color: $white;
+        border: toRem(1) solid $stroke-color;
+        border-radius: toRem(12);
+        .nav {
+            &-link {
+                padding: toRem(14) toRem(28);
+                background-color: transparent;
+                border-radius: toRem(10);
+                white-space: nowrap;
+                @include fontFamily(17, $fw_semiBold, 20, $text-black);
+                &.active {
+                    background-color: $primary-color;
+                    color: $text-black;
+                }
+            }
+        }
+    }
+}

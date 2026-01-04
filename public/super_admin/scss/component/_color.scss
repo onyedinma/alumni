@@ -1,0 +1,88 @@
+$theme-colors: (
+    "black-5": var(--black-5),
+    "black-8": var(--black-8),
+    "black-10": var(--black-10),
+    "black-12": var(--black-12),
+    "white-10": var(--white-10),
+    "white-12": var(--white-12),
+    "white-15": var(--white-15),
+    "white-32": var(--white-32),
+    "white-70": var(--white-70),
+    "white-80": var(--white-80),
+    "cdef84": var(--primary-color),
+    "7f56d9": var(--main-color),
+    "afd449": var(--hover-color),
+    "e4e6eb": var(--stroke-color),
+    "707070": var(--bColor),
+    "ebedf0": var(--colorTwo),
+    "fafafa": var(--colorThree),
+    "71e3ba": var(--colorFour),
+    "ed84ef": var(--colorFive),
+    "84a2ef": var(--colorSix),
+    "f4f4ef": var(--colorSeven),
+    "ea4335": var(--colorEight),
+    "ea4335-10": var(--colorEight-10),
+    "f9f9f9": var(--colorNine),
+    "fdedeb": var(--colorTen),
+    "eaeaea": var(--colorEleven),
+    "0fa958": var(--colorTwelve),
+    "0fa958-10": var(--colorTwelve-10),
+    "f5b40a": var(--color13),
+    "f5b40a-10": var(--color13-10),
+    "ebe7d5": var(--color14),
+    "e6ef84": var(--color15),
+    "84dcef": var(--color16),
+    "eef0f2": var(--color17),
+    "b7bdc6": var(--color18),
+    "596680": var(--color19),
+    "f0f0f0": var(--color20),
+    "ed0006": var(--color21),
+    "8d84ef": var(--color22),
+    "d3d9e5": var(--color23),
+    "cdffc5": var(--color24),
+    "ffc5a5": var(--color25),
+    "efece0": var(--color26),
+    "262722": var(--color27),
+    "f4f4f4": var(--color28),
+    "ffcdb0": var(--color29),
+    "bbffb0": var(--color30),
+    "30312d": var(--color31),
+    "8d6eff": var(--color32),
+    "ff8972": var(--color33),
+    "ffb263": var(--color34),
+    "scroll-track": var(--scroll-track),
+    "scroll-thumb": var(--scroll-thumb),
+    "1b1c17": var(--text-black),
+    "1b1c17-50": var(--text-black-50),
+    "4cbf4c": var(--green),
+    "ededed": var(--bg-one),
+    "e5e8ec": var(--border-color-one),
+    "b0b0b0": var(--border-color-deep),
+    "fbf9f1": var(--body-bg),
+);
+@each $key, $color in $theme-colors {
+    .text-#{$key} {
+        color: $color !important;
+    }
+}
+/* Background Color */
+@each $key, $color in $theme-colors {
+    .bg-#{$key} {
+        background-color: $color !important;
+    }
+}
+/* Border Color */
+@each $key, $color in $theme-colors {
+    .bd-c-#{$key} {
+        border-color: $color !important;
+    }
+}
+
+/* Fil color */
+.fill-green {
+    svg {
+        path {
+            fill: $green;
+        }
+    }
+}

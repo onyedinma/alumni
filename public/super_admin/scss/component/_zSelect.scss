@@ -1,0 +1,113 @@
+// Nice select
+.sf-select-without-search {
+  background-color: $input-color !important;
+  border-radius: toRem(8) !important;
+  border: 1px solid $stroke-color !important;
+  box-sizing: border-box;
+  clear: both;
+  cursor: pointer;
+  display: block;
+  float: left;
+  font-family: inherit;
+  font-size: toRem(14) !important;
+  font-weight: $fw_regular !important;
+  color: $text-black !important;
+  outline: none;
+  padding: toRem(20) toRem(17) !important;
+  position: relative;
+  text-align: left !important;
+  transition: all 0.2s ease-in-out;
+  user-select: none;
+  white-space: nowrap;
+  width: 100% !important;
+  margin-bottom: 0 !important;
+  line-height: 0 !important;
+  &.empty {
+    color: $text-black !important;
+  }
+  &:hover {
+    border-color: $stroke-color !important;
+  }
+  .option {
+    &.selected {
+      font-weight: normal !important;
+    }
+  }
+  &::after {
+    border-color: $text-black;
+    width: 9px;
+    height: 9px;
+    right: 15px;
+    border-width: 1px;
+  }
+  &:active,
+  &.open,
+  &:focus {
+    box-shadow: 0 0 0 0 #00000000;
+  }
+  .list {
+    width: 100% !important;
+    scrollbar-width: thin;
+    &::-webkit-scrollbar {
+      width: toRem(6);
+    }
+    &::-webkit-scrollbar-track {
+      background: $scroll-track;
+      border-radius: toRem(50);
+    }
+    &::-webkit-scrollbar-thumb {
+      background: $scroll-thumb;
+      border-radius: toRem(50);
+    }
+  }
+  &.open {
+    .list {
+      opacity: 1;
+      pointer-events: auto;
+      width: 100%;
+      border-radius: toRem(12);
+      border: toRem(1) solid $stroke-color;
+      box-shadow: 0 0 toRem(10) rgb(76 76 76 / 12%);
+      background-color: #fff;
+      // padding: toRem(13);
+      padding: toRem(10) 0;
+      max-height: toRem(200);
+      overflow-y: auto;
+      z-index: 10001;
+      li {
+        padding: toRem(5) toRem(15);
+        margin-bottom: toRem(7);
+        border-radius: 0;
+        @include fontFamily(13, $fw_medium, 16, $text-black);
+        min-height: inherit;
+        transition: all 0.3s;
+        &:last-child {
+          margin-bottom: 0;
+        }
+        &.focus,
+        &.selected,
+        &:hover {
+          background-color: $purple-light !important;
+          color: $main-color !important;
+        }
+      }
+    }
+    &::after {
+      transform: rotate(45deg);
+    }
+  }
+}
+// .nice-select-1 {
+//   height: toRem(29) !important;
+//   padding: toRem(14) toRem(29.12) toRem(14) toRem(9) !important;
+//   font-size: toRem(14) !important;
+//   font-weight: $fw_medium !important;
+//   .list {
+//     box-shadow: 0px 10px 20px -5px rgba(163, 177, 204, 0.2), 0px 0px 10px 0px rgba(163, 177, 204, 0.12) !important;
+//   }
+//   &::after {
+//     width: toRem(7);
+//     height: toRem(7);
+//     right: toRem(9);
+//   }
+// }

@@ -1,0 +1,39 @@
+/* Border */
+$borders: (
+    "half": 0.5,
+    "one": 1,
+    "three": 3,
+);
+@each $key, $bd in $borders {
+    .bd-#{$key} {
+        border-width: toRem($bd) !important;
+        border-style: solid;
+    }
+}
+/* Border top */
+$borders-t: (
+    "one": 1,
+);
+@each $key, $bd in $borders-t {
+    .bd-t-#{$key} {
+        border-top-width: toRem($bd) !important;
+        border-top-style: solid;
+    }
+}
+/* Border Bottom */
+$borders-b: (
+    "one": 1,
+);
+@each $key, $bd in $borders-b {
+    .bd-b-#{$key} {
+        border-bottom-width: toRem($bd) !important;
+        border-bottom-style: solid;
+    }
+}
+/* Border Radius */
+$bdr-array: 4, 6, 7, 8, 10, 12, 15, 20, 25, 50;
+@each $bdr in $bdr-array {
+    .bd-ra-#{$bdr} {
+        border-radius: toRem($bdr) !important;
+    }
+}

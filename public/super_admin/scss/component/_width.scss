@@ -1,0 +1,76 @@
+/* Minimum width */
+$min-w-array: 50, 100, 110, 130, 150, 160, 408;
+@each $min in $min-w-array {
+    .min-w-#{$min} {
+        min-width: toRem($min);
+    }
+}
+/* Maximum width */
+$max-w-array: 10, 14, 26, 30, 60, 67, 131, 146, 150, 177, 220, 230, 240, 260,
+    351, 366, 408, 469, 483, 503, 555, 605, 631, 818, 830, 840, 890, 936, 940;
+@each $max in $max-w-array {
+    .max-w-#{$max} {
+        max-width: toRem($max);
+    }
+}
+/* Width */
+$w-array: 18, 28, 30, 32, 35, 40, 42, 45, 48, 50, 56, 74, 76, 90, 110;
+@each $w in $w-array {
+    .w-#{$w} {
+        width: toRem($w) !important;
+    }
+}
+/* Minimum Height */
+$min-h-array: 45, 82, 106, 180;
+@each $min in $min-h-array {
+    .min-h-#{$min} {
+        min-height: toRem($min) !important;
+    }
+}
+/* Maximum Height */
+$max-h-array: 35, 69, 430, 800;
+@each $max in $max-h-array {
+    .max-h-#{$max} {
+        max-height: toRem($max);
+    }
+}
+/* Height */
+$h-array: 18, 28, 30, 32, 35, 40, 42, 45, 48, 50, 56, 74, 76, 90, 110;
+@each $h in $h-array {
+    .h-#{$h} {
+        height: toRem($h) !important;
+    }
+}
+
+.max-wp-100 {
+    max-width: 100% !important;
+}
+
+/* Top */
+$top-array: 10;
+@each $t in $top-array {
+    .top-#{$t} {
+        top: #{$t}px !important;
+    }
+}
+/* Right */
+$right-array: 10;
+@each $r in $right-array {
+    .right-#{$r} {
+        right: #{$r}px !important;
+    }
+}
+/* Line clamp */
+$line-clamp-array: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10;
+@each $lc in $line-clamp-array {
+    .line-clamp-#{$lc} {
+        -webkit-line-clamp: #{$lc};
+    }
+}
+/* Text ellipsis */
+.sf-text-ellipsis {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

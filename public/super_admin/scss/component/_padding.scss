@@ -1,0 +1,78 @@
+/* z-index */
+$z-array: 10;
+@each $z in $z-array {
+    .z-index-#{$z} {
+        z-index: #{$z} !important;
+    }
+}
+/* Padding */
+$p-array: 13, 14, 18, 20, 25, 30;
+@each $p in $p-array {
+    .p-#{$p} {
+        padding: toRem($p) !important;
+    }
+}
+/* Padding top & bottom */
+$py-array: 3, 5, 6, 7, 8, 10, 11, 13, 14, 16, 17, 18, 20, 22, 25, 30, 150;
+@each $py in $py-array {
+    .py-#{$py} {
+        padding-top: toRem($py) !important;
+        padding-bottom: toRem($py) !important;
+    }
+}
+$py-sm-array: 60, 100;
+@each $py-sm in $py-sm-array {
+    .py-sm-#{$py-sm} {
+        @media screen and (min-width: 576px) {
+            padding-top: toRem($py-sm) !important;
+            padding-bottom: toRem($py-sm) !important;
+        }
+    }
+}
+/* Padding left & right */
+$px-array: 5, 6, 9, 10, 14, 17, 18, 20, 24, 25, 26, 29, 30, 33, 36, 37, 50;
+@each $px in $px-array {
+    .px-#{$px} {
+        padding-left: toRem($px) !important;
+        padding-right: toRem($px) !important;
+    }
+}
+/* Padding top */
+$pt-array: 4, 10, 17, 18, 20, 23, 25, 28, 30, 40, 76, 81, 86, 100, 114, 150;
+@each $pt in $pt-array {
+    .pt-#{$pt} {
+        padding-top: toRem($pt) !important;
+    }
+}
+/* Padding bottom */
+$pb-array: 0, 2, 3, 4, 5, 6, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 20, 22, 23,
+    24, 25, 26, 27, 30, 32, 33, 35, 36, 37, 40, 46, 50, 52, 70, 100, 122, 150;
+@each $pba in $pb-array {
+    .pb-#{$pba} {
+        padding-bottom: toRem($pba) !important;
+    }
+}
+/* Padding Left */
+$pl-array: 13, 40;
+@each $pl in $pl-array {
+    .pl-#{$pl} {
+        padding-left: toRem($pl) !important;
+    }
+}
+/* Padding Left */
+$pl-xl-array: 70;
+@each $pl-xl in $pl-xl-array {
+    .pl-xl-#{$pl-xl} {
+        @media screen and (min-width: 1200px) {
+            padding-left: toRem($pl-xl) !important;
+        }
+    }
+}
+$pl-sm-array: 47;
+@each $pl-sm in $pl-sm-array {
+    .pl-sm-#{$pl-sm} {
+        @media screen and (min-width: 576px) {
+            padding-left: toRem($pl-sm) !important;
+        }
+    }
+}
