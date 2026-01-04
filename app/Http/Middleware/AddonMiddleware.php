@@ -19,6 +19,7 @@ class AddonMiddleware
     {
         $addons = getAddonAppNameList();
 
+        /*
         foreach ($addons as $addon) {
             $codeBuildVersion = getAddonCodeBuildVersion($addon);
             $dbBuildVersion = getCustomerAddonBuildVersion($addon);
@@ -39,6 +40,7 @@ class AddonMiddleware
                 }
             }
         }
+        */
         return $next($request);
     }
 }

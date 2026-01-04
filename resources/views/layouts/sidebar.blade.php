@@ -1,6 +1,7 @@
 <!-- Sidebar -->
-<div class="zSidebar" data-background="{{ asset('assets/images/sidebar-bg.png') }}">
-    <div class="zSidebar-overlay"></div>
+<div class="zSidebar bg-secondary border-r border-white/10"
+    data-background="{{ asset('assets/images/sidebar-bg.png') }}">
+    <div class="zSidebar-overlay bg-secondary/95"></div>
     <!-- Logo -->
     <a href="{{ route('index') }}" class="d-block mx-26 mb-27 max-w-146 pt-23">
         @if(centralDomain() && isAddonInstalled('ALUSAAS'))
@@ -486,7 +487,7 @@
                                 </li>
                                 <li><a class="{{ $activeConfigurationSetting ?? '' }}"
                                         href="{{ route('admin.setting.configuration-settings') }}">{{ __('Configurations
-                                                                                                                        Settings') }}</a>
+                                                                                                                                Settings') }}</a>
                                 </li>
                                 <li><a class="{{ $activeCurrenciesSetting ?? '' }}"
                                         href="{{ route('admin.setting.currencies.index') }}">{{ __('Currency Settings') }}</a>
@@ -552,16 +553,19 @@
         <ul>
             @if(!isAddonInstalled('ALUSAAS'))
                 <li class="d-inline-flex align-items-center cg-15 pt-17 px-25">
-                    <span class="align-items-center cg-10 has-subMenu-arrow">
+                    <span class="align-items-center cg-10 has-subMenu-arrow text-gray-400">
                         {{ __('Version') }} : {{ getOption('current_version', 'v1.0') }}
                     </span>
                 </li>
             @endif
             <a href="{{ route('logout') }}"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                class="d-inline-flex align-items-center cg-15 pt-17 pb-30 px-25">
-                <img src="{{ asset('assets/images/icon/logout.svg') }}" alt="" />
-                <p class="fs-14 fw-500 lh-16 text-white-70">{{ __('Logout') }}</p>
+                class="d-inline-flex align-items-center cg-15 pt-17 pb-30 px-25 group">
+                <div class="w-20 d-flex justify-content-center">
+                    <img src="{{ asset('assets/images/icon/logout.svg') }}"
+                        class="group-hover:brightness-0 group-hover:invert transition-all" alt="" />
+                </div>
+                <p class="fs-14 fw-500 lh-16 text-gray-400 group-hover:text-gold-400">{{ __('Logout') }}</p>
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf

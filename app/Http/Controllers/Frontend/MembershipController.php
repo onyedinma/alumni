@@ -23,7 +23,7 @@ class MembershipController extends Controller
         $data['all_membership'] = $this->homeService->getMembership();
         $userService = new UserService();
         $data['user'] = $userService->userData();
-        return view('frontend.membership.index', $data);
+        return view('frontend.membership.index_modern', $data);
     }
 
 }

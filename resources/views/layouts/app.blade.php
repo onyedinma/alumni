@@ -3,18 +3,18 @@
 
 @include('layouts.header')
 
-<body>
+<body class="bg-secondary text-ivory font-sans antialiased">
     <div class="overflow-x-hidden">
         @if (getOption('app_preloader_status', 0) == STATUS_ACTIVE)
-        <div id="preloader">
-            <div id="preloader_status">
-                @if(centralDomain() && isAddonInstalled('ALUSAAS'))
-                    <img src="{{ getSettingImageCentral('app_preloader') }}" alt="{{ getOption('app_name') }}" />
-                @else
-                    <img src="{{ getSettingImage('app_preloader') }}" alt="{{ getOption('app_name') }}" />
-                @endif
+            <div id="preloader">
+                <div id="preloader_status">
+                    @if(centralDomain() && isAddonInstalled('ALUSAAS'))
+                        <img src="{{ getSettingImageCentral('app_preloader') }}" alt="{{ getOption('app_name') }}" />
+                    @else
+                        <img src="{{ getSettingImage('app_preloader') }}" alt="{{ getOption('app_name') }}" />
+                    @endif
+                </div>
             </div>
-        </div>
         @endif
 
         <!-- Main Content -->
@@ -31,9 +31,9 @@
         </div>
     </div>
     @if (!empty(getOption('cookie_status')) && getOption('cookie_status') == STATUS_ACTIVE)
-    <div class="cookie-consent-wrap shadow-lg">
-        @include('cookie-consent::index')
-    </div>
+        <div class="cookie-consent-wrap shadow-lg">
+            @include('cookie-consent::index')
+        </div>
     @endif
     @include('layouts.script')
 </body>

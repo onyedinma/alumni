@@ -23,14 +23,14 @@ class EventController extends Controller
     {
         $data['title'] = __('Event');
         $data['allEvent'] = $this->homeService->getEvent(6);
-        return view('frontend.events.all_event', $data);
+        return view('frontend.events.all_event_modern', $data);
     }
 
     public function eventDetails($slug)
     {
         $data['title'] = __('Event');
         $data['event'] = $this->eventService->getEvent($slug);
-        return view('frontend.events.event_details', $data);
+        return view('frontend.events.event_details_modern', $data);
     }
 
 }

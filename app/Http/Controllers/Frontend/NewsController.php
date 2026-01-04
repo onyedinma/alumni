@@ -23,14 +23,15 @@ class NewsController extends Controller
     {
         $data['title'] = __('News');
         $data['allNews'] = $this->homeService->getNews(6);
-        return view('frontend.news.all_news', $data);
+        return view('frontend.news.all_news_modern', $data);
     }
 
     public function newsDetails($slug)
     {
         $data['title'] = __('News');
-        $data['news'] = $this->newsService->getNewsBySlug($slug);;
-        return view('frontend.news.news_details', $data);
+        $data['news'] = $this->newsService->getNewsBySlug($slug);
+        ;
+        return view('frontend.news.news_details_modern', $data);
     }
 
 }

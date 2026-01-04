@@ -23,14 +23,15 @@ class NoticeController extends Controller
     {
         $data['title'] = __('Notice Board');
         $data['allNotice'] = $this->homeService->getNotice(6);
-        return view('frontend.notice.all_notice', $data);
+        return view('frontend.notice.all_notice_modern', $data);
     }
 
     public function noticeDetails($slug)
     {
         $data['title'] = __('Notice Board');
-        $data['notice'] = $this->noticeService->getNoticeBySlug($slug);;
-        return view('frontend.notice.notice_details', $data);
+        $data['notice'] = $this->noticeService->getNoticeBySlug($slug);
+        ;
+        return view('frontend.notice.notice_details_modern', $data);
     }
 
 }

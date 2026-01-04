@@ -23,14 +23,14 @@ class StoryController extends Controller
     {
         $data['title'] = __('Story');
         $data['stories'] = $this->storyService->getAll(8);
-        return view('frontend.stories.list', $data);
+        return view('frontend.stories.list_modern', $data);
     }
 
     public function view($slug)
     {
         $data['title'] = __('Story');
         $data['story'] = $this->storyService->getBySlug($slug);
-        return view('frontend.stories.view', $data);
+        return view('frontend.stories.view_modern', $data);
     }
 
 }

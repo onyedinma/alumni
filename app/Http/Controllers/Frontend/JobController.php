@@ -23,14 +23,15 @@ class JobController extends Controller
     {
         $data['title'] = __('Find Job');
         $data['allJob'] = $this->homeService->getJob(6);
-        return view('frontend.jobs.all_job', $data);
+        return view('frontend.jobs.all_job_modern', $data);
     }
 
     public function jobDetails($slug)
     {
         $data['title'] = __('Job Details');
-        $data['jobPostData'] = $this->jobService->getBySlug($slug);;
-        return view('frontend.jobs.job_details', $data);
+        $data['jobPostData'] = $this->jobService->getBySlug($slug);
+        ;
+        return view('frontend.jobs.job_details_modern', $data);
     }
 
 }

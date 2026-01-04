@@ -20,12 +20,12 @@ class ContactUsController extends Controller
     public function contactUs()
     {
         $data['pageTitle'] = __('Contact Us');
-        return view('frontend.contact-us', $data);
+        return view('frontend.contact_us_modern', $data);
     }
 
     public function store(ContactUsRequest $request)
     {
-        return  $this->contactUsService->store($request);
+        return $this->contactUsService->store($request);
     }
 
 }

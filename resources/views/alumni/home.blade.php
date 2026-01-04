@@ -15,20 +15,20 @@
                         action="{{ route('posts.store') }}" data-handler="postResponse">
                         @csrf
                         <!-- Create Post -->
-                        <div class="p-25 bg-white bd-one bd-c-black-10 bd-ra-25">
+                        <div class="p-25 bg-[#1e1e1e] border border-white/5 rounded-xl shadow-lg">
                             <!-- Title -->
-                            <h4 class="fs-20 fw-600 lh-24 text-1b1c17 pb-26">{{ __('Create Post') }}</h4>
+                            <h4 class="fs-20 fw-600 lh-24 text-gold-400 font-serif pb-26">{{ __('Create Post') }}</h4>
                             <!-- User -->
                             <div class="d-flex align-items-center cg-10 pb-20">
-                                <div class="flex-shrink-0 w-50 h-50 bd-one bd-c-cdef84 rounded-circle overflow-hidden"><img
+                                <div class="flex-shrink-0 w-50 h-50 border border-gold-500 rounded-circle overflow-hidden"><img
                                         src="{{ asset(getFileUrl($user->image)) }}" class="w-100"
                                         alt="{{ $user->name }}" />
                                 </div>
-                                <h4 class="fs-16 fw-500 lh-20 text-1b1c17">{{ $user->name }}</h4>
+                                <h4 class="fs-16 fw-500 lh-20 text-white">{{ $user->name }}</h4>
                             </div>
                             <!-- Post Input -->
                             <div class="pb-15">
-                                <textarea name="body" class="form-control postInput" placeholder="{{ __('What’s on your mind?') }}"></textarea>
+                                <textarea name="body" class="form-control postInput bg-secondary border border-white/10 text-white placeholder-gray-500 rounded-lg p-3 w-full" placeholder="{{ __('What’s on your mind?') }}"></textarea>
                             </div>
                             <div class="">
                                 <!-- Attachment preview -->
@@ -41,22 +41,22 @@
                                 <div class="d-flex justify-content-between align-items-center flex-wrap g-10">
                                     <!-- Add image/video -->
                                     <div class="d-flex align-items-center cg-15">
-                                        <p class="fs-16 lh-18 fw-500 text-707070">{{ __('Add to your post') }}:</p>
+                                        <p class="fs-16 lh-18 fw-500 text-gray-400">{{ __('Add to your post') }}:</p>
                                         <div class="align-items-center cg-10 d-flex flex-shrink-0">
-                                            <label for="mAttachment1"><img
+                                            <label for="mAttachment1" class="cursor-pointer opacity-70 hover:opacity-100 transition-opacity"><img
                                                     src="{{ asset('assets/images/icon/post-photo.svg') }}"
-                                                    alt="" /></label>
+                                                    alt="" class="brightness-0 invert" /></label>
                                             <input type="file" name="file[]"
                                                 accept=".png,.jpg,.svg,.jpeg,.gif,.mp4,.mov,.avi,.mkv,.webm,.flv"
                                                 id="mAttachment1" class="d-none" multiple />
-                                            <label for="mAttachment1"><img
+                                            <label for="mAttachment1" class="cursor-pointer opacity-70 hover:opacity-100 transition-opacity"><img
                                                     src="{{ asset('assets/images/icon/post-video.svg') }}"
-                                                    alt="" /></label>
+                                                    alt="" class="brightness-0 invert" /></label>
                                         </div>
                                     </div>
                                     <!-- Post button -->
                                     <button type="submit"
-                                        class="border-0 py-10 px-26 bd-ra-12 bg-cdef84 hover-bg-one">{{ __('Post Now') }}</button>
+                                        class="border-0 py-10 px-26 rounded-xl bg-maroon-600 text-white font-medium hover:bg-maroon-700 transition-all shadow-md">{{ __('Post Now') }}</button>
                                 </div>
                             </div>
                         </div>
@@ -71,12 +71,12 @@
                 <div class="d-flex flex-column rg-30">
                     <!-- Upcoming Events -->
                     @if (count($upcomingEvents))
-                        <div class="p-25 bg-white bd-one bd-c-black-10 bd-ra-25">
+                        <div class="p-25 bg-[#1e1e1e] border border-white/5 rounded-xl shadow-lg">
                             <!-- Title -->
                             <div class="d-flex justify-content-between align-items-center pb-30">
-                                <h4 class="fs-20 fw-600 lh-24 text-1b1c17">{{ __('Upcoming Events') }}</h4>
+                                <h4 class="fs-20 fw-600 lh-24 text-gold-400 font-serif">{{ __('Upcoming Events') }}</h4>
                                 <a href="{{ route('event.all') }}"
-                                    class="flex-shrink-0 fs-14 fw-500 lh-17 text-1b1c17 d-flex align-items-center cg-6 hover-color-one">
+                                    class="flex-shrink-0 fs-14 fw-500 lh-17 text-gray-300 d-flex align-items-center cg-6 hover:text-gold-400 transition-colors">
                                     <span>{{ __('See All') }}</span>
                                     <span><i class="fa-solid fa-arrow-right"></i></span>
                                 </a>
@@ -85,38 +85,38 @@
                             <ul class="zList-five">
                                 @foreach ($upcomingEvents as $event)
                                     <li>
-                                        <div class="home-item-one">
+                                        <div class="home-item-one bg-secondary/50 border border-white/5 rounded-lg p-3 hover:bg-secondary transition-colors">
                                             <div class="img">
                                                 <img src="{{ asset(getFileUrl($event->thumbnail)) }}"
-                                                    alt="{{ $event->title }}">
+                                                    alt="{{ $event->title }}" class="rounded-lg">
                                                 <ul class="tag d-flex flex-wrap cg-2 rg-5">
                                                     <li><a
-                                                            class="fs-12 fw-500 lh-16 text-1b1c17 px-6 bg-white rounded-pill d-flex">{{ eventType($event->type) }}</a>
+                                                            class="fs-12 fw-500 lh-16 text-white px-6 bg-maroon-600 rounded-pill d-flex">{{ eventType($event->type) }}</a>
                                                     </li>
                                                     <li><a
-                                                            class="fs-12 fw-500 lh-16 text-1b1c17 px-6 bg-white rounded-pill d-flex">{{ $event->category->name }}</a>
+                                                            class="fs-12 fw-500 lh-16 text-secondary px-6 bg-gold-400 rounded-pill d-flex">{{ $event->category->name }}</a>
                                                     </li>
                                                 </ul>
                                             </div>
                                             <div class="content">
                                                 <!-- Tab - Date -->
                                                 <div class="d-flex align-items-center flex-wrap cg-10">
-                                                    <p class="fs-14 fw-400 lh-17 text-707070">
+                                                    <p class="fs-14 fw-400 lh-17 text-gold-400/80">
                                                         {{ date('F j, g:i A', strtotime($event->date)) }}
                                                     </p>
                                                 </div>
                                                 <!-- Title -->
-                                                <h4 class="title">{{ $event->title }}</h4>
+                                                <h4 class="title text-white font-serif">{{ $event->title }}</h4>
                                                 <!-- Location -->
                                                 <div class="d-flex align-items-center cg-5">
                                                     <div class="d-flex max-w-10"><img
                                                             src="{{ asset('assets/images/icon/location.svg') }}"
-                                                            alt="" /></div>
-                                                    <p class="fs-14 fw-400 lh-17 text-707070">{{ $event->location }}</p>
+                                                            alt="" class="brightness-0 invert opacity-70" /></div>
+                                                    <p class="fs-14 fw-400 lh-17 text-gray-400">{{ $event->location }}</p>
                                                 </div>
                                                 <!-- Link -->
                                                 <a href="{{ route('event.details', $event->slug) }}"
-                                                    class="fs-14 fw-500 lh-17 text-1b1c17 text-decoration-underline hover-color-one">{{ __('Reservation') }}</a>
+                                                    class="fs-14 fw-500 lh-17 text-gold-400 text-decoration-underline hover:text-white transition-colors">{{ __('Reservation') }}</a>
                                             </div>
                                         </div>
                                     </li>
@@ -126,12 +126,12 @@
                     @endif
                     <!-- Jobs -->
                     @if (count($latestJobs))
-                        <div class="p-25 bg-white bd-one bd-c-black-10 bd-ra-25">
+                        <div class="p-25 bg-[#1e1e1e] border border-white/5 rounded-xl shadow-lg">
                             <!-- Title -->
                             <div class="d-flex justify-content-between align-items-center pb-30">
-                                <h4 class="fs-20 fw-600 lh-24 text-1b1c17">{{ __('Jobs') }}</h4>
+                                <h4 class="fs-20 fw-600 lh-24 text-gold-400 font-serif">{{ __('Jobs') }}</h4>
                                 <a href="{{ route('jobPost.all-job-post') }}"
-                                    class="flex-shrink-0 fs-14 fw-500 lh-17 text-1b1c17 d-flex align-items-center cg-6 hover-color-one">
+                                    class="flex-shrink-0 fs-14 fw-500 lh-17 text-gray-300 d-flex align-items-center cg-6 hover:text-gold-400 transition-colors">
                                     <span>{{ __('See All') }}</span>
                                     <span><i class="fa-solid fa-arrow-right"></i></span>
                                 </a>
@@ -212,25 +212,25 @@
                             <ul class="zList-five">
                                 @foreach ($latestNotice as $notice)
                                     <li>
-                                        <div class="home-item-one">
+                                        <div class="home-item-one bg-secondary/50 border border-white/5 rounded-lg p-3 hover:bg-secondary transition-colors">
                                             <div class="img"><img src="{{ asset(getFileUrl($notice->image)) }}"
-                                                    alt="{{ $notice->title }}" />
+                                                    alt="{{ $notice->title }}" class="rounded-lg" />
                                             </div>
                                             <div class="content">
                                                 <!-- Tab - Date -->
                                                 <div class="d-flex align-items-center flex-wrap cg-10">
-                                                    <p class="fs-14 fw-400 lh-17 text-707070">
+                                                    <p class="fs-14 fw-400 lh-17 text-gold-400/80">
                                                         {{ date('M d, Y', strtotime($notice->created_at)) }}
                                                     </p>
                                                 </div>
                                                 <!-- Title -->
-                                                <h4 class="title">{{ $notice->title }}</h4>
+                                                <h4 class="title text-white font-serif">{{ $notice->title }}</h4>
                                                 <!-- Info -->
-                                                <p class="fs-14 fw-400 lh-17 text-707070">
+                                                <p class="fs-14 fw-400 lh-17 text-gray-400">
                                                     {{ getSubText($notice->details, 150) }}</p>
                                                 <!-- Link -->
                                                 <a href="{{ route('notice.details', $notice->slug) }}"
-                                                    class="fs-14 fw-500 lh-17 text-1b1c17 text-decoration-underline hover-color-one">{{ __('More Details') }}</a>
+                                                    class="fs-14 fw-500 lh-17 text-gold-400 text-decoration-underline hover:text-white transition-colors">{{ __('More Details') }}</a>
                                             </div>
                                         </div>
                                     </li>
@@ -240,12 +240,12 @@
                     @endif
                     <!-- Latest News -->
                     @if (count($latestNews))
-                        <div class="p-25 bg-white bd-one bd-c-black-10 bd-ra-25">
+                        <div class="p-25 bg-[#1e1e1e] border border-white/5 rounded-xl shadow-lg">
                             <!-- Title -->
                             <div class="d-flex justify-content-between align-items-center pb-30">
-                                <h4 class="fs-20 fw-600 lh-24 text-1b1c17">{{ __('Latest News') }}</h4>
+                                <h4 class="fs-20 fw-600 lh-24 text-gold-400 font-serif">{{ __('Latest News') }}</h4>
                                 <a href="{{ route('all.news') }}"
-                                    class="flex-shrink-0 fs-14 fw-500 lh-17 text-1b1c17 d-flex align-items-center cg-6 hover-color-one">
+                                    class="flex-shrink-0 fs-14 fw-500 lh-17 text-gray-300 d-flex align-items-center cg-6 hover:text-gold-400 transition-colors">
                                     <span>{{ __('See All') }}</span>
                                     <span><i class="fa-solid fa-arrow-right"></i></span>
                                 </a>

@@ -21,7 +21,7 @@ class DonationController extends Controller
         $data['campaigns'] = DonationCampaign::tenant()->active()->orderBy('is_featured', 'desc')->orderBy('created_at', 'desc')->get();
         $data['gateways'] = Gateway::where('status', ACTIVE)->where('tenant_id', getTenantId())->get();
         $data['banks'] = Bank::where('status', ACTIVE)->where('tenant_id', getTenantId())->get();
-        return view('frontend.donation', $data);
+        return view('frontend.donation_modern', $data);
     }
 
     public function store(Request $request)
@@ -76,7 +76,7 @@ class DonationController extends Controller
         $data['gateways'] = Gateway::where('status', ACTIVE)->where('tenant_id', getTenantId())->get();
         $data['banks'] = Bank::where('status', ACTIVE)->where('tenant_id', getTenantId())->get();
 
-        return view('frontend.donation-checkout', $data);
+        return view('frontend.donation-checkout-modern', $data);
     }
 
     public function success()

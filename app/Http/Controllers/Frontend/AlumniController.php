@@ -20,6 +20,6 @@ class AlumniController extends Controller
     {
         $data['title'] = __('All Alumni');
         $data['allAlumni'] = $this->homeService->getAlumni(8);
-        return view('frontend.alumni.index', $data);
+        return view('frontend.alumni.index_modern', $data);
     }
 }
