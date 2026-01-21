@@ -196,7 +196,7 @@ return [
          */
 
         Spatie\Permission\PermissionServiceProvider::class,
-        Spatie\Backup\BackupServiceProvider::class,
+
 
         /*
          * Application Service Providers...
