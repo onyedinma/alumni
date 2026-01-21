@@ -1,6 +1,6 @@
 <?php
 
-if(!function_exists("month")){
+if (!function_exists("month")) {
     function month($input = null)
     {
         $output = [
@@ -608,7 +608,7 @@ function getCurrency($currency = null, $only_symbol = false)
     }
 }
 
-if(!function_exists("getRoleName")){
+if (!function_exists("getRoleName")) {
     function getRoleName($input = null)
     {
         $output = [
@@ -626,7 +626,7 @@ if(!function_exists("getRoleName")){
     }
 }
 
-if(!function_exists("getMessage")){
+if (!function_exists("getMessage")) {
     function getMessage($input = null)
     {
         $output = [
@@ -648,7 +648,7 @@ if(!function_exists("getMessage")){
     }
 }
 
-if(!function_exists("getStatus")){
+if (!function_exists("getStatus")) {
     function getStatus($input = null)
     {
         $output = [
@@ -671,7 +671,7 @@ if(!function_exists("getStatus")){
     }
 }
 
-if(!function_exists("getDurationType")){
+if (!function_exists("getDurationType")) {
     function getDurationType($input = null)
     {
         $output = [
@@ -688,7 +688,7 @@ if(!function_exists("getDurationType")){
     }
 }
 
-if(!function_exists("getReturnType")){
+if (!function_exists("getReturnType")) {
     function getReturnType($input = null)
     {
         $output = [
@@ -705,15 +705,15 @@ if(!function_exists("getReturnType")){
     }
 }
 
-if(!function_exists("getPageType")){
+if (!function_exists("getPageType")) {
     function getPageType($input = null)
     {
         $output = [
-           PAGE_ABOUT_US => 'About Us',
-           PAGE_PRIVACY_POLICY => 'Privacy Policy',
-           PAGE_TERMS_OF_SERVICE => 'Terms Of Service',
-           PAGE_COOKIE_POLICY => 'Cookie Policy',
-           PAGE_REFUND_POLICY => 'Refund Policy',
+            PAGE_ABOUT_US => 'About Us',
+            PAGE_PRIVACY_POLICY => 'Privacy Policy',
+            PAGE_TERMS_OF_SERVICE => 'Terms Of Service',
+            PAGE_COOKIE_POLICY => 'Cookie Policy',
+            PAGE_REFUND_POLICY => 'Refund Policy',
         ];
 
 
@@ -725,7 +725,7 @@ if(!function_exists("getPageType")){
     }
 }
 
-if(!function_exists("walletDepositType")){
+if (!function_exists("walletDepositType")) {
     function walletDepositType($input = null)
     {
         $output = [
@@ -741,7 +741,7 @@ if(!function_exists("walletDepositType")){
         }
     }
 }
-if(!function_exists("orderHistoryType")){
+if (!function_exists("orderHistoryType")) {
     function orderHistoryType($input = null)
     {
         $output = [
@@ -759,7 +759,7 @@ if(!function_exists("orderHistoryType")){
     }
 }
 
-if(!function_exists("getDateFormatList")){
+if (!function_exists("getDateFormatList")) {
     function getDateFormatList($input = null)
     {
         $output = [
@@ -774,7 +774,7 @@ if(!function_exists("getDateFormatList")){
     }
 }
 
-if(!function_exists("getTimeList")){
+if (!function_exists("getTimeList")) {
     function getTimeList($input = null)
     {
         $output = [
@@ -810,9 +810,9 @@ function getPaymentServiceClass($input = null)
     }
 }
 
-function emailTempFields()
+function emailTempFields($category = null)
 {
-    $data  = [
+    $data = [
         '{{username}}' => '',
         '{{app_name}}' => '',
         '{{otp}}' => '',
@@ -821,13 +821,13 @@ function emailTempFields()
         '{{link}}' => '',
         '{{app_contact_number}}' => '',
         '{{app_email}}' => '',
-        ];
+    ];
 
-   return $data;
+    return $data;
 }
 
 
-if(!function_exists("eventType")){
+if (!function_exists("eventType")) {
     function eventType($input = null)
     {
         $output = [
@@ -843,7 +843,7 @@ if(!function_exists("eventType")){
     }
 }
 
-if(!function_exists("getEmployeeStatus")){
+if (!function_exists("getEmployeeStatus")) {
     function getEmployeeStatus($input = null)
     {
         $output = [
@@ -861,7 +861,7 @@ if(!function_exists("getEmployeeStatus")){
     }
 }
 
-if(!function_exists("getJobStatus")){
+if (!function_exists("getJobStatus")) {
     function getJobStatus($input = null)
     {
         $output = [
@@ -878,7 +878,7 @@ if(!function_exists("getJobStatus")){
     }
 }
 
-if(!function_exists("getAlumniMemberStatus")){
+if (!function_exists("getAlumniMemberStatus")) {
     function getAlumniMemberStatus($input = null)
     {
         $output = [
@@ -894,7 +894,7 @@ if(!function_exists("getAlumniMemberStatus")){
     }
 }
 
-if(!function_exists("getAlumniGeneralStatus")){
+if (!function_exists("getAlumniGeneralStatus")) {
     function getAlumniGeneralStatus($input = null)
     {
         $output = [
@@ -911,7 +911,7 @@ if(!function_exists("getAlumniGeneralStatus")){
     }
 }
 
-if(!function_exists("getPaymentStatus")){
+if (!function_exists("getPaymentStatus")) {
     function getPaymentStatus($input = null)
     {
         $output = [
@@ -928,7 +928,7 @@ if(!function_exists("getPaymentStatus")){
     }
 }
 
-if(!function_exists("transactionType")){
+if (!function_exists("transactionType")) {
     function transactionType($input = null)
     {
         $output = [
@@ -945,7 +945,7 @@ if(!function_exists("transactionType")){
     }
 }
 
-if(!function_exists("superAdminSetting")){
+if (!function_exists("superAdminSetting")) {
     function superAdminSetting($input = null): array|string
     {
         $output = [
@@ -977,7 +977,7 @@ if(!function_exists("superAdminSetting")){
     }
 }
 
-if(!function_exists("getAddonAppNameList")){
+if (!function_exists("getAddonAppNameList")) {
     function getAddonAppNameList($input = null): array|string
     {
         $output = ['ALUSAAS'];

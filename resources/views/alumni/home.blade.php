@@ -3,7 +3,7 @@
     {{ __('Home') }}
 @endpush
 @push('style')
-{!! RecaptchaV3::initJs() !!}
+    {!! RecaptchaV3::initJs() !!}
 @endpush
 @section('content')
     <div class="p-30">
@@ -15,20 +15,26 @@
                         action="{{ route('posts.store') }}" data-handler="postResponse">
                         @csrf
                         <!-- Create Post -->
-                        <div class="p-25 bg-[#1e1e1e] border border-white/5 rounded-xl shadow-lg">
+                        <div class="p-25 bg-[#252525] border border-gold-500/20 rounded-xl shadow-lg">
                             <!-- Title -->
-                            <h4 class="fs-20 fw-600 lh-24 text-gold-400 font-serif pb-26">{{ __('Create Post') }}</h4>
+                            <div class="d-flex align-items-center gap-3 pb-26">
+                                <div class="icon-box-gold"><i class="bi bi-pencil-square"></i></div>
+                                <h4 class="fs-20 fw-600 lh-24 text-gold-400 font-serif">{{ __('Create Post') }}</h4>
+                            </div>
                             <!-- User -->
                             <div class="d-flex align-items-center cg-10 pb-20">
-                                <div class="flex-shrink-0 w-50 h-50 border border-gold-500 rounded-circle overflow-hidden"><img
-                                        src="{{ asset(getFileUrl($user->image)) }}" class="w-100"
+                                <div
+                                    class="flex-shrink-0 w-50 h-50 border-2 border-gold-500 rounded-circle overflow-hidden">
+                                    <img src="{{ asset(getFileUrl($user->image)) }}" class="w-100"
                                         alt="{{ $user->name }}" />
                                 </div>
                                 <h4 class="fs-16 fw-500 lh-20 text-white">{{ $user->name }}</h4>
                             </div>
                             <!-- Post Input -->
                             <div class="pb-15">
-                                <textarea name="body" class="form-control postInput bg-secondary border border-white/10 text-white placeholder-gray-500 rounded-lg p-3 w-full" placeholder="{{ __('What’s on your mind?') }}"></textarea>
+                                <textarea name="body"
+                                    class="form-control postInput bg-[#1a1a1a] border border-gold-500/30 text-white placeholder-gray-400 rounded-lg p-3 w-full focus:border-gold-400"
+                                    placeholder="{{ __('What\'s on your mind?') }}"></textarea>
                             </div>
                             <div class="">
                                 <!-- Attachment preview -->
@@ -41,22 +47,27 @@
                                 <div class="d-flex justify-content-between align-items-center flex-wrap g-10">
                                     <!-- Add image/video -->
                                     <div class="d-flex align-items-center cg-15">
-                                        <p class="fs-16 lh-18 fw-500 text-gray-400">{{ __('Add to your post') }}:</p>
+                                        <p class="fs-16 lh-18 fw-500 text-gray-200">{{ __('Add to your post') }}:</p>
                                         <div class="align-items-center cg-10 d-flex flex-shrink-0">
-                                            <label for="mAttachment1" class="cursor-pointer opacity-70 hover:opacity-100 transition-opacity"><img
-                                                    src="{{ asset('assets/images/icon/post-photo.svg') }}"
-                                                    alt="" class="brightness-0 invert" /></label>
+                                            <label for="mAttachment1"
+                                                class="cursor-pointer opacity-70 hover:opacity-100 transition-opacity"><img
+                                                    src="{{ asset('assets/images/icon/post-photo.svg') }}" alt=""
+                                                    class="brightness-0 invert" /></label>
                                             <input type="file" name="file[]"
                                                 accept=".png,.jpg,.svg,.jpeg,.gif,.mp4,.mov,.avi,.mkv,.webm,.flv"
                                                 id="mAttachment1" class="d-none" multiple />
-                                            <label for="mAttachment1" class="cursor-pointer opacity-70 hover:opacity-100 transition-opacity"><img
-                                                    src="{{ asset('assets/images/icon/post-video.svg') }}"
-                                                    alt="" class="brightness-0 invert" /></label>
+                                            <label for="mAttachment1"
+                                                class="cursor-pointer opacity-70 hover:opacity-100 transition-opacity"><img
+                                                    src="{{ asset('assets/images/icon/post-video.svg') }}" alt=""
+                                                    class="brightness-0 invert" /></label>
                                         </div>
                                     </div>
                                     <!-- Post button -->
                                     <button type="submit"
-                                        class="border-0 py-10 px-26 rounded-xl bg-maroon-600 text-white font-medium hover:bg-maroon-700 transition-all shadow-md">{{ __('Post Now') }}</button>
+                                        class="border-0 py-10 px-26 rounded-xl text-white font-medium transition-all shadow-md"
+                                        style="background-color: #701c1c !important; color: #ffffff !important;"
+                                        onmouseover="this.style.backgroundColor='#c5a059'"
+                                        onmouseout="this.style.backgroundColor='#701c1c'">{{ __('Post Now') }}</button>
                                 </div>
                             </div>
                         </div>
@@ -71,12 +82,15 @@
                 <div class="d-flex flex-column rg-30">
                     <!-- Upcoming Events -->
                     @if (count($upcomingEvents))
-                        <div class="p-25 bg-[#1e1e1e] border border-white/5 rounded-xl shadow-lg">
+                        <div class="p-25 bg-[#252525] border border-gold-500/20 rounded-xl shadow-lg">
                             <!-- Title -->
                             <div class="d-flex justify-content-between align-items-center pb-30">
-                                <h4 class="fs-20 fw-600 lh-24 text-gold-400 font-serif">{{ __('Upcoming Events') }}</h4>
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="icon-box-gold"><i class="bi bi-calendar-event"></i></div>
+                                    <h4 class="fs-20 fw-600 lh-24 text-gold-400 font-serif">{{ __('Upcoming Events') }}</h4>
+                                </div>
                                 <a href="{{ route('event.all') }}"
-                                    class="flex-shrink-0 fs-14 fw-500 lh-17 text-gray-300 d-flex align-items-center cg-6 hover:text-gold-400 transition-colors">
+                                    class="flex-shrink-0 fs-14 fw-500 lh-17 text-ivory d-flex align-items-center cg-6 hover:text-gold-400 transition-colors">
                                     <span>{{ __('See All') }}</span>
                                     <span><i class="fa-solid fa-arrow-right"></i></span>
                                 </a>
@@ -85,10 +99,11 @@
                             <ul class="zList-five">
                                 @foreach ($upcomingEvents as $event)
                                     <li>
-                                        <div class="home-item-one bg-secondary/50 border border-white/5 rounded-lg p-3 hover:bg-secondary transition-colors">
+                                        <div
+                                            class="home-item-one bg-[#1a1a1a] border border-gold-500/10 rounded-lg p-3 hover:border-gold-500/30 transition-colors">
                                             <div class="img">
-                                                <img src="{{ asset(getFileUrl($event->thumbnail)) }}"
-                                                    alt="{{ $event->title }}" class="rounded-lg">
+                                                <img src="{{ asset(getFileUrl($event->thumbnail)) }}" alt="{{ $event->title }}"
+                                                    class="rounded-lg">
                                                 <ul class="tag d-flex flex-wrap cg-2 rg-5">
                                                     <li><a
                                                             class="fs-12 fw-500 lh-16 text-white px-6 bg-maroon-600 rounded-pill d-flex">{{ eventType($event->type) }}</a>
@@ -101,7 +116,7 @@
                                             <div class="content">
                                                 <!-- Tab - Date -->
                                                 <div class="d-flex align-items-center flex-wrap cg-10">
-                                                    <p class="fs-14 fw-400 lh-17 text-gold-400/80">
+                                                    <p class="fs-14 fw-400 lh-17 text-gold-400">
                                                         {{ date('F j, g:i A', strtotime($event->date)) }}
                                                     </p>
                                                 </div>
@@ -110,9 +125,9 @@
                                                 <!-- Location -->
                                                 <div class="d-flex align-items-center cg-5">
                                                     <div class="d-flex max-w-10"><img
-                                                            src="{{ asset('assets/images/icon/location.svg') }}"
-                                                            alt="" class="brightness-0 invert opacity-70" /></div>
-                                                    <p class="fs-14 fw-400 lh-17 text-gray-400">{{ $event->location }}</p>
+                                                            src="{{ asset('assets/images/icon/location.svg') }}" alt=""
+                                                            class="brightness-0 invert" /></div>
+                                                    <p class="fs-14 fw-400 lh-17 text-gray-300">{{ $event->location }}</p>
                                                 </div>
                                                 <!-- Link -->
                                                 <a href="{{ route('event.details', $event->slug) }}"
@@ -126,12 +141,15 @@
                     @endif
                     <!-- Jobs -->
                     @if (count($latestJobs))
-                        <div class="p-25 bg-[#1e1e1e] border border-white/5 rounded-xl shadow-lg">
+                        <div class="p-25 bg-[#252525] border border-gold-500/20 rounded-xl shadow-lg">
                             <!-- Title -->
                             <div class="d-flex justify-content-between align-items-center pb-30">
-                                <h4 class="fs-20 fw-600 lh-24 text-gold-400 font-serif">{{ __('Jobs') }}</h4>
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="icon-box-gold"><i class="bi bi-briefcase"></i></div>
+                                    <h4 class="fs-20 fw-600 lh-24 text-gold-400 font-serif">{{ __('Jobs') }}</h4>
+                                </div>
                                 <a href="{{ route('jobPost.all-job-post') }}"
-                                    class="flex-shrink-0 fs-14 fw-500 lh-17 text-gray-300 d-flex align-items-center cg-6 hover:text-gold-400 transition-colors">
+                                    class="flex-shrink-0 fs-14 fw-500 lh-17 text-ivory d-flex align-items-center cg-6 hover:text-gold-400 transition-colors">
                                     <span>{{ __('See All') }}</span>
                                     <span><i class="fa-solid fa-arrow-right"></i></span>
                                 </a>
@@ -143,54 +161,49 @@
                                         <!-- Logo - User -->
                                         <div class="d-flex align-items-center cg-10 pb-10">
                                             <div
-                                                class="flex-shrink-0 w-45 h-45 bd-one bd-c-ededed rounded-circle d-flex justify-content-center align-items-center">
-                                                <img src="{{ asset(getFileUrl($job->company_logo)) }}"
-                                                    alt="{{ $job->title }}" />
+                                                class="flex-shrink-0 w-45 h-45 border border-gold-500/30 rounded-circle d-flex justify-content-center align-items-center bg-[#1a1a1a]">
+                                                <img src="{{ asset(getFileUrl($job->company_logo)) }}" alt="{{ $job->title }}" />
                                             </div>
                                             <div class="">
-                                                <h4 class="fs-16 fw-500 lh-18 text-1b1c17 pb-4">{{ $job->title }}</h4>
+                                                <h4 class="fs-16 fw-500 lh-18 text-white pb-4">{{ $job->title }}</h4>
                                                 <div class="d-flex align-items-center cg-5">
                                                     <div class="d-flex"><img
-                                                            src="{{ asset('assets/images/icon/calendar-icon.svg') }}"
-                                                            alt="">
-                                                    </div>
-                                                    <p class="fs-12 fw-400 lh-15 text-707070">
+                                                            src="{{ asset('assets/images/icon/calendar-icon.svg') }}" alt=""
+                                                            class="brightness-0 invert"></div>
+                                                    <p class="fs-12 fw-400 lh-15 text-gray-300">
                                                         {{ date('l, F j, Y', strtotime($job->application_deadline)) }}
                                                     </p>
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- Short description -->
-                                        <p class="fs-14 fw-400 lh-24 text-707070 pb-10">
+                                        <p class="fs-14 fw-400 lh-24 text-gray-200 pb-10">
                                             {{ getSubText($job->job_context, 150) }}
                                         </p>
                                         <!-- Job nature -->
-                                        <ul
-                                            class="d-flex justify-content-between align-items-center flex-wrap cg-20 rg-10 pb-20">
+                                        <ul class="d-flex justify-content-between align-items-center flex-wrap cg-20 rg-10 pb-20">
                                             <li class="d-flex align-items-center cg-7">
-                                                <div class="d-flex"><img
-                                                        src="{{ asset('assets/images/icon/suitcase.svg') }}"
-                                                        alt="" /></div>
-                                                <p class="fs-14 fw-400 lh-16 text-707070">
-                                                    {{ getEmployeeStatus($job->employee_status) }}</p>
+                                                <div class="d-flex"><img src="{{ asset('assets/images/icon/suitcase.svg') }}" alt=""
+                                                        class="brightness-0 invert" /></div>
+                                                <p class="fs-14 fw-400 lh-16 text-gray-300">
+                                                    {{ getEmployeeStatus($job->employee_status) }}
+                                                </p>
                                             </li>
                                             <li class="d-flex align-items-center cg-7">
-                                                <div class="d-flex"><img
-                                                        src="{{ asset('assets/images/icon/location.svg') }}"
-                                                        alt="" /></div>
-                                                <p class="fs-14 fw-400 lh-16 text-707070">{{ $job->location }}</p>
+                                                <div class="d-flex"><img src="{{ asset('assets/images/icon/location.svg') }}" alt=""
+                                                        class="brightness-0 invert" /></div>
+                                                <p class="fs-14 fw-400 lh-16 text-gray-300">{{ $job->location }}</p>
                                             </li>
                                             <li class="d-flex align-items-center cg-7">
-                                                <div class="d-flex"><img
-                                                        src="{{ asset('assets/images/icon/dollar-coin.svg') }}"
-                                                        alt="" />
+                                                <div class="d-flex"><img src="{{ asset('assets/images/icon/dollar-coin.svg') }}"
+                                                        alt="" class="brightness-0 invert" />
                                                 </div>
-                                                <p class="fs-14 fw-400 lh-16 text-707070">{{ $job->salary }}</p>
+                                                <p class="fs-14 fw-400 lh-16 text-gray-300">{{ $job->salary }}</p>
                                             </li>
                                         </ul>
                                         <!-- Link -->
                                         <a href="{{ route('jobPost.details', $job->slug) }}"
-                                            class="fs-14 fw-500 lh-17 text-1b1c17 text-decoration-underline hover-color-one">{{ __('More Details') }}</a>
+                                            class="fs-14 fw-500 lh-17 text-gold-400 text-decoration-underline hover:text-white transition-colors">{{ __('More Details') }}</a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -198,12 +211,15 @@
                     @endif
                     <!-- Notice -->
                     @if (count($latestNotice))
-                        <div class="p-25 bg-white bd-one bd-c-black-10 bd-ra-25">
+                        <div class="p-25 bg-[#252525] border border-gold-500/20 rounded-xl shadow-lg">
                             <!-- Title -->
                             <div class="d-flex justify-content-between align-items-center pb-30">
-                                <h4 class="fs-20 fw-600 lh-24 text-1b1c17">{{ __('Notice') }}</h4>
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="icon-box-gold"><i class="bi bi-megaphone"></i></div>
+                                    <h4 class="fs-20 fw-600 lh-24 text-gold-400 font-serif">{{ __('Notice') }}</h4>
+                                </div>
                                 <a href="{{ route('all.notice') }}"
-                                    class="flex-shrink-0 fs-14 fw-500 lh-17 text-1b1c17 d-flex align-items-center cg-6 hover-color-one">
+                                    class="flex-shrink-0 fs-14 fw-500 lh-17 text-ivory d-flex align-items-center cg-6 hover:text-gold-400 transition-colors">
                                     <span>{{ __('See All') }}</span>
                                     <span><i class="fa-solid fa-arrow-right"></i></span>
                                 </a>
@@ -212,22 +228,24 @@
                             <ul class="zList-five">
                                 @foreach ($latestNotice as $notice)
                                     <li>
-                                        <div class="home-item-one bg-secondary/50 border border-white/5 rounded-lg p-3 hover:bg-secondary transition-colors">
+                                        <div
+                                            class="home-item-one bg-[#1a1a1a] border border-gold-500/10 rounded-lg p-3 hover:border-gold-500/30 transition-colors">
                                             <div class="img"><img src="{{ asset(getFileUrl($notice->image)) }}"
                                                     alt="{{ $notice->title }}" class="rounded-lg" />
                                             </div>
                                             <div class="content">
                                                 <!-- Tab - Date -->
                                                 <div class="d-flex align-items-center flex-wrap cg-10">
-                                                    <p class="fs-14 fw-400 lh-17 text-gold-400/80">
+                                                    <p class="fs-14 fw-400 lh-17 text-gold-400">
                                                         {{ date('M d, Y', strtotime($notice->created_at)) }}
                                                     </p>
                                                 </div>
                                                 <!-- Title -->
                                                 <h4 class="title text-white font-serif">{{ $notice->title }}</h4>
                                                 <!-- Info -->
-                                                <p class="fs-14 fw-400 lh-17 text-gray-400">
-                                                    {{ getSubText($notice->details, 150) }}</p>
+                                                <p class="fs-14 fw-400 lh-17 text-gray-200">
+                                                    {{ getSubText($notice->details, 150) }}
+                                                </p>
                                                 <!-- Link -->
                                                 <a href="{{ route('notice.details', $notice->slug) }}"
                                                     class="fs-14 fw-500 lh-17 text-gold-400 text-decoration-underline hover:text-white transition-colors">{{ __('More Details') }}</a>
@@ -240,12 +258,15 @@
                     @endif
                     <!-- Latest News -->
                     @if (count($latestNews))
-                        <div class="p-25 bg-[#1e1e1e] border border-white/5 rounded-xl shadow-lg">
+                        <div class="p-25 bg-[#252525] border border-gold-500/20 rounded-xl shadow-lg">
                             <!-- Title -->
                             <div class="d-flex justify-content-between align-items-center pb-30">
-                                <h4 class="fs-20 fw-600 lh-24 text-gold-400 font-serif">{{ __('Latest News') }}</h4>
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="icon-box-gold"><i class="bi bi-newspaper"></i></div>
+                                    <h4 class="fs-20 fw-600 lh-24 text-gold-400 font-serif">{{ __('Latest News') }}</h4>
+                                </div>
                                 <a href="{{ route('all.news') }}"
-                                    class="flex-shrink-0 fs-14 fw-500 lh-17 text-gray-300 d-flex align-items-center cg-6 hover:text-gold-400 transition-colors">
+                                    class="flex-shrink-0 fs-14 fw-500 lh-17 text-ivory d-flex align-items-center cg-6 hover:text-gold-400 transition-colors">
                                     <span>{{ __('See All') }}</span>
                                     <span><i class="fa-solid fa-arrow-right"></i></span>
                                 </a>
@@ -254,34 +275,35 @@
                             <ul class="zList-five">
                                 @foreach ($latestNews as $news)
                                     <li>
-                                        <div class="home-item-one">
+                                        <div
+                                            class="home-item-one bg-[#1a1a1a] border border-gold-500/10 rounded-lg p-3 hover:border-gold-500/30 transition-colors">
                                             <div class="img"><img src="{{ asset(getFileUrl($news->image)) }}"
-                                                    alt="{{ $news->title }}" />
+                                                    alt="{{ $news->title }}" class="rounded-lg" />
                                             </div>
                                             <div class="content">
                                                 <!-- Tab - Date -->
                                                 <div class="d-flex align-items-center flex-wrap cg-10">
                                                     <a
-                                                        class="d-inline-block py-3 px-10 bg-f0f0f0 rounded-pill fs-12 fw-400 lh-16 text-1b1c17">{{ $news->category->name }}</a>
-                                                    <p class="fs-14 fw-400 lh-17 text-707070">
+                                                        class="d-inline-block py-3 px-10 bg-maroon-600 rounded-pill fs-12 fw-400 lh-16 text-white">{{ $news->category->name }}</a>
+                                                    <p class="fs-14 fw-400 lh-17 text-gold-400">
                                                         {{ date('M d, Y', strtotime($news->created_at)) }}
                                                     </p>
                                                 </div>
                                                 <!-- Title -->
-                                                <h4 class="title">{{ $news->title }}</h4>
+                                                <h4 class="title text-white font-serif">{{ $news->title }}</h4>
                                                 <!-- User -->
                                                 <div class="d-flex align-items-center cg-5">
                                                     <div
-                                                        class="flex-shrink-0 w-18 h-18 bd-one bd-c-1b1c17 rounded-circle overflow-hidden bg-eaeaea d-flex justify-content-center align-items-center">
+                                                        class="flex-shrink-0 w-18 h-18 border border-gold-500/30 rounded-circle overflow-hidden d-flex justify-content-center align-items-center">
                                                         <img src="{{ asset(getFileUrl($news->author->image)) }}"
                                                             alt="{{ $news->author->name }}" />
                                                     </div>
-                                                    <p class="fs-10 fw-400 lh-12 text-707070">{{ $news->author->name }}
+                                                    <p class="fs-10 fw-400 lh-12 text-gray-300">{{ $news->author->name }}
                                                     </p>
                                                 </div>
                                                 <!-- Link -->
                                                 <a href="{{ route('news.details', $news->slug) }}"
-                                                    class="fs-14 fw-500 lh-17 text-1b1c17 text-decoration-underline hover-color-one">{{ __('More Details') }}</a>
+                                                    class="fs-14 fw-500 lh-17 text-gold-400 text-decoration-underline hover:text-white transition-colors">{{ __('More Details') }}</a>
                                             </div>
                                         </div>
                                     </li>
@@ -316,8 +338,7 @@
                                 <li>
                                     <div class="home-item-one">
                                         <div class="img">
-                                            <img src="{{ asset(getFileUrl($event->thumbnail)) }}"
-                                                alt="{{ $event->title }}">
+                                            <img src="{{ asset(getFileUrl($event->thumbnail)) }}" alt="{{ $event->title }}">
                                             <ul class="tag d-flex flex-wrap cg-2 rg-5">
                                                 <li><a
                                                         class="fs-12 fw-500 lh-16 text-1b1c17 px-6 bg-white rounded-pill d-flex">{{ eventType($event->type) }}</a>
@@ -339,8 +360,7 @@
                                             <!-- Location -->
                                             <div class="d-flex align-items-center cg-5">
                                                 <div class="d-flex max-w-10"><img
-                                                        src="{{ asset('assets/images/icon/location.svg') }}"
-                                                        alt="" /></div>
+                                                        src="{{ asset('assets/images/icon/location.svg') }}" alt="" /></div>
                                                 <p class="fs-14 fw-400 lh-17 text-707070">{{ $event->location }}</p>
                                             </div>
                                             <!-- Link -->
@@ -373,14 +393,12 @@
                                     <div class="d-flex align-items-center cg-10 pb-10">
                                         <div
                                             class="flex-shrink-0 w-45 h-45 bd-one bd-c-ededed rounded-circle d-flex justify-content-center align-items-center">
-                                            <img src="{{ asset(getFileUrl($job->company_logo)) }}"
-                                                alt="{{ $job->title }}" />
+                                            <img src="{{ asset(getFileUrl($job->company_logo)) }}" alt="{{ $job->title }}" />
                                         </div>
                                         <div class="">
                                             <h4 class="fs-16 fw-500 lh-18 text-1b1c17 pb-4">{{ $job->title }}</h4>
                                             <div class="d-flex align-items-center cg-5">
-                                                <div class="d-flex"><img
-                                                        src="{{ asset('assets/images/icon/calendar-icon.svg') }}"
+                                                <div class="d-flex"><img src="{{ asset('assets/images/icon/calendar-icon.svg') }}"
                                                         alt="">
                                                 </div>
                                                 <p class="fs-12 fw-400 lh-15 text-707070">
@@ -394,24 +412,21 @@
                                         {{ getSubText($job->job_context, 150) }}
                                     </p>
                                     <!-- Job nature -->
-                                    <ul
-                                        class="d-flex justify-content-between align-items-center flex-wrap cg-20 rg-10 pb-20">
+                                    <ul class="d-flex justify-content-between align-items-center flex-wrap cg-20 rg-10 pb-20">
                                         <li class="d-flex align-items-center cg-7">
-                                            <div class="d-flex"><img src="{{ asset('assets/images/icon/suitcase.svg') }}"
-                                                    alt="" />
+                                            <div class="d-flex"><img src="{{ asset('assets/images/icon/suitcase.svg') }}" alt="" />
                                             </div>
                                             <p class="fs-14 fw-400 lh-16 text-707070">
-                                                {{ getEmployeeStatus($job->employee_status) }}</p>
+                                                {{ getEmployeeStatus($job->employee_status) }}
+                                            </p>
                                         </li>
                                         <li class="d-flex align-items-center cg-7">
-                                            <div class="d-flex"><img src="{{ asset('assets/images/icon/location.svg') }}"
-                                                    alt="" />
+                                            <div class="d-flex"><img src="{{ asset('assets/images/icon/location.svg') }}" alt="" />
                                             </div>
                                             <p class="fs-14 fw-400 lh-16 text-707070">{{ $job->location }}</p>
                                         </li>
                                         <li class="d-flex align-items-center cg-7">
-                                            <div class="d-flex"><img
-                                                    src="{{ asset('assets/images/icon/dollar-coin.svg') }}"
+                                            <div class="d-flex"><img src="{{ asset('assets/images/icon/dollar-coin.svg') }}"
                                                     alt="" /></div>
                                             <p class="fs-14 fw-400 lh-16 text-707070">{{ $job->salary }}</p>
                                         </li>
@@ -454,7 +469,8 @@
                                             <h4 class="title">{{ $notice->title }}</h4>
                                             <!-- Info -->
                                             <p class="fs-14 fw-400 lh-17 text-707070">
-                                                {{ getSubText($notice->details, 150) }}</p>
+                                                {{ getSubText($notice->details, 150) }}
+                                            </p>
                                             <!-- Link -->
                                             <a href="{{ route('notice.details', $notice->slug) }}"
                                                 class="fs-14 fw-500 lh-17 text-1b1c17 text-decoration-underline hover-color-one">{{ __('More Details') }}</a>
@@ -545,15 +561,16 @@
                 <div class="align-items-center d-flex justify-content-between ps-4 pt-17">
                     <h4 class="fs-18 fw-500 lh-20 text-1b1c17">{{ __('Update Comment') }}</h4>
                 </div>
-                <form action="{{ route('posts.comments.update') }}" data-handler="postCommentUpdateResponse"
-                    method="POST" class="ajax reset">
+                <form action="{{ route('posts.comments.update') }}" data-handler="postCommentUpdateResponse" method="POST"
+                    class="ajax reset">
                     @method('put')
                     @csrf
                     <div class="modal-body zModalTwo-body" id="comment-edit-modal-content">
                         <!-- Body -->
                         <div class="pb-18 bd-c-black-10">
                             <input type="hidden" name="id">
-                            <textarea class="form-control postInput" name="body" placeholder="{{ __('What’s your comment?') }}"></textarea>
+                            <textarea class="form-control postInput" name="body"
+                                placeholder="{{ __('What’s your comment?') }}"></textarea>
                         </div>
                         <!-- Footer -->
                         <div class="">
@@ -588,5 +605,5 @@
 @endsection
 
 @push('script')
-    <script src="{{ asset('alumni/js/posts.js') }}?ver={{ env('VERSION' ,0) }}"></script>
+    <script src="{{ asset('alumni/js/posts.js') }}?ver={{ env('VERSION', 0) }}"></script>
 @endpush

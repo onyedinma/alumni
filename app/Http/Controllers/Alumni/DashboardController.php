@@ -29,18 +29,25 @@ class DashboardController extends Controller
     public $newsService;
     public $hardwareService;
     public $walletService;
+    public $dashboardService;
 
     public function __construct()
     {
         $this->newsService = new NewsService;
+        $this->dashboardService = new DashboardService;
     }
 
     public function index(Request $request)
     {
         $data['activeDashboard'] = 'active';
-        $data['news'] = $this->newsService->getAllActive();
+        $data['pageTitle'] = __('Dashboard');
+        $data['upcomingEvents'] = $this->dashboardService->getUpcomingEvent()->getData()->data;
+        $data['latestJobs'] = $this->dashboardService->getLatestJobs()->getData()->data;
+        $data['latestNews'] = $this->dashboardService->getLatestNews()->getData()->data;
+        $data['latestNotice'] = $this->dashboardService->getLatestNotice()->getData()->data;
+        $data['user'] = auth()->user();
 
-        return view('alumni.dashboard', $data);
+        return view('alumni.home', $data);
     }
     public function tester()
     {

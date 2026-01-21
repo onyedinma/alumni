@@ -5,17 +5,176 @@
 @endpush
 
 @section('content')
+    <style>
+        /* Premium Admin Panel Standards */
+        .premium-admin-panel {
+            background-color: var(--bg-primary, #0B0E11);
+            min-height: 100vh;
+            padding: 30px;
+        }
+
+        .premium-card {
+            background-color: var(--bg-surface, #12161C);
+            border: 1px solid var(--border-dark, #1F2630);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .premium-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--maroon, #8B2635), var(--gold, #D4AF5A), var(--maroon, #8B2635));
+        }
+
+        /* Table Styling Overrides */
+        .premium-card .table-responsive {
+            background: transparent !important;
+        }
+
+        .premium-card table.zTable,
+        .premium-card table.dataTable,
+        .premium-card #alumni-all-list-filter {
+            background: var(--bg-primary, #0B0E11) !important;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .premium-card table.zTable thead,
+        .premium-card table.dataTable thead,
+        .premium-card #alumni-all-list-filter thead {
+            background: var(--bg-elevated, #171C23) !important;
+        }
+
+        .premium-card table.zTable thead th,
+        .premium-card table.dataTable thead th,
+        .premium-card #alumni-all-list-filter thead th,
+        .premium-card .dataTable thead th,
+        .premium-card th {
+            color: var(--gold, #D4AF5A) !important;
+            font-weight: 500 !important;
+            font-size: 13px !important;
+            letter-spacing: 0.3px !important;
+            border-bottom: 1px solid var(--border-dark, #1F2630) !important;
+            padding: 12px 14px !important;
+            background: var(--bg-elevated, #171C23) !important;
+            border-top: none !important;
+        }
+
+        .premium-card table.zTable thead th div,
+        .premium-card th div {
+            color: var(--gold, #D4AF5A) !important;
+            background: transparent !important;
+            font-size: 13px !important;
+            font-weight: 500 !important;
+        }
+
+        .premium-card table.zTable tbody td,
+        .premium-card table.dataTable tbody td,
+        .premium-card #alumni-all-list-filter tbody td,
+        .premium-card td {
+            color: var(--text-primary, #E6EAF0) !important;
+            border-bottom: 1px solid var(--border-dark, #1F2630) !important;
+            padding: 16px !important;
+            background: var(--bg-primary, #0B0E11) !important;
+        }
+
+        .premium-card table.zTable tbody tr:hover td {
+            background: var(--bg-elevated, #171C23) !important;
+        }
+
+        /* Modal Styling */
+        .zModalTwo-content {
+            background-color: var(--bg-surface, #12161C) !important;
+            border: 1px solid var(--gold, #D4AF5A) !important;
+            border-radius: 16px;
+        }
+
+        .zModalTwo-body p {
+            color: var(--text-secondary, #B4BCC8) !important;
+        }
+
+        .zModalTwo-body h4 {
+            color: var(--gold, #D4AF5A) !important;
+        }
+
+        /* Filter Section */
+        .alumniFilter {
+            background: var(--bg-elevated, #171C23);
+            border: 1px solid var(--border-dark, #1F2630);
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 20px;
+        }
+
+        .alumniFilter h4 {
+            color: var(--gold, #D4AF5A) !important;
+        }
+
+        .alumniFilter label {
+            color: var(--text-secondary, #B4BCC8);
+        }
+
+        .alumniFilter select,
+        .alumniFilter .primary-form-control {
+            background-color: var(--bg-primary, #0B0E11) !important;
+            border: 1px solid var(--border-dark, #1F2630) !important;
+            color: var(--text-primary, #E6EAF0) !important;
+        }
+
+        .advance-filter {
+            background: linear-gradient(135deg, var(--gold, #D4AF5A) 0%, #b8934a 100%) !important;
+            color: #000 !important;
+            border: none !important;
+            font-weight: 600 !important;
+        }
+
+        /* DataTables Pagination & Info */
+        .premium-card .dataTables_wrapper .dataTables_length,
+        .premium-card .dataTables_wrapper .dataTables_filter,
+        .premium-card .dataTables_wrapper .dataTables_info,
+        .premium-card .dataTables_wrapper .dataTables_paginate {
+            color: var(--text-secondary, #B4BCC8) !important;
+            padding-top: 10px;
+        }
+
+        .premium-card .dataTables_wrapper .dataTables_paginate .paginate_button {
+            color: #000 !important;
+            background: var(--gold, #D4AF5A) !important;
+            border: 1px solid var(--gold, #D4AF5A) !important;
+            border-radius: 6px;
+            margin: 0 4px;
+        }
+
+        .premium-card .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+            background: var(--maroon, #8B2635) !important;
+            border-color: var(--maroon, #8B2635) !important;
+            color: #fff !important;
+        }
+    </style>
+
     <!-- Page content area start -->
-    <div class="p-30">
-        <div class="">
-            <div class="bg-white bd-half bd-c-ebedf0 bd-ra-25 p-30">
+    <div class="premium-admin-panel">
+        <div class="container-fluid">
+            <!-- Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="fs-24 fw-600 premium-header text-white" style="font-family: 'Playfair Display', serif;">
+                    <i class="fa-solid fa-user-graduate"
+                        style="color: var(--gold, #D4AF5A); margin-right: 10px;"></i>{{ $title }}
+                </h4>
+            </div>
+
+            <div class="premium-card">
                 <!-- Search & Filter -->
                 <div class="pb-30">
                     <!-- Search & Filter Button -->
                     <div class="d-flex align-items-center cg-5">
-                        <!-- Search Field -->
-                        <!-- Filter Button -->
-
                     </div>
                 </div>
                 <!-- Table -->
@@ -28,30 +187,94 @@
                         <thead>
                             <tr>
                                 <th scope="col">
-                                    <div>{{ __('Full Name') }}</div>
+                                    <div><i class="fa-solid fa-user" style="margin-right: 8px;"></i>{{ __('Full Name') }}
+                                    </div>
                                 </th>
                                 <th scope="col" class="min-w-100">
-                                    <div>{{ __('Batch') }}</div>
+                                    <div><i class="fa-solid fa-chalkboard"
+                                            style="margin-right: 8px;"></i>{{ __('Final Class') }}
+                                    </div>
+                                </th>
+                                <th scope="col" class="min-w-100">
+                                    <div><i class="fa-solid fa-house-flag"
+                                            style="margin-right: 8px;"></i>{{ __('Final House') }}
+                                    </div>
                                 </th>
                                 <th scope="col">
-                                    <div>{{ __('Passing Year') }}</div>
+                                    <div><i class="fa-solid fa-graduation-cap"
+                                            style="margin-right: 8px;"></i>{{ __('Year') }}</div>
                                 </th>
                                 <th scope="col">
-                                    <div>{{ __('Location') }}</div>
+                                    <div><i class="fa-solid fa-map-marker-alt"
+                                            style="margin-right: 8px;"></i>{{ __('Location') }}</div>
                                 </th>
                                 <th class="min-w-150 w-110" scope="col">
-                                    <div>{{ __('Change status') }}</div>
+                                    <div><i class="fa-solid fa-exchange-alt"
+                                            style="margin-right: 8px;"></i>{{ __('Status') }}</div>
                                 </th>
                                 <th scope="col" class="text-center max-w-150 ">
-                                    <div>{{ __('Action') }}</div>
+                                    <div><i class="fa-solid fa-cog" style="margin-right: 8px;"></i>{{ __('Action') }}</div>
                                 </th>
                             </tr>
                         </thead>
                     </table>
                 </div>
             </div>
+
+            <!-- Filter Section (Moved inside panel) -->
+            <div id="search-section">
+                <div class="collapse" id="collapseExample">
+                    <div class="alumniFilter">
+                        <h4 class="fs-18 fw-500 lh-38 pb-10">{{__('Filter your search')}}</h4>
+                        <div class="filterOptions">
+                            <div class="item">
+                                <div class="primary-form-group">
+                                    <div class="primary-form-group-wrap">
+                                        <label for="Department" class="form-label">{{__('Department')}}</label>
+                                        <select class="sf-select-without-search primary-form-control" name='department'
+                                            id='department'>
+                                            <option selected="" value=0>{{__('All Department')}}</option>
+                                            @foreach ($department as $row)
+                                                <option value="{{ $row->id }}">{{ $row->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="primary-form-group">
+                                    <div class="primary-form-group-wrap">
+                                        <label for="passing_year" class="form-label">{{__('Passing Year')}}</label>
+                                        <select class="sf-select-without-search primary-form-control" name='passing_year'
+                                            id='passing-year'>
+                                            <option selected="" value=0>{{__('All Year')}}</option>
+                                            @foreach ($passingYear as $row)
+                                                <option value="{{ $row->id }}">{{ $row->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="primary-form-group">
+                                    <div class="primary-form-group-wrap">
+                                        <label for="is_member" class="form-label">{{__('Member')}}</label>
+                                        <select class="sf-select-without-search primary-form-control" name='is_member'
+                                            id='is-member'>
+                                            <option value="-1" selected>{{__('All')}}</option>
+                                            @foreach (getAlumniMemberStatus() as $key => $value)
+                                                <option value="{{ $key }}">{{ $value }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn advance-filter py-13 px-26 fs-15 bd-ra-12">{{__('Search Now')}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
     </div>
     <!-- Page content area End -->
 
@@ -62,9 +285,8 @@
             <div class="modal-content zModalTwo-content">
                 <div class="modal-body zModalTwo-body">
                     <div class="text-center py-30">
-                        <p class="fs-14 fw-500 lh-18 text-707070 pb-10">{{ __('Contact with') }} <span
-                                class="contact-name"></span></p>
-                        <h4 class="fs-32 fw-500 lh-42 text-black show-phone"></h4>
+                        <p class="fs-14 fw-500 lh-18 pb-10">{{ __('Contact with') }} <span class="contact-name"></span></p>
+                        <h4 class="fs-32 fw-500 lh-42 show-phone"></h4>
                     </div>
                 </div>
             </div>
@@ -77,70 +299,14 @@
             <div class="modal-content zModalTwo-content">
                 <div class="modal-body zModalTwo-body">
                     <div class="text-center py-30">
-                        <p class="fs-14 fw-500 lh-18 text-707070 pb-10">{{ __('Contact with') }} <span
-                                class="contact-name"></span></p>
-                        <h4 class="fs-32 fw-500 lh-42 text-black show-email"></h4>
+                        <p class="fs-14 fw-500 lh-18 pb-10">{{ __('Contact with') }} <span class="contact-name"></span></p>
+                        <h4 class="fs-32 fw-500 lh-42 show-email"></h4>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="search-section">
-        <div class="collapse" id="collapseExample">
-            <div class="alumniFilter">
-                <h4 class="fs-18 fw-500 lh-38 text-1b1c17 pb-10">{{__('Filter your search')}}</h4>
-                <div class="filterOptions">
-                    <div class="item">
-                        <div class="primary-form-group">
-                            <div class="primary-form-group-wrap">
-                                <label for="Department" class="form-label">{{__('Department')}}</label>
-                                <select class="sf-select-without-search primary-form-control" name='department'
-                                    id='department'>
-                                    <option selected="" value=0>{{__('All Department')}}</option>
-                                    @foreach ($department as $row)
-                                        <option value="{{ $row->id }}">{{ $row->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="primary-form-group">
-                            <div class="primary-form-group-wrap">
-                                <label for="passing_year" class="form-label">{{__('Passing Year')}}</label>
-                                <select class="sf-select-without-search primary-form-control" name='passing_year'
-                                    id='passing-year'>
-                                    <option selected="" value=0>{{__('All Year')}}</option>
-                                    @foreach ($passingYear as $row)
-                                        <option value="{{ $row->id }}">{{ $row->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="primary-form-group">
-                            <div class="primary-form-group-wrap">
-                                <label for="is_member" class="form-label">{{__('Member')}}</label>
-                                <select class="sf-select-without-search primary-form-control" name='is_member'
-                                    id='is-member'>
-                                    <option value="-1" selected>{{__('All')}}</option>
-                                    @foreach (getAlumniMemberStatus() as $key => $value)
-                                        <option value="{{ $key }}">{{ $value }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <button
-                        class="bg-cdef84 border-0 bd-ra-12 py-13 px-26 fs-15 fw-500 lh-25 text-black hover-bg-one advance-filter">{{__('Search Now')}}</button>
-                    <!-- <div class="item">
-                                              </div> -->
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
 
 @push('script')

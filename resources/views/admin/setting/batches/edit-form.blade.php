@@ -1,9 +1,10 @@
 <div class="modal-header">
     <h5 class="modal-title">{{ __('Update Currency') }}</h5>
-    <button type="button" class="border-0 btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="border-0 btn-close" data-bs-dismiss="modal" aria-label="Close"
+        style="filter: invert(1);"></button>
 </div>
 <form class="ajax reset" action="{{ route('admin.setting.batches.update', $batch->id) }}" method="post"
-      data-handler="commonResponseForModal">
+    data-handler="commonResponseForModal">
     @csrf
     @method('PATCH')
     <div class="modal-body">
@@ -14,14 +15,13 @@
                         <label for="currentPassword" class="form-label">{{ __('Name') }} <span
                                 class="text-danger">*</span></label>
                         <input type="text" class="primary-form-control" name="name" value="{{ $batch->name }}" required
-                               placeholder="{{ __('Name') }}">
+                            placeholder="{{ __('Name') }}">
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="submit"
-                class="fs-15 fw-500 lh-25 text-black py-10 px-26 bg-cdef84 border-0 bd-ra-12 hover-bg-one">{{ __('Update') }}</button>
+        <button type="submit" class="premium-btn">{{ __('Update') }}</button>
     </div>
 </form>

@@ -46,7 +46,7 @@ class SettingController extends Controller
 
     public function configurationSettingConfigure(Request $request)
     {
-        if(env('APP_DEMO', false) == false){
+        if (env('APP_DEMO', false) == false) {
             if ($request->key == 'email_verification_status' || $request->key == 'app_mail_status') {
                 return view('admin.setting.general_settings.configuration.form.email_configuration');
             } else if ($request->key == 'app_sms_status') {
@@ -64,11 +64,11 @@ class SettingController extends Controller
             } else if ($request->key == 'cookie_status') {
                 return view('admin.setting.general_settings.configuration.form.cookie_configuration');
             }
-        }else{
+        } else {
             return '<div class="alert alert-info text-center">
-            <p>'.__('This is a demo version, and configuration setup is not visible').'.</p>
-            <p>'.__('You can access the full demo after purchase or by contacting us').'.</p>
-            <a href="https://ticket.zainikthemes.com/contact-us" target="__blank" class="btn btn-primary">'.__('Contact Us').'</a>
+            <p>' . __('This is a demo version, and configuration setup is not visible') . '.</p>
+            <p>' . __('You can access the full demo after purchase or by contacting us') . '.</p>
+            <a href="https://ticket.zainikthemes.com/contact-us" target="__blank" class="btn btn-primary">' . __('Contact Us') . '</a>
         </div>';
         }
     }
@@ -101,9 +101,9 @@ class SettingController extends Controller
             return view('admin.setting.general_settings.configuration.help.registration_approval_help');
         } else if ($request->key == 'show_language_switcher') {
             return view('admin.setting.general_settings.configuration.help.show_language_switcher_help');
-        } else if($request->key == 'register_file_required'){
+        } else if ($request->key == 'register_file_required') {
             return view('admin.setting.general_settings.configuration.help.register_file_required_help');
-        } else if($request->key == 'app_debug'){
+        } else if ($request->key == 'app_debug') {
             return view('admin.setting.general_settings.configuration.help.app_debug_help');
         }
 
@@ -119,55 +119,78 @@ class SettingController extends Controller
             $option = Setting::firstOrCreate(['option_key' => $key, 'tenant_id' => getTenantId()]);
 
             if ($request->hasFile('app_preloader') && $key == 'app_preloader') {
-                $upload = settingImageStoreUpdate($value, $request->app_preloader);
-                $option->option_value = $upload;
-                $option->save();
+                $upload = settingImageStoreUpdate($option->option_value, $request->app_preloader);
+                if ($upload) {
+                    $option->option_value = $upload;
+                    $option->save();
+                }
             } elseif ($request->hasFile('app_logo') && $key == 'app_logo') {
-                $upload = settingImageStoreUpdate($value, $request->app_logo);
-                $option->option_value = $upload;
-                $option->save();
+                $upload = settingImageStoreUpdate($option->option_value, $request->app_logo);
+                if ($upload) {
+                    $option->option_value = $upload;
+                    $option->save();
+                }
             } elseif ($request->hasFile('app_black_logo') && $key == 'app_black_logo') {
-                $upload = settingImageStoreUpdate($value, $request->app_black_logo);
-                $option->option_value = $upload;
-                $option->save();
+                $upload = settingImageStoreUpdate($option->option_value, $request->app_black_logo);
+                if ($upload) {
+                    $option->option_value = $upload;
+                    $option->save();
+                }
             } elseif ($request->hasFile('app_fav_icon') && $key == 'app_fav_icon') {
-                $upload = settingImageStoreUpdate($value, $request->app_fav_icon);
-                $option->option_value = $upload;
-                $option->save();
+                $upload = settingImageStoreUpdate($option->option_value, $request->app_fav_icon);
+                if ($upload) {
+                    $option->option_value = $upload;
+                    $option->save();
+                }
             } elseif ($request->hasFile('login_left_image') && $key == 'login_left_image') {
-                $upload = settingImageStoreUpdate($value, $request->login_left_image);
-                $option->option_value = $upload;
-                $option->save();
+                $upload = settingImageStoreUpdate($option->option_value, $request->login_left_image);
+                if ($upload) {
+                    $option->option_value = $upload;
+                    $option->save();
+                }
             } elseif ($request->hasFile('page_breadcrumb') && $key == 'page_breadcrumb') {
-                $upload = settingImageStoreUpdate($value, $request->page_breadcrumb);
-                $option->option_value = $upload;
-                $option->save();
+                $upload = settingImageStoreUpdate($option->option_value, $request->page_breadcrumb);
+                if ($upload) {
+                    $option->option_value = $upload;
+                    $option->save();
+                }
             } elseif ($request->hasFile('banner_background_breadcrumb') && $key == 'banner_background_breadcrumb') {
-                $upload = settingImageStoreUpdate($value, $request->banner_background_breadcrumb);
-                $option->option_value = $upload;
-                $option->save();
-            }elseif ($request->hasFile('join_us_left_icon') && $key == 'join_us_left_icon') {
-                $upload = settingImageStoreUpdate($value, $request->join_us_left_icon);
-                $option->option_value = $upload;
-                $option->save();
-            }elseif ($request->hasFile('join_us_middle_icon') && $key == 'join_us_middle_icon') {
-                $upload = settingImageStoreUpdate($value, $request->join_us_middle_icon);
-                $option->option_value = $upload;
-                $option->save();
-            }elseif ($request->hasFile('join_us_right_icon') && $key == 'join_us_right_icon') {
-                $upload = settingImageStoreUpdate($value, $request->join_us_right_icon);
-                $option->option_value = $upload;
-                $option->save();
-            }elseif ($request->hasFile('about_us_background_breadcrumb') && $key == 'about_us_background_breadcrumb') {
-                $upload = settingImageStoreUpdate($value, $request->about_us_background_breadcrumb);
-                $option->option_value = $upload;
-                $option->save();
-            }elseif ($request->hasFile('upcoming_events_background') && $key == 'upcoming_events_background') {
-                $upload = settingImageStoreUpdate($value, $request->upcoming_events_background);
-                $option->option_value = $upload;
-                $option->save();
-            }
-            else {
+                $upload = settingImageStoreUpdate($option->option_value, $request->banner_background_breadcrumb);
+                if ($upload) {
+                    $option->option_value = $upload;
+                    $option->save();
+                }
+            } elseif ($request->hasFile('join_us_left_icon') && $key == 'join_us_left_icon') {
+                $upload = settingImageStoreUpdate($option->option_value, $request->join_us_left_icon);
+                if ($upload) {
+                    $option->option_value = $upload;
+                    $option->save();
+                }
+            } elseif ($request->hasFile('join_us_middle_icon') && $key == 'join_us_middle_icon') {
+                $upload = settingImageStoreUpdate($option->option_value, $request->join_us_middle_icon);
+                if ($upload) {
+                    $option->option_value = $upload;
+                    $option->save();
+                }
+            } elseif ($request->hasFile('join_us_right_icon') && $key == 'join_us_right_icon') {
+                $upload = settingImageStoreUpdate($option->option_value, $request->join_us_right_icon);
+                if ($upload) {
+                    $option->option_value = $upload;
+                    $option->save();
+                }
+            } elseif ($request->hasFile('about_us_background_breadcrumb') && $key == 'about_us_background_breadcrumb') {
+                $upload = settingImageStoreUpdate($option->option_value, $request->about_us_background_breadcrumb);
+                if ($upload) {
+                    $option->option_value = $upload;
+                    $option->save();
+                }
+            } elseif ($request->hasFile('upcoming_events_background') && $key == 'upcoming_events_background') {
+                $upload = settingImageStoreUpdate($option->option_value, $request->upcoming_events_background);
+                if ($upload) {
+                    $option->option_value = $upload;
+                    $option->save();
+                }
+            } else {
                 $option->option_value = $value;
                 $option->save();
             }
@@ -178,7 +201,7 @@ class SettingController extends Controller
 
     public function configurationSettingUpdate(Request $request)
     {
-        if(env('APP_DEMO', false) == false){
+        if (env('APP_DEMO', false) == false) {
             try {
                 $option = Setting::firstOrCreate(['option_key' => $request->key, 'tenant_id' => getTenantId()]);
                 $option->option_value = $request->value;
@@ -187,7 +210,7 @@ class SettingController extends Controller
             } catch (Exception $e) {
                 return $this->error([], getMessage(SOMETHING_WENT_WRONG));
             }
-        }else{
+        } else {
             return $this->error([], 'This is a demo version, and this setup is not available in this version. If you need full version then purchase or contact with us');
         }
     }
@@ -289,7 +312,7 @@ class SettingController extends Controller
     public function mailTest(Request $request)
     {
         try {
-            genericEmailNotify($request,'','','');
+            genericEmailNotify($request, '', '', '');
             return redirect()->back()->with('success', __(SENT_SUCCESSFULLY));
         } catch (\PharIo\Manifest\Exception $exception) {
             return redirect()->back()->with('error', __(SOMETHING_WENT_WRONG));
@@ -403,7 +426,7 @@ class SettingController extends Controller
 
                 Artisan::call('storage:link');
                 return redirect()->back()->with('success', 'Application Storage Linked successfully');
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 return redirect()->back()->with('error', $e->getMessage());
             }
         }

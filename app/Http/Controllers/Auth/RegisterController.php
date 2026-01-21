@@ -64,7 +64,7 @@ class RegisterController extends Controller
      */
     public function register(Request $request)
     {
-        if(isAddonInstalled('ALUSAAS') && !isCentralDomain() && getPackageLimit(PACKAGE_RULE_ALUMNI_LIMIT) != -1 && getPackageLimit(PACKAGE_RULE_ALUMNI_LIMIT) <= 0){
+        if (isAddonInstalled('ALUSAAS') && !isCentralDomain() && getPackageLimit(PACKAGE_RULE_ALUMNI_LIMIT) != -1 && getPackageLimit(PACKAGE_RULE_ALUMNI_LIMIT) <= 0) {
             return back()->with('error', __('The alumni limit has been finished. Please contact with admin to upgrade the plan'));
         }
 
@@ -76,7 +76,7 @@ class RegisterController extends Controller
             event(new Registered($user = $this->createCentral($request->all())));
         }
 
-        if(is_null($user) || is_null($user->id)){
+        if (is_null($user) || is_null($user->id)) {
             return back()->with('error', __(SOMETHING_WENT_WRONG));
         }
         $this->guard()->login($user);
@@ -96,20 +96,30 @@ class RegisterController extends Controller
      * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param array $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
     protected function validator(array $data)
     {
         $rules = [
             "email" => ['required', 'email', 'max:255', 'unique:users'],
             "name" => ['required', 'string', 'max:255'],
             "mobile" => 'bail|required|min:6|unique:users',
-            "batch_id" => 'required',
-            "department_id" => 'required',
-            "passing_year_id" => 'required',
-            "id_number" => 'bail|required|min:1',
+            "id_number" => 'bail|nullable|min:1',
             "file" => ['bail', 'nullable', 'mimetypes:application/pdf'],
             "date_of_birth" => 'required|date|before:today',
             "gender" => 'bail|required',
             "password" => ['required', 'string', 'min:6', 'confirmed'],
+            // FGCO Specific Fields
+            "first_class_id" => 'nullable|exists:classes,id',
+            "final_class_id" => 'nullable|exists:classes,id',
+            "first_house_id" => 'nullable|exists:houses,id',
+            "final_house_id" => 'nullable|exists:houses,id',
+            "passing_year_id" => 'nullable|exists:passing_years,id',
+            "nickname" => 'nullable|string|max:100',
         ];
 
         if (getOption('register_file_required', 0)) {
@@ -174,6 +184,7 @@ class RegisterController extends Controller
         $newUser = User::create([
             'tenant_id' => $tenantId,
             'name' => $data['name'],
+            'nick_name' => $data['nickname'] ?? null,
             'email' => $data['email'],
             'mobile' => $data['mobile'],
             'password' => Hash::make($data['password']),
@@ -189,10 +200,14 @@ class RegisterController extends Controller
         Alumni::create([
             'tenant_id' => $tenantId,
             'user_id' => $newUser->id,
-            'batch_id' => $data['batch_id'],
-            'department_id' => $data['department_id'],
-            'passing_year_id' => $data['passing_year_id'],
-            'id_number' => $data['id_number'],
+            'batch_id' => $data['batch_id'] ?? null,
+            'department_id' => $data['department_id'] ?? null,
+            'passing_year_id' => $data['passing_year_id'] ?? null,
+            'first_class_id' => $data['first_class_id'] ?? null,
+            'final_class_id' => $data['final_class_id'] ?? null,
+            'first_house_id' => $data['first_house_id'] ?? null,
+            'final_house_id' => $data['final_house_id'] ?? null,
+            'id_number' => $data['id_number'] ?? null,
             'file' => $file,
             'date_of_birth' => $data['date_of_birth'],
             'gender' => $data['gender'],
@@ -211,7 +226,7 @@ class RegisterController extends Controller
     protected function createCentral(array $data)
     {
         DB::beginTransaction();
-        try{
+        try {
 
             $remember_token = Str::random(64);
 
@@ -241,11 +256,11 @@ class RegisterController extends Controller
                 'gender' => $data['gender'],
             ]);
 
-            Artisan::call('set-tenancy-data --tenant='.$tenant->id);
+            Artisan::call('set-tenancy-data --tenant=' . $tenant->id);
 
             DB::commit();
             return $newUser;
-        }catch (Exception $e){
+        } catch (Exception $e) {
             DB::rollBack();
             return new User();
         }
@@ -287,6 +302,8 @@ class RegisterController extends Controller
             $data['passingYears'] = PassingYear::all();
             $data['batches'] = Batch::all();
             $data['departments'] = Department::all();
+            $data['classes'] = \App\Models\SchoolClass::where('is_active', true)->ordered()->get();
+            $data['houses'] = \App\Models\House::where('is_active', true)->orderBy('name')->get();
             return view('auth.register', $data);
         } else {
             return redirect()->back()->with('error', 'Registration is disable!');

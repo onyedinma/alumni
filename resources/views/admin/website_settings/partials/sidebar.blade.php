@@ -1,92 +1,81 @@
-<div class="email__sidebar bg-style">
+<div class="">
     <div class="sidebar__item">
-        <ul class="d-flex flex-column rg-15 sidebar__mail__nav">
+        <ul class="d-flex flex-column rg-15 sidebar__mail__nav p-0 m-0" style="list-style: none;">
             <li>
                 <a href="{{ route('admin.setting.website-settings.index') }}"
-                    class="align-items-center flex list-item list-item">
-                    <span class="fa fa-gear fs-14 text-707070"></span>
-                    <span
-                        class="font-bold fs-14 hover-color-one text-1b1c17 {{ @$subWebsiteSettingActiveClass }}">{{__('Common Setting')}}</span>
+                    class="align-items-center flex list-item {{ @$subWebsiteSettingActiveClass }}">
+                    <i class="fa fa-globe fs-18"></i>
+                    <span class="font-bold fs-14">{{__('Common Setting')}}</span>
                 </a>
             </li>
             <li>
-                <a class="align-items-center flex list-item list-item"
+                <a class="align-items-center flex list-item {{ @$bannerSettingActiveClass }}"
                     href="{{ route('admin.setting.website-settings.banner.setting') }}">
-                    <span class="fa fa-gear fs-14 text-707070"></span>
-                    <span
-                        class="font-bold fs-14 hover-color-one text-1b1c17 {{ @$bannerSettingActiveClass }}">{{ __('Banner Setting') }}</span>
+                    <i class="fa fa-flag fs-18"></i>
+                    <span class="font-bold fs-14">{{ __('Banner Setting') }}</span>
                 </a>
             </li>
             <li>
-                <a class="align-items-center flex list-item list-item"
+                <a class="align-items-center flex list-item {{ @$whyJoinWithUsActiveClass }}"
                     href="{{ route('admin.setting.website-settings.why-you-should-join-us') }}">
-                    <span class="fa fa-gear fs-14 text-707070"></span>
-                    <span
-                        class="font-bold fs-14 hover-color-one text-1b1c17 {{ @$whyJoinWithUsActiveClass }}">{{ __('Why Join With Us') }}</span>
+                    <i class="fa fa-users-rays fs-18"></i>
+                    <span class="font-bold fs-14">{{ __('Why Join With Us') }}</span>
                 </a>
             </li>
             <li>
-                <a class="align-items-center flex list-item list-item"
+                <a class="align-items-center flex list-item {{ @$aboutUsActiveClass }}"
                     href="{{ route('admin.setting.website-settings.about-us') }}">
-                    <span class="fa fa-gear fs-14 text-707070"></span>
-                    <span
-                        class="font-bold fs-14 hover-color-one text-1b1c17 {{ @$aboutUsActiveClass }}">{{ __('About Us') }}</span>
+                    <i class="fa fa-address-card fs-18"></i>
+                    <span class="font-bold fs-14">{{ __('About Us') }}</span>
                 </a>
             </li>
             <li>
-                <a class="align-items-center flex list-item list-item"
+                <a class="align-items-center flex list-item {{ @$activeImageGallerySetting }}"
                     href="{{ route('admin.setting.website-settings.image_galleries.index') }}">
-                    <span class="fa fa-gear fs-14 text-707070"></span>
-                    <span
-                        class="font-bold fs-14 hover-color-one text-1b1c17 {{ @$activeImageGallerySetting }}">{{ __('Image Gallery') }}</span>
+                    <i class="fa fa-images fs-18"></i>
+                    <span class="font-bold fs-14">{{ __('Image Gallery') }}</span>
                 </a>
             </li>
             <li>
-                <a class="align-items-center flex list-item list-item"
+                <a class="align-items-center flex list-item {{ @$privacyPolicyActiveClass }}"
                     href="{{ route('admin.setting.website-settings.privacy-policy') }}">
-                    <span class="fa fa-gear fs-14 text-707070"></span>
-                    <span
-                        class="font-bold fs-14 hover-color-one text-1b1c17 {{ @$privacyPolicyActiveClass }}">{{ __('Privacy Policy') }}</span>
+                    <i class="fa-solid fa-file-shield fs-18"></i>
+                    <span class="font-bold fs-14">{{ __('Privacy Policy') }}</span>
                 </a>
             </li>
             <li>
-                <a class="align-items-center flex list-item list-item"
+                <a class="align-items-center flex list-item {{ @$cookiePolicyActiveClass }}"
                     href="{{ route('admin.setting.website-settings.cookie-policy') }}">
-                    <span class="fa fa-gear fs-14 text-707070"></span>
-                    <span
-                        class="font-bold fs-14 hover-color-one text-1b1c17 {{ @$cookiePolicyActiveClass }}">{{ __('Cookie Policy') }}</span>
+                    <i class="fa-solid fa-cookie-bite fs-18"></i>
+                    <span class="font-bold fs-14">{{ __('Cookie Policy') }}</span>
                 </a>
             </li>
             <li>
-                <a class="align-items-center flex list-item list-item"
+                <a class="align-items-center flex list-item {{ @$termsConditionActiveClass }}"
                     href="{{ route('admin.setting.website-settings.terms-condition') }}">
-                    <span class="fa fa-gear fs-14 text-707070"></span>
-                    <span
-                        class="font-bold fs-14 hover-color-one text-1b1c17 {{ @$termsConditionActiveClass }}">{{ __('Terms And Condition') }}</span>
+                    <i class="fa-solid fa-file-contract fs-18"></i>
+                    <span class="font-bold fs-14">{{ __('Terms And Condition') }}</span>
                 </a>
             </li>
             <li>
-                <a class="align-items-center flex list-item list-item"
+                <a class="align-items-center flex list-item {{ @$refundPolicyActiveClass }}"
                     href="{{ route('admin.setting.website-settings.refund-policy') }}">
-                    <span class="fa fa-gear fs-14 text-707070"></span>
-                    <span
-                        class="font-bold fs-14 hover-color-one text-1b1c17 {{ @$refundPolicyActiveClass }}">{{ __('Refund Policy') }}</span>
+                    <i class="fa-solid fa-file-invoice-dollar fs-18"></i>
+                    <span class="font-bold fs-14">{{ __('Refund Policy') }}</span>
                 </a>
             </li>
             <li>
-                <a class="align-items-center flex list-item list-item"
+                <a class="align-items-center flex list-item {{ @$constitutionActiveClass }}"
                     href="{{ route('admin.setting.website-settings.constitution') }}">
-                    <span class="fa fa-book fs-14 text-707070"></span>
-                    <span
-                        class="font-bold fs-14 hover-color-one text-1b1c17 {{ @$constitutionActiveClass }}">{{ __('Constitution') }}</span>
+                    <i class="fa-solid fa-scroll fs-18"></i>
+                    <span class="font-bold fs-14">{{ __('Constitution') }}</span>
                 </a>
             </li>
             <li>
-                <a class="align-items-center flex list-item list-item"
+                <a class="align-items-center flex list-item {{ @$contactUsActiveClass }}"
                     href="{{ route('admin.setting.website-settings.contact-us') }}">
-                    <span class="fa fa-gear fs-14 text-707070"></span>
-                    <span
-                        class="font-bold fs-14 hover-color-one text-1b1c17 {{ @$contactUsActiveClass }}">{{ __('Contact Us') }}</span>
+                    <i class="fa-solid fa-address-book fs-18"></i>
+                    <span class="font-bold fs-14">{{ __('Contact Us') }}</span>
                 </a>
             </li>
         </ul>

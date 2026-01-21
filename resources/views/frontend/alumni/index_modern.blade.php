@@ -38,9 +38,10 @@
 
                         <div class="absolute bottom-0 left-0 p-6 w-full">
                             <h3 class="text-xl font-serif font-bold text-white mb-1">{{ $alumni->name }}</h3>
-                            <p class="text-gold-200 text-sm font-medium mb-0.5 font-sans">{{ $alumni->department_name }}</p>
-                            <p class="text-gray-300 text-xs uppercase tracking-wider font-sans">{{ __('Batch') }}
-                                {{ $alumni->batch_name }}</p>
+                            <p class="text-gold-200 text-sm font-medium mb-0.5 font-sans">{{ $alumni->final_class_name ?? 'N/A' }}
+                            </p>
+                            <p class="text-gray-300 text-xs uppercase tracking-wider font-sans">
+                                {{ $alumni->final_house_name ?? 'N/A' }}</p>
                         </div>
                     </div>
                 @endforeach

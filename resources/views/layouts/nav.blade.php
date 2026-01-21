@@ -1,18 +1,18 @@
 <div
-    class="main-header pt-28 pb-27 px-30 border-b border-white/10 bg-secondary d-flex justify-content-between align-items-center">
+    class="main-header pt-28 pb-27 px-30 border-b-2 border-[var(--gold,#D4AF5A)] bg-[var(--bg-surface,#12161C)] d-flex justify-content-between align-items-center shadow-lg">
     <!-- Left -->
     <div class="d-flex align-items-center cg-15">
         <!-- Mobile Menu Button -->
         <div class="mobileMenu">
             <button
-                class="bd-one bd-c-ededed bd-ra-12 w-30 h-30 d-flex justify-content-center align-items-center text-707070 p-0 bg-transparent">
+                class="bd-one bd-c-[var(--border-dark,#1F2630)] bd-ra-12 w-30 h-30 d-flex justify-content-center align-items-center text-[var(--text-secondary,#B4BCC8)] hover:text-[var(--gold,#D4AF5A)] p-0 bg-transparent transition-colors">
                 <i class="fa-solid fa-bars"></i></button>
         </div>
         <!-- Alumni link -->
         <a href="{{ route('alumni.list-search-with-filter') }}"
-            class="d-none d-sm-inline-block fs-15 fw-500 lh-25 text-white py-10 px-26 bg-maroon-600 rounded-xl hover:bg-maroon-700 transition-colors">{{
-    __('Find
-            an Alumni') }}</a>
+            class="d-none d-sm-inline-block fs-15 fw-600 lh-25 text-black py-10 px-26 bg-gradient-to-r from-[var(--gold,#D4AF5A)] to-[#b8934a] hover:from-[#e3c16e] hover:to-[#c4a159] rounded-xl transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+            <i class="fas fa-search mr-2"></i> {{
+    __('Find an Alumni') }}</a>
     </div>
     <!-- Right -->
     <div class="right d-flex justify-content-end align-items-center cg-15">
@@ -26,7 +26,7 @@
                         <img class="h-100 object-fit-cover w-100" src="{{ asset(selectedLanguage()?->flag) }}" alt="" />
                     </div>
                     <div class="text-start d-none d-md-block">
-                        <h4 class="fs-15 fw-500 lh-18 text-1b1c17">{{ selectedLanguage()?->language }}</h4>
+                        <h4 class="fs-15 fw-500 lh-18 text-white">{{ selectedLanguage()?->language }}</h4>
                     </div>
                 </button>
                 <ul class="dropdown-menu dropdownItem-one">
@@ -72,7 +72,7 @@
                                                     <a href="{{ route('notification.notification-mark-all-as-read') }}"
                                                         class="fs-12 fw-600 lh-20 text-1b1c17 text-decoration-underline border-0 p-0 bg-transparent hover-color-one">{{
                                 __('Mark
-                                                        all as read') }}</a>
+                                                                                                                                all as read') }}</a>
                             @endif
                         </div>
 
@@ -110,12 +110,13 @@
             <div class="dropdown headerUserDropdown">
                 <button class="dropdown-toggle p-0 border-0 bg-transparent d-flex align-items-center cg-8" type="button"
                     data-bs-toggle="dropdown" aria-expanded="false">
-                    <div class="w-42 h-42 rounded-circle overflow-hidden bd-one bd-c-cdef84"><img
-                            src="{{ asset(getFileUrl(auth()->user()->image)) }}" alt="{{ auth()->user()->name }}" />
+                    <div
+                        class="w-42 h-42 rounded-circle overflow-hidden border-2 border-[var(--gold,#D4AF5A)] shadow-md">
+                        <img src="{{ asset(getFileUrl(auth()->user()->image)) }}" alt="{{ auth()->user()->name }}" />
                     </div>
                     <div class="text-start d-none d-sm-block">
-                        <p class="fs-12 fw-400 lh-15 text-707070">{{ __('Welcome') }}</p>
-                        <h4 class="fs-15 fw-500 lh-18 text-1b1c17">{{ auth()->user()->name }}</h4>
+                        <p class="fs-12 fw-400 lh-15" style="color: #B4BCC8;">{{ __('Welcome') }}</p>
+                        <h4 class="fs-15 fw-600 lh-18" style="color: #D4AF5A;">{{ auth()->user()->name }}</h4>
                     </div>
                 </button>
                 <ul class="dropdown-menu dropdownItem-one">

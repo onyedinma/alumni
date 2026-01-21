@@ -34,9 +34,11 @@ class SettingsService
             $option = Setting::firstOrCreate(['option_key' => $key, 'tenant_id' => getTenantId()]);
 
             if ($request->hasFile('cookie_image') && $key == 'cookie_image') {
-                $upload = settingImageStoreUpdate($value, $request->cookie_image);
-                $option->option_value = $upload;
-                $option->save();
+                $upload = settingImageStoreUpdate($option->option_value, $request->cookie_image);
+                if ($upload) {
+                    $option->option_value = $upload;
+                    $option->save();
+                }
             } else {
                 $option->option_value = $value;
                 $option->save();
@@ -56,9 +58,11 @@ class SettingsService
             $option = Setting::firstOrCreate(['option_key' => $key, 'tenant_id' => getTenantId()]);
 
             if ($request->hasFile('cookie_image') && $key == 'cookie_image') {
-                $upload = settingImageStoreUpdate($value, $request->cookie_image);
-                $option->option_value = $upload;
-                $option->save();
+                $upload = settingImageStoreUpdate($option->option_value, $request->cookie_image);
+                if ($upload) {
+                    $option->option_value = $upload;
+                    $option->save();
+                }
             } else {
                 $option->option_value = $value;
                 $option->save();

@@ -1,16 +1,16 @@
 @foreach ($posts as $post)
-    <div class="zPost-item p-25 bg-[#1e1e1e] border border-white/5 rounded-xl shadow-lg post-main-area mb-6">
+    <div class="zPost-item p-25 bg-[#252525] border border-gold-500/20 rounded-xl shadow-lg post-main-area mb-6">
         <input type="hidden" class="post-slug" value="{{ $post->slug }}">
         <!-- Header -->
         <div class="pb-22 d-flex justify-content-between align-items-center">
             <!-- User -->
             <div class="d-flex align-items-center cg-10">
-                <div class="flex-shrink-0 w-45 h-45 border border-gold-500 rounded-circle overflow-hidden"><img
+                <div class="flex-shrink-0 w-45 h-45 border-2 border-gold-500 rounded-circle overflow-hidden"><img
                         src="{{ asset(getFileUrl($post->author->image)) }}" class="w-100" alt="{{ $post->author->name }}" />
                 </div>
                 <div class="">
                     <h4 class="fs-16 fw-500 lh-20 text-white font-serif">{{ $post->author->name }}</h4>
-                    <p class="fs-12 fw-400 lh-15 text-gold-400/80">{{ $post->created_at->diffForHumans() }}</p>
+                    <p class="fs-12 fw-400 lh-15 text-gold-400">{{ $post->created_at->diffForHumans() }}</p>
                 </div>
             </div>
             <!-- Edit - Delete -->
@@ -59,8 +59,8 @@
             @endif
         </div>
         <!-- Body -->
-        <div class="pb-25 border-b border-white/10 post-main-body post-main-body-{{ $post->slug }}">
-            <p class="fs-14 fw-400 lh-24 text-gray-300">
+        <div class="pb-25 border-b border-gold-500/20 post-main-body post-main-body-{{ $post->slug }}">
+            <p class="fs-14 fw-400 lh-24 text-gray-200">
                 {!! nl2br($post->body) !!}
             </p>
             @if(count($post->media))
@@ -108,7 +108,7 @@
         <!-- Footer -->
         <div class="like-comment-area like-comment-area-{{ $post->slug }}">
             <!-- Like & Comment button -->
-            <div class="py-17 border-b border-white/10">
+            <div class="py-17 border-b border-gold-500/20">
                 <ul class="d-flex flex-wrap align-items-center cg-40 rg-10">
                     <li>
                         @include('alumni.partials.post-like')
@@ -148,7 +148,7 @@
                     </div>
                     <div class="flex-grow-1">
                         <input type="text"
-                            class="form-control postCommentInput bg-secondary border border-white/10 text-white placeholder-gray-500 rounded-lg"
+                            class="form-control postCommentInput bg-[#1a1a1a] border border-gold-500/30 text-white placeholder-gray-400 rounded-lg focus:border-gold-400"
                             placeholder="{{ __('Write your comment...') }}" />
                     </div>
                 </div>

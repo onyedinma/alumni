@@ -1,0 +1,26 @@
+EXCEL FILE FIELDS:
+--------------------------------------------------
+1. Timestamp
+2. Image / Photo
+3. Full Name
+4. Nick Name / Alias
+5. Email
+6. Phone
+7. Your First Year Class at FGCO
+8. Your Final Year Class at FGCO
+9. Your First House at FGCO
+10. Your Final House at FGCO
+11. Date of Birth
+12. Country of Residence
+13. State of Residence
+14. State of Origin
+15. LGA of Origin
+16. Current Location / Address
+17. Current Job/ Business
+18. Expertise / Field
+19. Business / Company Name 
+20. Designation 
+21. Office  / Business Address
+22. Portfolio - Introduce Yourself
+--------------------------------------------------
+Total rows: 67

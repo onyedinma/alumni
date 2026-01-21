@@ -4,140 +4,455 @@
     {{ $pageTitle }}
 @endpush
 
+@push('style')
+    <style>
+        /* Contact Page - Premium Dark Theme */
+        .contact-section {
+            min-height: 100vh;
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, #0B0E11 0%, #12161C 50%, #0B0E11 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated background orbs */
+        .contact-section::before,
+        .contact-section::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, rgba(139, 38, 53, 0.4), rgba(212, 175, 90, 0.3));
+            filter: blur(100px);
+            opacity: 0.5;
+            animation: contactFloat 20s infinite ease-in-out;
+            z-index: 0;
+        }
+
+        .contact-section::before {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 5%;
+        }
+
+        .contact-section::after {
+            width: 400px;
+            height: 400px;
+            bottom: 10%;
+            right: 5%;
+            animation-delay: 5s;
+        }
+
+        @keyframes contactFloat {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            25% {
+                transform: translate(30px, 30px) rotate(90deg);
+            }
+
+            50% {
+                transform: translate(-30px, -30px) rotate(180deg);
+            }
+
+            75% {
+                transform: translate(30px, -30px) rotate(270deg);
+            }
+        }
+
+        /* Page header */
+        .contact-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .contact-header h1 span {
+            background: linear-gradient(90deg, #D4AF5A, #E3C16E);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-header p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 18px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Main card */
+        .contact-card {
+            background: rgba(18, 22, 28, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Top gradient border */
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #8B2635, #D4AF5A, #8B2635);
+        }
+
+        .contact-row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        /* Left column - Info */
+        .contact-info {
+            flex: 0 0 40%;
+            max-width: 40%;
+            padding: 50px;
+            background: linear-gradient(135deg, rgba(139, 38, 53, 0.2) 0%, rgba(23, 28, 35, 0.9) 100%);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 991px) {
+            .contact-info {
+                flex: 0 0 100%;
+                max-width: 100%;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        .contact-info-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #D4AF5A;
+            margin-bottom: 30px;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .contact-info-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #D4AF5A, #B8934A);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-info-icon i {
+            font-size: 20px;
+            color: #0B0E11;
+        }
+
+        .contact-info-content h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .contact-info-content p {
+            font-size: 16px;
+            color: #fff;
+            margin: 0;
+        }
+
+        .contact-info-content a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info-content a:hover {
+            color: #D4AF5A;
+        }
+
+        /* Social links */
+        .contact-social {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-social h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .contact-social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .contact-social-links a {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #D4AF5A;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-social-links a:hover {
+            background: #D4AF5A;
+            color: #0B0E11;
+            transform: translateY(-3px);
+        }
+
+        /* Right column - Form */
+        .contact-form-wrap {
+            flex: 0 0 60%;
+            max-width: 60%;
+            padding: 50px;
+        }
+
+        @media (max-width: 991px) {
+            .contact-form-wrap {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+        }
+
+        .contact-form-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 30px;
+        }
+
+        .contact-form-group {
+            margin-bottom: 24px;
+        }
+
+        .contact-form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 8px;
+        }
+
+        .contact-form-control {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form-control:focus {
+            outline: none;
+            border-color: #D4AF5A;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 0 3px rgba(212, 175, 90, 0.2);
+        }
+
+        .contact-form-control::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        textarea.contact-form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .contact-submit-btn {
+            width: 100%;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #8B2635 0%, #751525 100%);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 38, 53, 0.4);
+        }
+
+        .contact-submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .contact-submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .contact-submit-btn i {
+            margin-left: 8px;
+        }
+    </style>
+@endpush
+
 @section('content')
-    <!-- Header -->
-    <div class="relative bg-maroon-900 py-24 px-4 sm:px-6 lg:px-8 overflow-hidden text-center">
-        <div class="absolute inset-0">
-            <div class="absolute inset-0 bg-gradient-to-br from-maroon-900 to-secondary opacity-90"></div>
-        </div>
-        <div class="relative max-w-7xl mx-auto">
-            <h1 class="text-4xl font-serif font-extrabold text-white sm:text-5xl mb-4">
-                {{ __('Get in Touch') }}
-            </h1>
-            <p class="max-w-2xl mx-auto text-xl text-gold-100 font-sans">
-                {{ __('Have questions or suggestions? We\'d love to hear from you.') }}
-            </p>
-        </div>
-    </div>
+    <section class="contact-section">
+        <div class="container">
+            <!-- Header -->
+            <div class="contact-header">
+                <h1>Get in <span>Touch</span></h1>
+                <p>Have questions or want to connect? We'd love to hear from you.</p>
+            </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 -mt-10 relative z-10">
-        <div class="bg-white rounded-sm shadow-2xl overflow-hidden flex flex-col md:flex-row">
-            <!-- Contact Info Sidebar -->
-            <div class="bg-maroon-800 p-10 md:w-2/5 text-white flex flex-col justify-between">
-                <div>
-                    <h3 class="text-2xl font-serif font-bold mb-6">Contact Information</h3>
-                    <p class="text-gold-100 mb-8 leading-relaxed font-sans">Fill up the form and our team will get back to
-                        you within
-                        24 hours.</p>
+            <!-- Main Card -->
+            <div class="contact-card">
+                <div class="contact-row">
+                    <!-- Contact Info -->
+                    <div class="contact-info">
+                        <h3 class="contact-info-title">Contact Information</h3>
 
-                    <ul class="space-y-6">
-                        <li class="flex items-start gap-4">
-                            <div
-                                class="w-10 h-10 rounded-full bg-maroon-700 flex items-center justify-center flex-shrink-0 border border-maroon-600">
-                                <i class="fas fa-phone-alt text-gold-400"></i>
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <i class="fas fa-phone-alt"></i>
                             </div>
-                            <div>
-                                <p class="text-gold-200 text-xs uppercase font-bold">Phone</p>
-                                <p class="font-bold text-lg font-sans">{{ getOption('app_contact_number') }}</p>
+                            <div class="contact-info-content">
+                                <h4>Phone</h4>
+                                <p><a
+                                        href="tel:{{ getOption('app_contact_number', '+1234567890') }}">{{ getOption('app_contact_number', '+1234567890') }}</a>
+                                </p>
                             </div>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <div
-                                class="w-10 h-10 rounded-full bg-maroon-700 flex items-center justify-center flex-shrink-0 border border-maroon-600">
-                                <i class="fas fa-envelope text-gold-400"></i>
-                            </div>
-                            <div>
-                                <p class="text-gold-200 text-xs uppercase font-bold">Email</p>
-                                <p class="font-bold text-lg font-sans">{{ getOption('app_email') }}</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <div
-                                class="w-10 h-10 rounded-full bg-maroon-700 flex items-center justify-center flex-shrink-0 border border-maroon-600">
-                                <i class="fas fa-map-marker-alt text-gold-400"></i>
-                            </div>
-                            <div>
-                                <p class="text-gold-200 text-xs uppercase font-bold">Address</p>
-                                <p class="font-bold text-lg font-sans">{{ getOption('app_address') }}</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                        </div>
 
-                <div class="mt-12">
-                    <h4 class="font-bold mb-4 font-serif text-lg">Follow Us</h4>
-                    <div class="flex gap-4">
-                        @if(getOption('facebook_link'))
-                            <a href="{{ getOption('facebook_link') }}"
-                                class="w-10 h-10 rounded-full bg-maroon-700 hover:bg-white hover:text-maroon-800 flex items-center justify-center transition-all border border-maroon-600"><i
-                                    class="fab fa-facebook-f"></i></a>
-                        @endif
-                        @if(getOption('twitter_link'))
-                            <a href="{{ getOption('twitter_link') }}"
-                                class="w-10 h-10 rounded-full bg-maroon-700 hover:bg-white hover:text-maroon-800 flex items-center justify-center transition-all border border-maroon-600"><i
-                                    class="fab fa-twitter"></i></a>
-                        @endif
-                        @if(getOption('linkedin_link'))
-                            <a href="{{ getOption('linkedin_link') }}"
-                                class="w-10 h-10 rounded-full bg-maroon-700 hover:bg-white hover:text-maroon-800 flex items-center justify-center transition-all border border-maroon-600"><i
-                                    class="fab fa-linkedin-in"></i></a>
-                        @endif
-                        @if(getOption('instagram_link'))
-                            <a href="{{ getOption('instagram_link') }}"
-                                class="w-10 h-10 rounded-full bg-maroon-700 hover:bg-white hover:text-maroon-800 flex items-center justify-center transition-all border border-maroon-600"><i
-                                    class="fab fa-instagram"></i></a>
-                        @endif
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-info-content">
+                                <h4>Email</h4>
+                                <p><a href="mailto:{{ getOption('app_email', 'info@example.com') }}">{{
+                                        getOption('app_email', 'info@example.com') }}</a></p>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-info-content">
+                                <h4>Address</h4>
+                                <p>{{ getOption('app_address', 'FGC Ohafia, Abia State, Nigeria') }}</p>
+                            </div>
+                        </div>
+
+                        <!-- Social Links -->
+                        <div class="contact-social">
+                            <h4>Follow Us</h4>
+                            <div class="contact-social-links">
+                                @if(getOption('facebook_link'))
+                                    <a href="{{ getOption('facebook_link') }}" target="_blank"><i
+                                            class="fab fa-facebook-f"></i></a>
+                                @endif
+                                @if(getOption('twitter_link'))
+                                    <a href="{{ getOption('twitter_link') }}" target="_blank"><i class="fab fa-twitter"></i></a>
+                                @endif
+                                @if(getOption('instagram_link'))
+                                    <a href="{{ getOption('instagram_link') }}" target="_blank"><i
+                                            class="fab fa-instagram"></i></a>
+                                @endif
+                                @if(getOption('linkedin_link'))
+                                    <a href="{{ getOption('linkedin_link') }}" target="_blank"><i
+                                            class="fab fa-linkedin-in"></i></a>
+                                @endif
+                                @if(!getOption('facebook_link') && !getOption('twitter_link') && !getOption('instagram_link') && !getOption('linkedin_link'))
+                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                    <a href="#"><i class="fab fa-instagram"></i></a>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="contact-form-wrap">
+                        <h3 class="contact-form-title">Send us a Message</h3>
+
+                        <form action="{{ route('contact_us.store') }}" method="post" data-handler="settingCommonHandler">
+                            @csrf
+                            <div class="contact-form-group">
+                                <label for="csName">Full Name</label>
+                                <input type="text" class="contact-form-control" id="csName" name="name"
+                                    placeholder="John Doe" required />
+                            </div>
+
+                            <div class="contact-form-group">
+                                <label for="csEmail">Email Address</label>
+                                <input type="email" class="contact-form-control" id="csEmail" name="email"
+                                    placeholder="john@example.com" required />
+                            </div>
+
+                            <div class="contact-form-group">
+                                <label for="csSubject">Subject</label>
+                                <input type="text" class="contact-form-control" id="csSubject" name="subject"
+                                    placeholder="How can we help?" required />
+                            </div>
+
+                            <div class="contact-form-group">
+                                <label for="csMessage">Message</label>
+                                <textarea name="message" id="csMessage" class="contact-form-control"
+                                    placeholder="Write your message here..." required></textarea>
+                            </div>
+
+                            <button type="submit" class="contact-submit-btn">
+                                Send Message <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
-
-            <!-- Contact Form -->
-            <div class="p-10 md:w-3/5">
-                <form action="{{ route('contact_us.store') }}" method="POST" class="space-y-6">
-                    @csrf
-                    <div>
-                        <label for="name" class="block text-sm font-bold text-gray-700 mb-2 font-sans">Full Name</label>
-                        <input type="text" name="name" id="name"
-                            class="w-full px-4 py-3 rounded-sm bg-gray-50 border-gray-200 focus:border-maroon-600 focus:bg-white focus:ring-0 transition-colors"
-                            placeholder="John Doe" required>
-                    </div>
-
-                    <div>
-                        <label for="email" class="block text-sm font-bold text-gray-700 mb-2 font-sans">Email
-                            Address</label>
-                        <input type="email" name="email" id="email"
-                            class="w-full px-4 py-3 rounded-sm bg-gray-50 border-gray-200 focus:border-maroon-600 focus:bg-white focus:ring-0 transition-colors"
-                            placeholder="john@example.com" required>
-                    </div>
-
-                    <div>
-                        <label for="subject" class="block text-sm font-bold text-gray-700 mb-2 font-sans">Subject</label>
-                        <input type="text" name="subject" id="subject"
-                            class="w-full px-4 py-3 rounded-sm bg-gray-50 border-gray-200 focus:border-maroon-600 focus:bg-white focus:ring-0 transition-colors"
-                            placeholder="How can we help?" required>
-                    </div>
-
-                    <div>
-                        <label for="message" class="block text-sm font-bold text-gray-700 mb-2 font-sans">Message</label>
-                        <textarea name="message" id="message" rows="4"
-                            class="w-full px-4 py-3 rounded-sm bg-gray-50 border-gray-200 focus:border-maroon-600 focus:bg-white focus:ring-0 transition-colors"
-                            placeholder="Write your message here..." required></textarea>
-                    </div>
-
-                    <button type="submit"
-                        class="w-full py-4 bg-maroon-700 hover:bg-maroon-800 text-white font-bold rounded-sm shadow-lg transition-all transform hover:-translate-y-1 font-serif">
-                        Send Message
-                    </button>
-                </form>
-            </div>
         </div>
-    </div>
-
-    <!-- Map Section (Optional) -->
-    <div class="h-96 w-full grayscale contrast-125 filter">
-        <iframe
-            src="https://maps.google.com/maps?q={{ getOption('app_location_latitude') }},{{ getOption('app_location_longitude') }}&t=&z=13&ie=UTF8&iwloc=&output=embed"
-            width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
-            tabindex="0"></iframe>
-    </div>
+    </section>
 @endsection

@@ -26,41 +26,50 @@ class ProfileController extends Controller
     {
         $data['activeProfile'] = 'active';
         $data['user'] = $this->userService->userData();
-        return view('alumni.profile',$data);
+        $data['classes'] = \App\Models\SchoolClass::where('is_active', true)->ordered()->get();
+        $data['houses'] = \App\Models\House::where('is_active', true)->orderBy('name')->get();
+        $data['passingYears'] = \App\Models\PassingYear::all();
+        return view('alumni.profile', $data);
     }
 
-    public function userProfileUpdate(ProfileRequest $request){
+    public function userProfileUpdate(ProfileRequest $request)
+    {
         return $this->userService->profileUpdate($request);
     }
 
-    public function addInstitution(Request $request){
+    public function addInstitution(Request $request)
+    {
 
         return $this->userService->addInstitution($request);
     }
 
     public function changePasswordUpdate(Request $request)
     {
-       return $this->userService->changePasswordUpdate($request);
+        return $this->userService->changePasswordUpdate($request);
     }
 
-    public function security(){
-        $user = User::where('id',auth()->user()->id)->first();
+    public function security()
+    {
+        $user = User::where('id', auth()->user()->id)->first();
         $google2fa = new Google2FA();
-        $data['qr_code']= $google2fa->getQRCodeInline(
+        $data['qr_code'] = $google2fa->getQRCodeInline(
             getOption('app_name'),
             $user->email,
             $user->google2fa_secret
         );
-        return view('profile.security',$data);
+        return view('profile.security', $data);
     }
 
-    public function smsSend(Request $request){
+    public function smsSend(Request $request)
+    {
         return $this->userService->smsSend($request);
     }
-    public function smsReSend(){
+    public function smsReSend()
+    {
         return $this->userService->smsReSend();
     }
-    public function smsVerify(Request $request){
+    public function smsVerify(Request $request)
+    {
         $request->validate([
             'opt-field.*' => 'required|numeric|',
         ]);

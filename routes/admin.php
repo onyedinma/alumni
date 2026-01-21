@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\EmailTemplateController;
 use App\Http\Controllers\Admin\EventCategoryController;
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\GatewayController;
+use App\Http\Controllers\Admin\HouseController;
 use App\Http\Controllers\Admin\ImageGalleryController;
 use App\Http\Controllers\Admin\JobPostController;
 use App\Http\Controllers\Admin\LanguageController;
@@ -20,14 +21,16 @@ use App\Http\Controllers\Admin\NoticeCategoryController;
 use App\Http\Controllers\Admin\NoticeController;
 use App\Http\Controllers\Admin\PassingYearController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\SchoolClassController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\StoryController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\Website\WebsiteSettingController;
-use App\Http\Controllers\addon\saas\admin\OrderController;
-use App\Http\Controllers\addon\saas\admin\SubscriptionController;
-use App\Http\Controllers\addon\saas\admin\CustomDomainRequestController;
+// use App\Http\Controllers\addon\saas\admin\OrderController;
+// use App\Http\Controllers\addon\saas\admin\SubscriptionController;
+// use App\Http\Controllers\addon\saas\admin\CustomDomainRequestController;
+use App\Http\Controllers\Admin\ImportAlumniController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -85,6 +88,10 @@ Route::group(['prefix' => 'alumni', 'as' => 'alumni.'], function () {
     Route::get('list-search-with-filter', [AlumniController::class, 'alumniListWithAdvanceFilter'])->name('list-search-with-filter');
     Route::get('list-pending-alumni-with-filter', [AlumniController::class, 'alumniPendingListWithAdvanceFilter'])->name('list-pending-alumni-with-filter');
     Route::post('change-alumni-status', [AlumniController::class, 'alumniChangeStatus'])->name('change-alumni-status');
+    // Import Routes
+    Route::get('import', [ImportAlumniController::class, 'index'])->name('import');
+    Route::post('import', [ImportAlumniController::class, 'store'])->name('import.store');
+    Route::get('import/sample', [ImportAlumniController::class, 'downloadSample'])->name('import.sample');
 });
 // Manage Alumni Route End
 
@@ -219,6 +226,24 @@ Route::group(['prefix' => 'setting', 'as' => 'setting.'], function () {
         Route::post('delete/{id}', [PassingYearController::class, 'delete'])->name('delete');
     });
 
+    // School Classes Route
+    Route::group(['prefix' => 'classes', 'as' => 'classes.'], function () {
+        Route::get('', [SchoolClassController::class, 'index'])->name('index');
+        Route::post('store', [SchoolClassController::class, 'store'])->name('store');
+        Route::get('edit/{id}', [SchoolClassController::class, 'edit'])->name('edit');
+        Route::patch('update/{id}', [SchoolClassController::class, 'update'])->name('update');
+        Route::post('delete/{id}', [SchoolClassController::class, 'delete'])->name('delete');
+    });
+
+    // Houses Route
+    Route::group(['prefix' => 'houses', 'as' => 'houses.'], function () {
+        Route::get('', [HouseController::class, 'index'])->name('index');
+        Route::post('store', [HouseController::class, 'store'])->name('store');
+        Route::get('edit/{id}', [HouseController::class, 'edit'])->name('edit');
+        Route::patch('update/{id}', [HouseController::class, 'update'])->name('update');
+        Route::post('delete/{id}', [HouseController::class, 'delete'])->name('delete');
+    });
+
     Route::group(['prefix' => 'language', 'as' => 'languages.'], function () {
         Route::get('/', [LanguageController::class, 'index'])->name('index');
         Route::post('store', [LanguageController::class, 'store'])->name('store');
@@ -310,6 +335,7 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
     Route::get('activity-{id}', [UserController::class, 'userActivity'])->name('activity');
 });
 
+/*
 if (isAddonInstalled('ALUSAAS')) {
     //subscription
     Route::group(['prefix' => 'subscription', 'as' => 'subscription.'], function () {
@@ -331,4 +357,5 @@ if (isAddonInstalled('ALUSAAS')) {
         Route::POST('update/{id}', [CustomDomainRequestController::class, 'update'])->name('update');
     });
 }
+*/
 

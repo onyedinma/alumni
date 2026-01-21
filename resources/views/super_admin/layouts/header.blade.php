@@ -11,7 +11,7 @@
             $metaData = getMeta('home');
         @endphp
 
-            <!-- Open Graph meta tags for social sharing -->
+        <!-- Open Graph meta tags for social sharing -->
         <meta property="og:type" content="{{ __('zaisub') }}">
         <meta property="og:title" content="{{ $metaData['meta_title'] ?? getOption('app_name') }}">
         <meta property="og:description" content="{{ $metaData['meta_description'] ?? getOption('app_name') }}">
@@ -49,4 +49,94 @@
     <link rel="stylesheet" href="{{ asset('super_admin/css/summernote/summernote-lite.min.css') }}" />
     <script src="{{ asset('super_admin/js/modernizr-3.11.2.min.js') }}"></script>
     @stack('style')
+
+    <!-- Improved Preloader Styles -->
+    <style>
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #0B0E11 0%, #12161C 50%, #0B0E11 100%) !important;
+            z-index: 9999;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        #preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        #preloader_status {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        #preloader_status img {
+            max-width: 120px !important;
+            max-height: 120px !important;
+            width: auto;
+            height: auto;
+            border-radius: 16px;
+            animation: preloaderPulse 1.5s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        #preloader_status::before,
+        #preloader_status::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            border: 2px solid rgba(212, 175, 90, 0.3);
+            animation: preloaderRing 1.5s ease-out infinite;
+        }
+
+        #preloader_status::before {
+            width: 140px;
+            height: 140px;
+        }
+
+        #preloader_status::after {
+            width: 180px;
+            height: 180px;
+            animation-delay: 0.3s;
+        }
+
+        @keyframes preloaderPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(0.95);
+                opacity: 0.85;
+            }
+        }
+
+        @keyframes preloaderRing {
+            0% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(1.3);
+                opacity: 0;
+            }
+        }
+    </style>
 </head>

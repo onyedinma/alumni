@@ -5,10 +5,230 @@
 @endpush
 
 @section('content')
+    <style>
+        /* Premium Alumni List Section */
+        .premium-alumni-list {
+            background: var(--bg-primary, #0B0E11);
+            padding: 40px 0;
+            min-height: 100vh;
+        }
+
+        /* Premium Card */
+        .premium-alumni-card {
+            background: var(--bg-surface, #12161C);
+            border: 1px solid var(--border-dark, #1F2630);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        /* Top Border Gradient */
+        .premium-alumni-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--maroon, #8B2635), var(--gold, #D4AF5A), var(--maroon, #8B2635));
+            border-radius: 24px 24px 0 0;
+        }
+
+        /* Table Styling */
+        .premium-alumni-card .table-responsive {
+            background: transparent !important;
+        }
+
+        .premium-alumni-card table.zTable,
+        .premium-alumni-card table.dataTable,
+        .premium-alumni-card #alumni-list-filter {
+            background: var(--bg-primary, #0B0E11) !important;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .premium-alumni-card table.zTable thead,
+        .premium-alumni-card table.dataTable thead,
+        .premium-alumni-card #alumni-list-filter thead {
+            background: var(--bg-elevated, #171C23) !important;
+        }
+
+        .premium-alumni-card table.zTable thead th,
+        .premium-alumni-card table.dataTable thead th,
+        .premium-alumni-card #alumni-list-filter thead th,
+        .premium-alumni-card .dataTable thead th,
+        .premium-alumni-card th {
+            color: var(--gold, #D4AF5A) !important;
+            font-weight: 500 !important;
+            font-size: 13px !important;
+            letter-spacing: 0.3px !important;
+            border-bottom: 1px solid var(--border-dark, #1F2630) !important;
+            padding: 12px 14px !important;
+            background: var(--bg-elevated, #171C23) !important;
+            border-top: none !important;
+        }
+
+        .premium-alumni-card table.zTable thead th div,
+        .premium-alumni-card th div {
+            color: var(--gold, #D4AF5A) !important;
+            background: transparent !important;
+            font-size: 13px !important;
+            font-weight: 500 !important;
+        }
+
+        .premium-alumni-card table.zTable tbody td,
+        .premium-alumni-card table.dataTable tbody td,
+        .premium-alumni-card #alumni-list-filter tbody td,
+        .premium-alumni-card td {
+            color: var(--text-primary, #E6EAF0) !important;
+            border-bottom: 1px solid var(--border-dark, #1F2630) !important;
+            padding: 16px !important;
+            background: var(--bg-primary, #0B0E11) !important;
+        }
+
+        .premium-alumni-card table.zTable tbody tr,
+        .premium-alumni-card table.dataTable tbody tr,
+        .premium-alumni-card #alumni-list-filter tbody tr {
+            background: var(--bg-primary, #0B0E11) !important;
+        }
+
+        .premium-alumni-card table.zTable tbody tr:hover td,
+        .premium-alumni-card table.dataTable tbody tr:hover td,
+        .premium-alumni-card #alumni-list-filter tbody tr:hover td {
+            background: var(--bg-elevated, #171C23) !important;
+        }
+
+        /* Action Buttons */
+        .premium-alumni-card .action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: 1px solid var(--border-dark, #1F2630);
+            background: var(--bg-elevated, #171C23);
+            transition: all 0.3s ease;
+        }
+
+        .premium-alumni-card .action-btn:hover {
+            background: var(--gold, #D4AF5A);
+            border-color: var(--gold, #D4AF5A);
+            transform: translateY(-2px);
+        }
+
+        .premium-alumni-card .action-btn:hover img {
+            filter: brightness(0);
+        }
+
+        /* DataTables Dark Theme Overrides */
+        .premium-alumni-card .dataTables_wrapper .dataTables_length,
+        .premium-alumni-card .dataTables_wrapper .dataTables_filter,
+        .premium-alumni-card .dataTables_wrapper .dataTables_info,
+        .premium-alumni-card .dataTables_wrapper .dataTables_paginate {
+            color: var(--text-primary, #E6EAF0);
+        }
+
+        .premium-alumni-card .dataTables_wrapper .dataTables_length select,
+        .premium-alumni-card .dataTables_wrapper .dataTables_filter input {
+            background: var(--bg-primary, #0B0E11);
+            border: 1px solid var(--border-dark, #1F2630);
+            color: var(--text-primary, #E6EAF0);
+            border-radius: 8px;
+            padding: 6px 12px;
+        }
+
+        .premium-alumni-card .dataTables_wrapper .dataTables_paginate .paginate_button {
+            color: #000000 !important;
+            background: var(--gold, #D4AF5A) !important;
+            border: 1px solid var(--gold, #D4AF5A) !important;
+            border-radius: 6px;
+            margin: 0 4px;
+            font-weight: 600;
+        }
+
+        .premium-alumni-card .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            color: #FFFFFF !important;
+            background: var(--maroon, #8B2635) !important;
+            border-color: var(--maroon, #8B2635) !important;
+            transform: translateY(-2px);
+        }
+
+        .premium-alumni-card .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+            color: #FFFFFF !important;
+            background: var(--maroon, #8B2635) !important;
+            border-color: var(--maroon, #8B2635) !important;
+        }
+
+        .premium-alumni-card .dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+            color: var(--text-disabled, #5E6675) !important;
+            background: var(--bg-elevated, #171C23) !important;
+            border-color: var(--border-dark, #1F2630) !important;
+            opacity: 0.5;
+        }
+
+        /* Filter Section */
+        .alumniFilter {
+            background: var(--bg-elevated, #171C23) !important;
+            border: 1px solid var(--border-dark, #1F2630) !important;
+            border-radius: 16px !important;
+            padding: 24px !important;
+            margin-bottom: 24px !important;
+        }
+
+        .alumniFilter h4 {
+            color: var(--gold, #D4AF5A) !important;
+            margin-bottom: 20px !important;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .alumniFilter .primary-form-group label {
+            color: var(--text-primary, #E6EAF0) !important;
+        }
+
+        .alumniFilter .primary-form-control {
+            background: var(--bg-primary, #0B0E11) !important;
+            border: 1px solid var(--border-dark, #1F2630) !important;
+            color: var(--text-primary, #E6EAF0) !important;
+        }
+
+        .alumniFilter .primary-form-control:focus {
+            border-color: var(--gold, #D4AF5A) !important;
+            box-shadow: 0 0 0 2px rgba(212, 175, 90, 0.2) !important;
+        }
+
+        .alumniFilter .advance-filter {
+            background: linear-gradient(135deg, var(--gold, #D4AF5A) 0%, #b8934a 100%) !important;
+            color: #000000 !important;
+            font-weight: 600 !important;
+            border: 1px solid var(--gold, #D4AF5A) !important;
+        }
+
+        .alumniFilter .advance-filter:hover {
+            background: linear-gradient(135deg, #e3c16e 0%, #c4a159 100%) !important;
+            transform: translateY(-2px);
+        }
+
+        /* Modal Styling */
+        .zModalTwo-content {
+            background: var(--bg-surface, #12161C) !important;
+            border: 1px solid var(--gold, #D4AF5A) !important;
+        }
+
+        .zModalTwo-body p {
+            color: var(--text-secondary, #B4BCC8) !important;
+        }
+
+        .zModalTwo-body h4 {
+            color: var(--gold, #D4AF5A) !important;
+        }
+    </style>
+
     <!-- Page content area start -->
-    <div class="p-30">
-        <div class="">
-            <div class="bg-white bd-half bd-c-ebedf0 bd-ra-25 p-30">
+    <div class="premium-alumni-list">
+        <div class="container">
+            <div class="premium-alumni-card">
                 <!-- Search & Filter -->
                 <div class="pb-30">
                     <!-- Search & Filter Button -->
@@ -25,19 +245,27 @@
                         <thead>
                             <tr>
                                 <th scope="col">
-                                    <div>{{ __('Full Name') }}</div>
+                                    <div><i class="fa-solid fa-user" style="margin-right: 8px;"></i>{{ __('Full Name') }}
+                                    </div>
                                 </th>
                                 <th scope="col" class="min-w-100">
-                                    <div>{{ __('Batch') }}</div>
+                                    <div><i class="fa-solid fa-chalkboard"
+                                            style="margin-right: 8px;"></i>{{ __('Final Class') }}</div>
+                                </th>
+                                <th scope="col" class="min-w-100">
+                                    <div><i class="fa-solid fa-house-flag"
+                                            style="margin-right: 8px;"></i>{{ __('Final House') }}</div>
                                 </th>
                                 <th scope="col">
-                                    <div>{{ __('Passing Year') }}</div>
+                                    <div><i class="fa-solid fa-graduation-cap"
+                                            style="margin-right: 8px;"></i>{{ __('Passing Year') }}</div>
                                 </th>
                                 <th scope="col">
-                                    <div>{{ __('Location') }}</div>
+                                    <div><i class="fa-solid fa-map-marker-alt"
+                                            style="margin-right: 8px;"></i>{{ __('Location') }}</div>
                                 </th>
                                 <th scope="col" class="text-center max-w-150 ">
-                                    <div>{{ __('Action') }}</div>
+                                    <div><i class="fa-solid fa-cog" style="margin-right: 8px;"></i>{{ __('Action') }}</div>
                                 </th>
                             </tr>
                         </thead>
@@ -45,7 +273,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
     <!-- Page content area End -->
 
@@ -129,7 +356,7 @@
                     <button
                         class="bg-cdef84 border-0 bd-ra-12 py-13 px-26 fs-15 fw-500 lh-25 text-black hover-bg-one advance-filter">{{__('Search Now')}}</button>
                     <!-- <div class="item">
-                                              </div> -->
+                                                              </div> -->
                 </div>
             </div>
         </div>

@@ -29,4 +29,31 @@
             toastr.error("{{ $error }}");
         @endforeach
     @endif
+
+    // Robust preloader fadeout - disable pointer events immediately
+    (function () {
+        var preloader = document.getElementById('preloader');
+        if (preloader) {
+            // Immediately disable pointer events to prevent blocking
+            preloader.style.pointerEvents = 'none';
+            preloader.style.opacity = '0';
+            // Remove after fade transition
+            setTimeout(function () {
+                if (preloader.parentNode) {
+                    preloader.parentNode.removeChild(preloader);
+                }
+            }, 500);
+        }
+    })();
+
+    // Also run on window load as backup
+    $(window).on('load', function () {
+        var preloader = document.getElementById('preloader');
+        if (preloader) {
+            preloader.style.pointerEvents = 'none';
+            $('#preloader').fadeOut('slow', function () {
+                $(this).remove();
+            });
+        }
+    });
 </script>

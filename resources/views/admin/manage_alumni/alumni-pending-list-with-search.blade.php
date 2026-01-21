@@ -31,12 +31,15 @@
                                     <div>{{ __('Full Name') }}</div>
                                 </th>
                                 <th scope="col" class="min-w-100">
-                                    <div>{{ __('Batch') }}</div>
+                                    <div>{{ __('Final Class') }}</div>
+                                </th>
+                                <th scope="col" class="min-w-100">
+                                    <div>{{ __('Final House') }}</div>
                                 </th>
                                 <th scope="col">
                                     <div>{{ __('Passing Year') }}</div>
                                 </th>
-                                <th  class="min-w-150  w-110" scope="col">
+                                <th class="min-w-150  w-110" scope="col">
                                     <div>{{ __('Change Status') }}</div>
                                 </th>
                                 <th scope="col" class="text-center max-w-150 ">
@@ -133,7 +136,7 @@
                     <button
                         class="bg-cdef84 border-0 bd-ra-12 py-13 px-26 fs-15 fw-500 lh-25 text-black hover-bg-one advance-filter">{{__('Search Now')}}</button>
                     <!-- <div class="item">
-                      </div> -->
+                              </div> -->
                 </div>
             </div>
         </div>

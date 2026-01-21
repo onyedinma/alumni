@@ -44,7 +44,7 @@ class UserService
             $smsText = __("Your") . " " . getOption('app_name') . " " . __("verification code is") . ": " . $otp;
             $sendSmsStatus = TwilioService::sendSms($phoneNumber, $otp, $smsText);
             if ($sendSmsStatus == true) {
-                $dateTime = Carbon::now()->addMinute(5);
+                $dateTime = Carbon::now()->addMinutes(5);
                 $expiryTime = $dateTime->format('Y-m-d H:i:s');
                 //save otp and expiry time in user table
                 $user->otp = $otp;
@@ -78,7 +78,7 @@ class UserService
             $smsText = __("Your") . " " . getOption('app_name') . " " . __("verification code is") . ": " . $otp;
             $sendSmsStatus = TwilioService::sendSms($phoneNumber, $otp, $smsText);
             if ($sendSmsStatus == true) {
-                $dateTime = Carbon::now()->addMinute(5);
+                $dateTime = Carbon::now()->addMinutes(5);
                 $expiryTime = $dateTime->format('Y-m-d H:i:s');
                 //save otp and expiry time in user table
                 $user->otp = $otp;
@@ -129,8 +129,7 @@ class UserService
                 'nick_name' => $request['nick_name'],
                 'mobile' => $request['mobile'],
             ];
-            if(auth()->user()->mobile !=$request['mobile'])
-            {
+            if (auth()->user()->mobile != $request['mobile']) {
                 $userData['phone_verification_status'] = STATUS_PENDING;
             }
 
@@ -142,7 +141,7 @@ class UserService
 
             $authUser->update($userData);
 
-            Alumni::updateOrCreate(['user_id' => $authUser->id],[
+            Alumni::updateOrCreate(['user_id' => $authUser->id], [
                 'user_id' => $authUser->id,
                 'date_of_birth' => $request['date_of_birth'],
                 'blood_group' => $request['blood_group'],
@@ -159,9 +158,22 @@ class UserService
                 'country' => $request['country'],
                 'zip' => $request['zip'],
                 'address' => $request['address'],
+                // FGCO New Fields
+                'state_of_origin' => $request['state_of_origin'],
+                'lga_of_origin' => $request['lga_of_origin'],
+                'current_job' => $request['current_job'],
+                'expertise' => $request['expertise'],
+                'company_name' => $request['company_name'],
+                'work_address' => $request['work_address'],
+                'bio' => $request['bio'],
+                'first_class_id' => $request['first_class_id'],
+                'final_class_id' => $request['final_class_id'],
+                'first_house_id' => $request['first_house_id'],
+                'final_house_id' => $request['final_house_id'],
+                'passing_year_id' => $request['passing_year_id'],
             ]);
 
-            foreach($request->institution['id'] ?? [] as $index => $id){
+            foreach ($request->institution['id'] ?? [] as $index => $id) {
                 $authUser->institutions()->where('id', $id)->update([
                     'passing_year' => $request->institution['passing_year'][$index],
                     'degree' => $request->institution['degree'][$index],
@@ -184,9 +196,9 @@ class UserService
     {
         $authUser = auth()->user();
         $data = $request->validate([
-            "passing_year" =>  'bail|required|max:195',
-            "degree" =>  'bail|required|max:195',
-            "institute" =>  'bail|required|max:195',
+            "passing_year" => 'bail|required|max:195',
+            "degree" => 'bail|required|max:195',
+            "institute" => 'bail|required|max:195',
         ]);
 
         try {
@@ -226,7 +238,7 @@ class UserService
             } else {
                 return $this->error([], "Current password dose not match!");
             }
-        }catch (Exception $e){
+        } catch (Exception $e) {
             return $this->error([], getMessage(SOMETHING_WENT_WRONG));
         }
 

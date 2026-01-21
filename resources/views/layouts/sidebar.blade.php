@@ -313,6 +313,9 @@
                                 <li><a class="{{ $activeAlumniPendingList ?? '' }}"
                                         href="{{ route('admin.alumni.list-pending-alumni-with-filter') }}">{{ __('Pending List') }}</a>
                                 </li>
+                                <li><a class="{{ $activeAlumniImport ?? '' }}"
+                                        href="{{ route('admin.alumni.import') }}">{{ __('Import Alumni') }}</a>
+                                </li>
                             </ul>
                         </div>
                     </li>
@@ -487,7 +490,7 @@
                                 </li>
                                 <li><a class="{{ $activeConfigurationSetting ?? '' }}"
                                         href="{{ route('admin.setting.configuration-settings') }}">{{ __('Configurations
-                                                                                                                                Settings') }}</a>
+                                                                                                                                                                Settings') }}</a>
                                 </li>
                                 <li><a class="{{ $activeCurrenciesSetting ?? '' }}"
                                         href="{{ route('admin.setting.currencies.index') }}">{{ __('Currency Settings') }}</a>
@@ -500,14 +503,15 @@
                                             href="{{ route('admin.setting.languages.index') }}">{{ __('Language Settings') }}</a>
                                     </li>
                                 @endif
-                                <li><a class="{{ $activeBatchesSetting ?? '' }}"
-                                        href="{{ route('admin.setting.batches.index') }}">{{ __('Batch Setting') }}</a>
-                                </li>
-                                <li><a class="{{ $activeDepartmentsSetting ?? '' }}"
-                                        href="{{ route('admin.setting.departments.index') }}">{{ __('Department Setting') }}</a>
-                                </li>
+
                                 <li><a class="{{ $activePassingSetting ?? '' }}"
                                         href="{{ route('admin.setting.passing_years.index') }}">{{ __('Passing Year') }}</a>
+                                </li>
+                                <li><a class="{{ $activeClassesSetting ?? '' }}"
+                                        href="{{ route('admin.setting.classes.index') }}">{{ __('Class Settings') }}</a>
+                                </li>
+                                <li><a class="{{ $activeHousesSetting ?? '' }}"
+                                        href="{{ route('admin.setting.houses.index') }}">{{ __('House Settings') }}</a>
                                 </li>
                                 <li><a class="{{ $activeEmailSetting ?? '' }}"
                                         href="{{ route('admin.setting.email-template') }}">{{ __('Email Template') }}</a>

@@ -1,3 +1,22 @@
+/* ====================================
+   Brand Color Palette
+   Gold: #D4AF5A
+   Maroon Red: #751525
+   Deep Ash: #3C3C3C
+   Dark: #0B0E11
+   White: #FFFFFF
+   ==================================== */
+:root {
+    --brand-gold: #D4AF5A;
+    --brand-gold-light: rgba(212, 175, 90, 0.15);
+    --brand-maroon: #751525;
+    --brand-maroon-light: rgba(117, 21, 37, 0.1);
+    --brand-ash: #3C3C3C;
+    --brand-dark: #0B0E11;
+    --brand-white: #FFFFFF;
+    --brand-ivory: #F5F5DC;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -10,6 +29,282 @@ body {
     font-weight: 500;
     color: #3C3C3C;
     background: #F9F9FA;
+}
+
+/* ====================================
+   Brand Hover Effects & Utilities
+   ==================================== */
+
+/* Hover Lift Effect */
+.hover-lift {
+    transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Hover Gold Glow */
+.hover-gold-glow {
+    transition: all 0.3s ease;
+}
+
+.hover-gold-glow:hover {
+    box-shadow: 0 5px 20px rgba(212, 175, 90, 0.4);
+    border-color: var(--brand-gold) !important;
+}
+
+/* Gold Border on Hover */
+.hover-border-gold {
+    transition: border-color 0.3s ease;
+}
+
+.hover-border-gold:hover {
+    border-color: var(--brand-gold) !important;
+}
+
+/* Gold Text on Hover */
+.hover-text-gold {
+    transition: color 0.3s ease;
+}
+
+.hover-text-gold:hover {
+    color: var(--brand-gold) !important;
+}
+
+/* Maroon Background on Hover */
+.hover-bg-maroon {
+    transition: all 0.3s ease;
+}
+
+.hover-bg-maroon:hover {
+    background-color: var(--brand-maroon) !important;
+    color: var(--brand-white) !important;
+}
+
+/* Gold Background on Hover */
+.hover-bg-gold {
+    transition: all 0.3s ease;
+}
+
+.hover-bg-gold:hover {
+    background-color: var(--brand-gold) !important;
+    color: var(--brand-dark) !important;
+}
+
+/* Scale Effect on Hover */
+.hover-scale {
+    transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+    transform: scale(1.03);
+}
+
+/* Card Hover Effect - Premium */
+.card-hover-premium {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid transparent;
+}
+
+.card-hover-premium:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    border-color: var(--brand-gold);
+}
+
+/* Brand Button Styles */
+.btn-brand-gold {
+    background-color: var(--brand-gold);
+    color: var(--brand-dark);
+    font-weight: 600;
+    padding: 12px 28px;
+    border-radius: 8px;
+    border: 2px solid var(--brand-gold);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.btn-brand-gold:hover {
+    background-color: var(--brand-maroon);
+    border-color: var(--brand-maroon);
+    color: var(--brand-white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(117, 21, 37, 0.3);
+}
+
+.btn-brand-maroon {
+    background-color: var(--brand-maroon);
+    color: var(--brand-white);
+    font-weight: 600;
+    padding: 12px 28px;
+    border-radius: 8px;
+    border: 2px solid var(--brand-maroon);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.btn-brand-maroon:hover {
+    background-color: var(--brand-gold);
+    border-color: var(--brand-gold);
+    color: var(--brand-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(212, 175, 90, 0.3);
+}
+
+.btn-brand-dark {
+    background-color: var(--brand-dark);
+    color: var(--brand-white);
+    font-weight: 600;
+    padding: 12px 28px;
+    border-radius: 8px;
+    border: 2px solid var(--brand-dark);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.btn-brand-dark:hover {
+    background-color: var(--brand-gold);
+    border-color: var(--brand-gold);
+    color: var(--brand-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(212, 175, 90, 0.3);
+}
+
+.btn-brand-outline {
+    background-color: transparent;
+    color: var(--brand-dark);
+    font-weight: 600;
+    padding: 12px 28px;
+    border-radius: 8px;
+    border: 2px solid var(--brand-ash);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.btn-brand-outline:hover {
+    background-color: var(--brand-gold);
+    border-color: var(--brand-gold);
+    color: var(--brand-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(212, 175, 90, 0.3);
+}
+
+/* Brand Text Colors */
+.text-brand-gold {
+    color: var(--brand-gold) !important;
+}
+
+.text-brand-maroon {
+    color: var(--brand-maroon) !important;
+}
+
+.text-brand-ash {
+    color: var(--brand-ash) !important;
+}
+
+.text-brand-dark {
+    color: var(--brand-dark) !important;
+}
+
+/* Brand Background Colors */
+.bg-brand-gold {
+    background-color: var(--brand-gold) !important;
+}
+
+.bg-brand-gold-light {
+    background-color: var(--brand-gold-light) !important;
+}
+
+.bg-brand-maroon {
+    background-color: var(--brand-maroon) !important;
+}
+
+.bg-brand-maroon-light {
+    background-color: var(--brand-maroon-light) !important;
+}
+
+.bg-brand-ash {
+    background-color: var(--brand-ash) !important;
+}
+
+.bg-brand-dark {
+    background-color: var(--brand-dark) !important;
+}
+
+/* Border Brand Colors */
+.border-brand-gold {
+    border-color: var(--brand-gold) !important;
+}
+
+.border-brand-maroon {
+    border-color: var(--brand-maroon) !important;
+}
+
+/* Icon Box with Gold Accent */
+.icon-box-gold {
+    width: 48px;
+    height: 48px;
+    background: var(--brand-gold-light);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.icon-box-gold i {
+    color: var(--brand-gold);
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.icon-box-gold:hover {
+    background: var(--brand-gold);
+}
+
+.icon-box-gold:hover i {
+    color: var(--brand-dark);
+}
+
+/* Link with Gold Underline Effect */
+.link-gold-underline {
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+.link-gold-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--brand-gold);
+    transition: width 0.3s ease;
+}
+
+.link-gold-underline:hover {
+    color: var(--brand-gold);
+}
+
+.link-gold-underline:hover::after {
+    width: 100%;
 }
 
 .breadcrumb-area {
@@ -275,29 +570,36 @@ body {
     width: 100%;
     height: 50px;
     text-decoration: none;
-    border: none;
+    border: 2px solid var(--brand-ash);
     background: #EDEDED;
-    border-radius: 16px;
-    font-size: 12px;
-    font-weight: 700;
-    color: #272323;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--brand-dark);
     text-transform: capitalize;
-    transition: all 0.5s;
+    transition: all 0.3s ease;
 }
 
 .primary-btn:hover {
-    color: #ffffff;
-    background: #09574A;
+    color: var(--brand-dark);
+    background: var(--brand-gold);
+    border-color: var(--brand-gold);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(212, 175, 90, 0.3);
 }
 
 .primary-btn.next {
-    background: #C92A2A;
+    background: var(--brand-maroon);
+    border-color: var(--brand-maroon);
     color: #ffffff;
 }
 
 .primary-btn.next:hover {
-    background: #E9B308;
-    color: #000000;
+    background: var(--brand-gold);
+    border-color: var(--brand-gold);
+    color: var(--brand-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(212, 175, 90, 0.3);
 }
 
 .primary-form .form-group {
