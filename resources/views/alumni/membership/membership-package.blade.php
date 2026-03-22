@@ -204,6 +204,72 @@
 			cursor: default;
 			pointer-events: none;
 		}
+
+		/* Mobile Responsive */
+		@media (max-width: 767px) {
+			.premium-membership-section {
+				padding: 16px 0;
+			}
+
+			.premium-card {
+				padding: 16px;
+				border-radius: 16px;
+			}
+
+			.page-title {
+				font-size: 22px;
+				justify-content: center;
+			}
+
+			/* Status banner */
+			.status-banner {
+				flex-direction: column;
+				text-align: center;
+				padding: 16px;
+				gap: 12px;
+			}
+
+			.status-icon {
+				width: 44px;
+				height: 44px;
+				font-size: 20px;
+			}
+
+			.status-text h4 {
+				font-size: 16px;
+			}
+
+			/* Plan cards */
+			.plan-card {
+				padding: 20px;
+				border-radius: 14px;
+			}
+
+			.plan-card:hover {
+				transform: none;
+			}
+
+			.plan-icon {
+				width: 50px;
+				height: 50px;
+				margin-bottom: 12px;
+			}
+
+			.plan-title {
+				font-size: 18px;
+			}
+
+			.plan-price {
+				font-size: 26px;
+				margin-bottom: 16px;
+			}
+
+			.plan-btn {
+				padding: 14px;
+				font-size: 15px;
+				min-height: 48px;
+			}
+		}
 	</style>
 
 	<!-- Page content area start -->
@@ -229,14 +295,16 @@
 							<div class="status-text">
 								@if($user->currentMembership)
 									<h4>{{ __('Currently you are a') }}
-										<span>{{ $user->currentMembership->membership->title }}</span> {{ __('Member') }}</h4>
+										<span>{{ $user->currentMembership->membership->title }}</span> {{ __('Member') }}
+									</h4>
 									<span class="expire-badge">
 										{{ __('Expires at') }} : {{ $user->currentMembership->expired_date }}
 									</span>
 								@else
 									<h4>{{ __('Currently you have no membership plan') }}</h4>
 									<p class="mb-0 text-muted" style="color: var(--text-secondary, #B4BCC8);">
-										{{ __('Choose a plan below to unlock exclusive benefits.') }}</p>
+										{{ __('Choose a plan below to unlock exclusive benefits.') }}
+									</p>
 								@endif
 							</div>
 						</div>

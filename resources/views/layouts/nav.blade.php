@@ -1,11 +1,77 @@
 <div
     class="main-header pt-28 pb-27 px-30 border-b-2 border-[var(--gold,#D4AF5A)] bg-[var(--bg-surface,#12161C)] d-flex justify-content-between align-items-center shadow-lg">
+    <style>
+        @keyframes pulse-maroon {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(139, 38, 53, 0.7);
+            }
+
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 5px rgba(139, 38, 53, 0);
+            }
+
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(139, 38, 53, 0);
+            }
+        }
+
+        .main-header .item-one {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            border: 1.5px solid rgba(212, 175, 90, 0.3) !important;
+            background: rgba(26, 15, 15, 0.9) !important;
+            backdrop-filter: blur(4px);
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            width: 44px !important;
+            height: 44px !important;
+        }
+
+        .main-header .item-one:hover {
+            background: rgba(212, 175, 90, 0.1) !important;
+            transform: translateY(-2px);
+            border-color: var(--gold, #D4AF5A) !important;
+            box-shadow: 0 6px 20px rgba(212, 175, 90, 0.2);
+        }
+
+        .main-header .notify_no {
+            background: linear-gradient(135deg, #8B2635 0%, #751525 100%) !important;
+            color: white !important;
+            font-weight: 700 !important;
+            border: 1.5px solid #1a0f0f !important;
+            animation: pulse-maroon 2s infinite;
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(139, 38, 53, 0.4);
+            z-index: 10;
+        }
+
+        .main-header .item-one i {
+            transition: transform 0.3s ease;
+            font-size: 18px !important;
+        }
+
+        .main-header .item-one:hover i {
+            transform: scale(1.1);
+        }
+    </style>
     <!-- Left -->
     <div class="d-flex align-items-center cg-15">
         <!-- Mobile Menu Button -->
         <div class="mobileMenu">
             <button
-                class="bd-one bd-c-[var(--border-dark,#1F2630)] bd-ra-12 w-30 h-30 d-flex justify-content-center align-items-center text-[var(--text-secondary,#B4BCC8)] hover:text-[var(--gold,#D4AF5A)] p-0 bg-transparent transition-colors">
+                class="bd-one bd-c-[var(--gold,#D4AF5A)] bd-ra-12 w-44 h-44 d-flex justify-content-center align-items-center text-white hover:text-[var(--gold,#D4AF5A)] p-0 bg-transparent transition-colors"
+                style="color: #FFFFFF !important; font-size: 20px;">
                 <i class="fa-solid fa-bars"></i></button>
         </div>
         <!-- Alumni link -->
@@ -47,16 +113,20 @@
         <div class="d-flex align-items-center cg-17">
             <div class="d-flex align-items-center cg-5">
                 <!-- Message -->
-                <a href="{{ route('chats.index') }}" class="item-one">
-                    <img src="{{ asset('assets/images/icon/chat-one.svg') }}" alt="" />
-                    <span class="notify_no" id="unseen-user-message">{{ userMessageUnseen() }}</span>
+                <a href="{{ route('chats.index') }}" class="item-one" title="{{ __('Messages') }}">
+                    <i class="fas fa-comment-dots" style="color: var(--gold, #D4AF5A); font-size: 18px;"></i>
+                    @if(userMessageUnseen() > 0)
+                        <span class="notify_no" id="unseen-user-message">{{ userMessageUnseen() }}</span>
+                    @endif
                 </a>
                 <!-- Notify -->
                 <div class="dropdown notifyDropdown">
                     <button class="item-one dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <img src="{{ asset('assets/images/icon/bell.svg') }}" alt="" />
-                        <span class="notify_no">{{ count(userNotification('unseen')) }}</span>
+                        aria-expanded="false" title="{{ __('Notifications') }}">
+                        <i class="fas fa-bell" style="color: var(--gold, #D4AF5A); font-size: 18px;"></i>
+                        @if(count(userNotification('unseen')) > 0)
+                            <span class="notify_no">{{ count(userNotification('unseen')) }}</span>
+                        @endif
                     </button>
                     <div class="dropdown-menu">
                         <div
@@ -72,7 +142,7 @@
                                                     <a href="{{ route('notification.notification-mark-all-as-read') }}"
                                                         class="fs-12 fw-600 lh-20 text-1b1c17 text-decoration-underline border-0 p-0 bg-transparent hover-color-one">{{
                                 __('Mark
-                                                                                                                                all as read') }}</a>
+                                                                                                                                                                                                         all as read') }}</a>
                             @endif
                         </div>
 
@@ -81,7 +151,7 @@
                                 <li class="d-flex align-items-start cg-15">
                                     <div
                                         class="flex-grow-0 flex-shrink-0 w-32 h-32 rounded-circle d-flex justify-content-center align-items-center bg-71e3ba">
-                                        <img src="{{ asset('assets/images/icon/bell-white.svg') }}" alt="" />
+                                        <i class="fas fa-bell text-white"></i>
                                     </div>
                                     <div class="flex-grow-1">
                                         <a href="{{ route('notification.notification-mark-as-read', $item->id) }}">

@@ -139,6 +139,84 @@
       border-color: var(--maroon, #8B2635) !important;
       color: #fff !important;
     }
+
+    /* Mobile Responsive Styles */
+    @media (max-width: 767px) {
+      .premium-admin-panel {
+        padding: 16px;
+      }
+
+      .premium-card {
+        padding: 16px;
+        border-radius: 16px;
+      }
+
+      .premium-header {
+        font-size: 20px !important;
+        text-align: center;
+        width: 100%;
+      }
+
+      /* DataTables mobile controls */
+      .dataTables_wrapper .dataTables_length,
+      .dataTables_wrapper .dataTables_filter {
+        float: none !important;
+        text-align: center !important;
+        margin-bottom: 16px !important;
+        width: 100% !important;
+      }
+
+      .dataTables_wrapper .dataTables_filter input {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        display: block;
+        margin-top: 8px;
+      }
+
+      .dataTables_wrapper .dataTables_info,
+      .dataTables_wrapper .dataTables_paginate {
+        float: none !important;
+        text-align: center !important;
+        margin-top: 16px !important;
+      }
+
+      /* Expanded child row styling */
+      table.dataTable>tbody>tr.child ul.dtr-details {
+        display: block;
+        width: 100%;
+        padding: 0;
+      }
+
+      table.dataTable>tbody>tr.child ul.dtr-details>li {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      table.dataTable>tbody>tr.child span.dtr-title {
+        font-weight: 600;
+        color: var(--gold, #D4AF5A);
+        min-width: 120px;
+      }
+
+      /* Modal fixes for mobile */
+      .modal-dialog {
+        margin: 10px !important;
+        max-width: calc(100% - 20px) !important;
+      }
+
+      .modal-content {
+        border-radius: 16px !important;
+      }
+
+      /* Action buttons touch-friendly */
+      .action-btn {
+        width: 40px !important;
+        height: 40px !important;
+      }
+    }
   </style>
 
   <div class="premium-admin-panel">

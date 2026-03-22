@@ -26,11 +26,20 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\StoryController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\MiniPollController;
 use App\Http\Controllers\Admin\Website\WebsiteSettingController;
 // use App\Http\Controllers\addon\saas\admin\OrderController;
 // use App\Http\Controllers\addon\saas\admin\SubscriptionController;
 // use App\Http\Controllers\addon\saas\admin\CustomDomainRequestController;
 use App\Http\Controllers\Admin\ImportAlumniController;
+use App\Http\Controllers\Admin\ElectionController;
+use App\Http\Controllers\Admin\BankTransferController;
+use App\Http\Controllers\Admin\FinancialDashboardController;
+use App\Http\Controllers\Admin\InMemoriamController;
+use App\Http\Controllers\Admin\HallOfFameController;
+use App\Http\Controllers\Admin\ExcoTenorController;
+use App\Http\Controllers\Admin\ExcoController;
+use App\Http\Controllers\Admin\EventCheckInController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,6 +54,66 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+// Financial Dashboard
+Route::get('financial-dashboard', [FinancialDashboardController::class, 'index'])->name('financial-dashboard');
+
+// In Memoriam Routes
+Route::group(['prefix' => 'in-memoriam', 'as' => 'in-memoriam.'], function () {
+    Route::get('/', [InMemoriamController::class, 'index'])->name('index');
+    Route::get('create', [InMemoriamController::class, 'create'])->name('create');
+    Route::post('/', [InMemoriamController::class, 'store'])->name('store');
+    Route::get('{id}/edit', [InMemoriamController::class, 'edit'])->name('edit');
+    Route::put('{id}', [InMemoriamController::class, 'update'])->name('update');
+    Route::delete('{id}', [InMemoriamController::class, 'destroy'])->name('destroy');
+});
+
+// Hall of Fame Routes
+Route::group(['prefix' => 'hall-of-fame', 'as' => 'hall-of-fame.'], function () {
+    Route::get('/', [HallOfFameController::class, 'index'])->name('index');
+    Route::get('create', [HallOfFameController::class, 'create'])->name('create');
+    Route::post('/', [HallOfFameController::class, 'store'])->name('store');
+    Route::get('{id}/edit', [HallOfFameController::class, 'edit'])->name('edit');
+    Route::put('{id}', [HallOfFameController::class, 'update'])->name('update');
+    Route::delete('{id}', [HallOfFameController::class, 'destroy'])->name('destroy');
+    Route::get('nominations', [HallOfFameController::class, 'nominations'])->name('nominations');
+    Route::post('nominations/{id}/approve', [HallOfFameController::class, 'approveNomination'])->name('nominations.approve');
+    Route::post('nominations/{id}/reject', [HallOfFameController::class, 'rejectNomination'])->name('nominations.reject');
+});
+
+// Excos Routes
+Route::group(['prefix' => 'excos', 'as' => 'excos.'], function () {
+    Route::get('/', [ExcoController::class, 'index'])->name('index');
+    Route::get('create', [ExcoController::class, 'create'])->name('create');
+    Route::post('/', [ExcoController::class, 'store'])->name('store');
+    Route::get('{id}/edit', [ExcoController::class, 'edit'])->name('edit');
+    Route::put('{id}', [ExcoController::class, 'update'])->name('update');
+    Route::delete('{id}', [ExcoController::class, 'destroy'])->name('destroy');
+});
+
+Route::group(['prefix' => 'exco-tenors', 'as' => 'exco-tenors.'], function () {
+    Route::get('/', [ExcoTenorController::class, 'index'])->name('index');
+    Route::post('/', [ExcoTenorController::class, 'store'])->name('store');
+    Route::put('{id}', [ExcoTenorController::class, 'update'])->name('update');
+    Route::delete('{id}', [ExcoTenorController::class, 'destroy'])->name('destroy');
+});
+
+// Bank Transfer Routes
+Route::group(['prefix' => 'bank-transfers', 'as' => 'bank-transfers.'], function () {
+    Route::get('/', [BankTransferController::class, 'index'])->name('index');
+    Route::get('{id}', [BankTransferController::class, 'show'])->name('show');
+    Route::post('{id}/approve', [BankTransferController::class, 'approve'])->name('approve');
+    Route::post('{id}/reject', [BankTransferController::class, 'reject'])->name('reject');
+});
+
+// Event Check-In Routes
+Route::group(['prefix' => 'event-check-in', 'as' => 'event-check-in.'], function () {
+    Route::get('/', [EventCheckInController::class, 'index'])->name('index');
+    Route::get('{event}/scan', [EventCheckInController::class, 'scan'])->name('scan');
+    Route::post('check-in', [EventCheckInController::class, 'checkIn'])->name('process');
+    Route::get('{event}/report', [EventCheckInController::class, 'report'])->name('report');
+    Route::get('{event}/export', [EventCheckInController::class, 'export'])->name('export');
+});
 
 // Event Route Start
 Route::group(['prefix' => 'event', 'as' => 'event.'], function () {
@@ -95,6 +164,36 @@ Route::group(['prefix' => 'alumni', 'as' => 'alumni.'], function () {
 });
 // Manage Alumni Route End
 
+// Mini Polls Route Start
+Route::group(['prefix' => 'mini-poll', 'as' => 'mini-poll.'], function () {
+    Route::get('/', [MiniPollController::class, 'index'])->name('index');
+    Route::post('store', [MiniPollController::class, 'store'])->name('store');
+    Route::get('edit/{id}', [MiniPollController::class, 'edit'])->name('edit');
+    Route::post('update/{id}', [MiniPollController::class, 'update'])->name('update');
+    Route::post('delete/{id}', [MiniPollController::class, 'delete'])->name('delete');
+    Route::post('change-status', [MiniPollController::class, 'changeStatus'])->name('change-status');
+});
+// Mini Polls Route End
+
+// Elections Route Start
+Route::group(['prefix' => 'elections', 'as' => 'elections.'], function () {
+    Route::get('/', [ElectionController::class, 'index'])->name('index');
+    Route::get('create', [ElectionController::class, 'create'])->name('create');
+    Route::post('store', [ElectionController::class, 'store'])->name('store');
+    Route::get('edit/{slug}', [ElectionController::class, 'edit'])->name('edit');
+    Route::put('update/{slug}', [ElectionController::class, 'update'])->name('update');
+    Route::delete('delete/{id}', [ElectionController::class, 'delete'])->name('delete');
+    Route::get('{slug}/positions', [ElectionController::class, 'positions'])->name('positions');
+    Route::post('{slug}/positions', [ElectionController::class, 'addPosition'])->name('positions.add');
+    Route::delete('positions/{id}', [ElectionController::class, 'deletePosition'])->name('positions.delete');
+    Route::get('{slug}/candidates', [ElectionController::class, 'candidates'])->name('candidates');
+    Route::post('{slug}/candidates', [ElectionController::class, 'addCandidate'])->name('candidates.add');
+    Route::delete('candidates/{id}', [ElectionController::class, 'deleteCandidate'])->name('candidates.delete');
+    Route::get('{slug}/results', [ElectionController::class, 'results'])->name('results');
+    Route::post('{slug}/publish', [ElectionController::class, 'publish'])->name('publish');
+});
+// Elections Route End
+
 // Donation Campaigns Route Start
 Route::group(['prefix' => 'donation-campaigns', 'as' => 'donation-campaigns.'], function () {
     Route::get('/', [\App\Http\Controllers\Admin\DonationCampaignController::class, 'index'])->name('index');
@@ -117,6 +216,8 @@ Route::group(['prefix' => 'setting', 'as' => 'setting.'], function () {
         Route::post('configuration-settings-update', [SettingController::class, 'configurationSettingUpdate'])->name('configuration-settings.update');
         Route::post('application-env-update', [SettingController::class, 'saveSetting'])->name('settings_env.update');
         Route::get('color-settings', [SettingController::class, 'colorSettings'])->name('color-settings');
+        Route::get('school-identity', [SettingController::class, 'schoolIdentity'])->name('school-identity');
+        Route::post('school-identity-update', [SettingController::class, 'schoolIdentityUpdate'])->name('school-identity.update');
 
         //website settings
         Route::group(['prefix' => 'website-settings', 'as' => 'website-settings.'], function () {
@@ -129,6 +230,14 @@ Route::group(['prefix' => 'setting', 'as' => 'setting.'], function () {
             Route::get('terms-condition', [WebsiteSettingController::class, 'termsCondition'])->name('terms-condition');
             Route::get('refund-policy', [WebsiteSettingController::class, 'refundPolicy'])->name('refund-policy');
             Route::get('constitution', [WebsiteSettingController::class, 'constitution'])->name('constitution');
+            Route::get('our-history', [\App\Http\Controllers\Admin\HistoryTimelineController::class, 'index'])->name('our-history');
+
+            // History Timeline CRUD
+            Route::post('history-timeline/store', [\App\Http\Controllers\Admin\HistoryTimelineController::class, 'store'])->name('history-timeline.store');
+            Route::post('history-timeline/update/{id}', [\App\Http\Controllers\Admin\HistoryTimelineController::class, 'update'])->name('history-timeline.update');
+            Route::post('history-timeline/delete/{id}', [\App\Http\Controllers\Admin\HistoryTimelineController::class, 'destroy'])->name('history-timeline.delete');
+            Route::post('history-timeline/reorder', [\App\Http\Controllers\Admin\HistoryTimelineController::class, 'reorder'])->name('history-timeline.reorder');
+
             Route::get('contact-us', [WebsiteSettingController::class, 'contactUs'])->name('contact-us');
 
             Route::group(['prefix' => 'image-galleries', 'as' => 'image_galleries.'], function () {
@@ -196,6 +305,10 @@ Route::group(['prefix' => 'setting', 'as' => 'setting.'], function () {
 
     //common setting update
     Route::post('common-settings-update', [SettingController::class, 'commonSettingUpdate'])->name('common.settings.update')->middleware('isDemo');
+
+    // Reunion Countdown Settings
+    Route::get('reunion-settings', [SettingController::class, 'reunionSettings'])->name('reunion-settings');
+    Route::post('reunion-settings', [SettingController::class, 'reunionSettingsUpdate'])->name('reunion-settings.update');
 
     Route::get('email-template', [EmailTemplateController::class, 'emailTemplate'])->name('email-template');
     Route::get('email-edit', [EmailTemplateController::class, 'emailTempEdit'])->name('email-edit');

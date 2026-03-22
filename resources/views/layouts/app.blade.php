@@ -30,6 +30,10 @@
             </div>
         </div>
     </div>
+
+    <!-- Mobile Sidebar Overlay -->
+    <div class="zSidebar-overlay" id="sidebarOverlay"></div>
+
     @if (!empty(getOption('cookie_status')) && getOption('cookie_status') == STATUS_ACTIVE)
         <div class="cookie-consent-wrap shadow-lg">
             @include('cookie-consent::index')

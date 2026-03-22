@@ -72,6 +72,13 @@
                 </a>
             </li>
             <li>
+                <a class="align-items-center flex list-item {{ @$ourHistoryActiveClass }}"
+                    href="{{ route('admin.setting.website-settings.our-history') }}">
+                    <i class="fa-solid fa-landmark fs-18"></i>
+                    <span class="font-bold fs-14">{{ __('Our History') }}</span>
+                </a>
+            </li>
+            <li>
                 <a class="align-items-center flex list-item {{ @$contactUsActiveClass }}"
                     href="{{ route('admin.setting.website-settings.contact-us') }}">
                     <i class="fa-solid fa-address-book fs-18"></i>

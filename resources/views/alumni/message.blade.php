@@ -213,6 +213,7 @@
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
+            flex-shrink: 0;
         }
 
         .atta-btn:hover,
@@ -270,9 +271,102 @@
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 991px) {
+            .content-chat {
+                flex-direction: column;
+                height: calc(100vh - 120px);
+                overflow-y: auto;
+            }
             .content-chat-user {
-                width: 280px;
+                width: 100%;
+                border-right: none !important;
+                border-bottom: 1px solid var(--border-dark, #1F2630) !important;
+                height: 300px;
+                flex-shrink: 0;
+            }
+            .content-chat-message-user-wrap {
+                height: 500px;
+                flex-shrink: 0;
+            }
+            .premium-messages-section {
+                padding: 10px;
+            }
+            /* STRONGLY override global styles for the footer inputs */
+            .content-chat .content-chat-message-user-wrap .footer-chat-message-user .footer-inputs {
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                gap: 10px !important;
+                height: auto !important;
+                background: transparent !important;
+                border-radius: 0 !important;
+                position: relative !important;
+                padding: 0 !important;
+            }
+            .content-chat .content-chat-message-user-wrap .footer-chat-message-user .message-user-send {
+                order: unset !important;
+                flex: 1 1 auto !important;
+                position: relative !important;
+                width: 100% !important;
+                display: block !important;
+            }
+            .content-chat .content-chat-message-user-wrap .footer-chat-message-user .message-user-send input.send-message {
+                width: 100% !important;
+                height: 44px !important;
+                padding: 0 16px !important;
+                margin: 0 !important;
+                font-size: 14px !important;
+                border-radius: 12px !important;
+                background: var(--bg-primary, #0B0E11) !important;
+                border: 1px solid var(--border-dark, #1F2630) !important;
+                color: var(--text-primary, #E6EAF0) !important;
+            }
+            .content-chat .content-chat-message-user-wrap .footer-chat-message-user button.atta-btn,
+            .content-chat .content-chat-message-user-wrap .footer-chat-message-user button.send-btn {
+                order: unset !important;
+                flex: 0 0 44px !important;
+                width: 44px !important;
+                height: 44px !important;
+                position: relative !important;
+                top: auto !important;
+                right: auto !important;
+                left: auto !important;
+                bottom: auto !important;
+                transform: none !important;
+                border-radius: 12px !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                background-color: var(--bg-primary, #0B0E11) !important;
+                border: 1px solid var(--border-dark, #1F2630) !important;
+            }
+            .content-chat .content-chat-message-user-wrap .footer-chat-message-user button.send-btn {
+                background: linear-gradient(135deg, var(--gold, #D4AF5A) 0%, #b8934a 100%) !important;
+                border-color: var(--gold, #D4AF5A) !important;
+            }
+            .content-chat .content-chat-message-user-wrap .footer-chat-message-user button.atta-btn label {
+                width: 100% !important;
+                height: 100% !important;
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                transform: none !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .content-chat .content-chat-message-user-wrap .footer-chat-message-user button.atta-btn img,
+            .content-chat .content-chat-message-user-wrap .footer-chat-message-user button.send-btn img {
+                max-width: 20px !important;
+                width: 20px !important;
+                height: auto !important;
+                position: static !important;
+                transform: none !important;
             }
         }
 

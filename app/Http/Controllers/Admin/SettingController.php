@@ -63,6 +63,12 @@ class SettingController extends Controller
                 return view('admin.setting.general_settings.configuration.form.google_analytics_configuration');
             } else if ($request->key == 'cookie_status') {
                 return view('admin.setting.general_settings.configuration.form.cookie_configuration');
+            } else if ($request->key == 'whatsapp_status') {
+                return view('admin.setting.general_settings.configuration.form.whatsapp_configuration');
+            } else if ($request->key == 'birthday_auto_post_status') {
+                return view('admin.setting.general_settings.configuration.form.birthday_configuration');
+            } else if ($request->key == 'fun_facts_status') {
+                return view('admin.setting.general_settings.configuration.form.fun_facts_configuration');
             }
         } else {
             return '<div class="alert alert-info text-center">
@@ -275,6 +281,37 @@ class SettingController extends Controller
         $data['activeApplicationSetting'] = 'active';
         $data['subColorSettingActiveClass'] = 'active-color-one';
         return view('admin.setting.general_settings.color-settings')->with($data);
+    }
+
+    public function schoolIdentity()
+    {
+        $data['title'] = __("School Identity");
+        $data['showManageApplicationSetting'] = 'show';
+        $data['activeApplicationSetting'] = 'active';
+        $data['subSchoolIdentityActiveClass'] = 'active-color-one';
+        return view('admin.setting.general_settings.school-identity')->with($data);
+    }
+
+    public function schoolIdentityUpdate(Request $request)
+    {
+        $inputs = Arr::except($request->all(), ['_token']);
+
+        foreach ($inputs as $key => $value) {
+            $option = Setting::firstOrCreate(['option_key' => $key, 'tenant_id' => getTenantId()]);
+
+            if ($request->hasFile('school_crest') && $key == 'school_crest') {
+                $upload = settingImageStoreUpdate($option->option_value, $request->school_crest);
+                if ($upload) {
+                    $option->option_value = $upload;
+                    $option->save();
+                }
+            } else {
+                $option->option_value = $value;
+                $option->save();
+            }
+        }
+
+        return $this->success([], getMessage(UPDATED_SUCCESSFULLY));
     }
 
     public function googleRecaptchaSetting()
@@ -491,6 +528,39 @@ class SettingController extends Controller
         $data['subNavGeneralSettingActiveClass'] = 'mm-active';
         $data['subSecurityGatewayActiveClass'] = 'active';
         return view('admin.setting.general_settings.security-settings', $data);
+    }
+
+    public function reunionSettings()
+    {
+        $data['title'] = __('Reunion Countdown Settings');
+        $data['showManageApplicationSetting'] = 'show';
+        $data['activeApplicationSetting'] = 'active';
+        $data['subReunionSettingsActiveClass'] = 'active-color-one';
+        return view('admin.setting.general_settings.reunion-settings', $data);
+    }
+
+    public function reunionSettingsUpdate(Request $request)
+    {
+        $request->validate([
+            'reunion_date' => 'nullable|date',
+            'reunion_title' => 'nullable|string|max:255',
+            'reunion_location' => 'nullable|string|max:500',
+        ]);
+
+        $inputs = [
+            'reunion_countdown_enabled' => $request->has('reunion_countdown_enabled') ? '1' : '0',
+            'reunion_date' => $request->input('reunion_date', ''),
+            'reunion_title' => $request->input('reunion_title', 'Annual Alumni Reunion'),
+            'reunion_location' => $request->input('reunion_location', ''),
+        ];
+
+        foreach ($inputs as $key => $value) {
+            $option = Setting::firstOrCreate(['option_key' => $key, 'tenant_id' => getTenantId()]);
+            $option->option_value = $value;
+            $option->save();
+        }
+
+        return $this->success([], getMessage(UPDATED_SUCCESSFULLY));
     }
 
 }

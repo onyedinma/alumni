@@ -14,6 +14,8 @@
                 <h4 class="hp-footer__title">Quick Links</h4>
                 <ul class="hp-footer__links">
                     <li><a href="{{ route('pages', 'about-us') }}">About Us</a></li>
+                    <li><a href="{{ route('school.identity') }}">School Identity</a></li>
+                    <li><a href="{{ route('gallery') }}">Photo Gallery</a></li>
                     <li><a href="{{ route('pages', 'constitution') }}">Constitution</a></li>
                     <li><a href="{{ route('all.event') }}">Events</a></li>
                     <li><a href="{{ route('all.stories') }}">Stories</a></li>
@@ -63,8 +65,8 @@
        FOOTER - Slate Gray with Gold Accents
        ==================================================== */
     .hp-footer {
-        background: #5D6875;
-        /* Slate gray from image */
+        background: #0B0E11;
+        /* Obsidian dark to match site theme */
         color: #fff;
         position: relative;
         padding-top: 0;

@@ -1,3 +1,4 @@
+@php /** @var \Illuminate\Support\ViewErrorBag $errors */ @endphp
 <div class="modal-header">
     <h5 class="modal-title">{{ __('Update Language') }}</h5>
     <button type="button" class="border-0 btn-close" data-bs-dismiss="modal" aria-label="Close"
@@ -28,7 +29,7 @@
                             <option value="">--{{ __('Select ISO Code') }}--</option>
                             @foreach(languageIsoCode() as $code => $isoCountryName)
                                 <option value="{{$code}}" {{ $code == $language->iso_code ? 'selected' : ''
-                                    }}>{{$isoCountryName . '-' . $code}}</option>
+                                        }}>{{$isoCountryName . '-' . $code}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -68,7 +69,7 @@
                         name="font">
                     @if ($errors->has('font'))
                         <span class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ $errors->first('font')
-                            }}</span>
+                                }}</span>
                     @endif
 
                 </div>

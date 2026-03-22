@@ -18,6 +18,8 @@ use App\Http\Controllers\Alumni\NoticeController;
 use App\Http\Controllers\Alumni\MembershipController;
 use App\Http\Controllers\Alumni\MessageController;
 use App\Http\Controllers\Alumni\PostController;
+use App\Http\Controllers\Alumni\ElectionController;
+use App\Http\Controllers\Alumni\AlumniIdController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -115,7 +117,7 @@ Route::group(['prefix' => 'posts', 'as' => 'posts.'], function () {
 // Post route start
 
 // Membership Route Start
-    Route::get('membership-package', [MembershipController::class, 'membershipPackage'])->name('membership-package');
+Route::get('membership-package', [MembershipController::class, 'membershipPackage'])->name('membership-package');
 // Membership Route End
 
 //notification  route start
@@ -161,4 +163,19 @@ Route::group(['prefix' => 'chats', 'as' => 'chats.'], function () {
     Route::post('send-message', [MessageController::class, 'send'])->name('send_message');
 });
 
+// Election route start
+Route::group(['prefix' => 'election', 'as' => 'election.'], function () {
+    Route::get('/', [ElectionController::class, 'index'])->name('index');
+    Route::get('{slug}/vote', [ElectionController::class, 'vote'])->name('vote');
+    Route::post('{slug}/vote', [ElectionController::class, 'castVote'])->name('cast');
+    Route::post('{slug}/submit', [ElectionController::class, 'submitVotes'])->name('submit');
+    Route::get('{slug}/results', [ElectionController::class, 'results'])->name('results');
+});
+// Election route end
 
+// Alumni ID Card routes
+Route::group(['prefix' => 'id-card', 'as' => 'id-card.'], function () {
+    Route::get('/', [AlumniIdController::class, 'show'])->name('show');
+    Route::post('generate', [AlumniIdController::class, 'generate'])->name('generate');
+    Route::get('download', [AlumniIdController::class, 'download'])->name('download');
+});

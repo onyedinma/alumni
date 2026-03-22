@@ -15,6 +15,14 @@
                 class="hp-navbar__link {{ request()->routeIs('all.alumni') ? 'hp-navbar__link--active' : '' }}">
                 {{ __('Alumni') }}
             </a>
+            <a href="{{ route('excos') }}"
+                class="hp-navbar__link {{ request()->routeIs('excos') ? 'hp-navbar__link--active' : '' }}">
+                {{ __('Excos') }}
+            </a>
+            <a href="{{ route('our.history') }}"
+                class="hp-navbar__link {{ request()->routeIs('our.history') ? 'hp-navbar__link--active' : '' }}">
+                {{ __('Our History') }}
+            </a>
             <a href="{{ route('all.event') }}"
                 class="hp-navbar__link {{ request()->routeIs('all.event') ? 'hp-navbar__link--active' : '' }}">
                 {{ __('Events') }}
@@ -63,6 +71,8 @@
     <div class="hp-navbar__mobile-menu" id="mobileMenu">
         <a href="{{ route('index') }}" class="hp-navbar__mobile-link">{{ __('Home') }}</a>
         <a href="{{ route('all.alumni') }}" class="hp-navbar__mobile-link">{{ __('Alumni') }}</a>
+        <a href="{{ route('excos') }}" class="hp-navbar__mobile-link">{{ __('Excos') }}</a>
+        <a href="{{ route('our.history') }}" class="hp-navbar__mobile-link">{{ __('Our History') }}</a>
         <a href="{{ route('all.event') }}" class="hp-navbar__mobile-link">{{ __('Events') }}</a>
         <a href="{{ route('all.stories') }}" class="hp-navbar__mobile-link">{{ __('Stories') }}</a>
         <a href="{{ route('our.news') }}" class="hp-navbar__mobile-link">{{ __('News') }}</a>

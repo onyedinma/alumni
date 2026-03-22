@@ -228,6 +228,10 @@
                 class="hp-header__link {{ request()->routeIs('index') ? 'hp-header__link--active' : '' }}">{{ __('Home') }}</a>
             <a href="{{ route('all.alumni') }}"
                 class="hp-header__link {{ request()->routeIs('all.alumni') ? 'hp-header__link--active' : '' }}">{{ __('Alumni') }}</a>
+            <a href="{{ route('excos') }}"
+                class="hp-header__link {{ request()->routeIs('excos') ? 'hp-header__link--active' : '' }}">{{ __('Excos') }}</a>
+            <a href="{{ route('our.history') }}"
+                class="hp-header__link {{ request()->routeIs('our.history') ? 'hp-header__link--active' : '' }}">{{ __('Our History') }}</a>
             <a href="{{ route('all.event') }}"
                 class="hp-header__link {{ request()->routeIs('all.event') ? 'hp-header__link--active' : '' }}">{{ __('Events') }}</a>
             <a href="{{ route('all.stories') }}"
@@ -261,6 +265,8 @@
     <div class="hp-header__mobile" id="headerMobile">
         <a href="{{ route('index') }}" class="hp-header__mobile-link">{{ __('Home') }}</a>
         <a href="{{ route('all.alumni') }}" class="hp-header__mobile-link">{{ __('Alumni') }}</a>
+        <a href="{{ route('excos') }}" class="hp-header__mobile-link">{{ __('Excos') }}</a>
+        <a href="{{ route('our.history') }}" class="hp-header__mobile-link">{{ __('Our History') }}</a>
         <a href="{{ route('all.event') }}" class="hp-header__mobile-link">{{ __('Events') }}</a>
         <a href="{{ route('all.stories') }}" class="hp-header__mobile-link">{{ __('Stories') }}</a>
         <a href="{{ route('our.news') }}" class="hp-header__mobile-link">{{ __('News') }}</a>

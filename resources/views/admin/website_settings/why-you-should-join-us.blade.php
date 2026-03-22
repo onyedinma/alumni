@@ -438,4 +438,6 @@
             </div>
         </div>
     </div>
+
+    @include('admin.website_settings.partials.upload-preview-script')
 @endsection

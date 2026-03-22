@@ -11,6 +11,7 @@ use App\Models\PassingYear;
 use App\Models\Tenant;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Http\Services\AdminNotificationService;
 use App\Traits\ResponseTrait;
 use Config;
 use Exception;
@@ -171,7 +172,7 @@ class RegisterController extends Controller
         if (isset($data['file']) && !is_null($data['file'])) {
             $new_file = new FileManager();
             $uploaded = $new_file->upload('users', $data['file']);
-            $file = $uploaded->id;
+            $file = $uploaded->id ?? null;
         }
         if (getOption('registration_approval') == 1) {
             $status = USER_STATUS_INACTIVE;
@@ -212,6 +213,11 @@ class RegisterController extends Controller
             'date_of_birth' => $data['date_of_birth'],
             'gender' => $data['gender'],
         ]);
+
+        // Notify admins if registration requires approval
+        if ($status == USER_STATUS_INACTIVE) {
+            AdminNotificationService::newRegistration($newUser);
+        }
 
         return $newUser;
 
@@ -271,7 +277,7 @@ class RegisterController extends Controller
     /**
      * create new tenant.
      *
-     * @return \Illuminate\View\View
+     * @return \App\Models\Tenant
      */
     public function createTenant()
     {
@@ -294,7 +300,7 @@ class RegisterController extends Controller
     /**
      * Show the application registration form.
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
      */
     public function showRegistrationForm()
     {

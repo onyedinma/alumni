@@ -35,12 +35,15 @@ Route::get('/local/{ln}', function ($ln) {
 })->name('local');
 
 
-Auth::routes(['verify' => false]);
+// Rate-limited auth routes
+Route::middleware('throttle:auth')->group(function () {
+    Auth::routes(['verify' => false]);
 
-Route::get('password/reset/verify/{token}/{email}', [ForgotPasswordController::class, 'forgetVerifyForm'])->name('password.reset.verify_form');
-Route::get('password/reset/verify/{token}', [ForgotPasswordController::class, 'forgetVerify'])->name('password.reset.verify');
-Route::post('password/reset/verify-resend/{token}', [ForgotPasswordController::class, 'forgetVerifyResend'])->name('password.reset.verify_resend');
-Route::post('password/reset/update/{token}', [ForgotPasswordController::class, 'updatePassword'])->name('password.update');
+    Route::get('password/reset/verify/{token}/{email}', [ForgotPasswordController::class, 'forgetVerifyForm'])->name('password.reset.verify_form');
+    Route::get('password/reset/verify/{token}', [ForgotPasswordController::class, 'forgetVerify'])->name('password.reset.verify');
+    Route::post('password/reset/verify-resend/{token}', [ForgotPasswordController::class, 'forgetVerifyResend'])->name('password.reset.verify_resend');
+    Route::post('password/reset/update/{token}', [ForgotPasswordController::class, 'updatePassword'])->name('password.update');
+});
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('logout', [LoginController::class, 'logout']);
@@ -56,5 +59,16 @@ Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallba
 Route::get('auth/facebook', [FacebookController::class, 'redirectToFacebook'])->name('facebook-login');
 Route::get('auth/facebook/callback', [FacebookController::class, 'handleFacebookCallback']);
 
+// Payment Webhooks (no CSRF, no auth)
+Route::post('webhook/paystack', [\App\Http\Controllers\Webhook\PaystackWebhookController::class, 'handle'])
+    ->name('webhook.paystack')
+    ->withoutMiddleware(['web', 'csrf']);
 
+Route::post('webhook/flutterwave', [\App\Http\Controllers\Webhook\FlutterwaveWebhookController::class, 'handle'])
+    ->name('webhook.flutterwave')
+    ->withoutMiddleware(['web', 'csrf']);
+
+Route::post('webhook/stripe', [\App\Http\Controllers\Webhook\StripeWebhookController::class, 'handle'])
+    ->name('webhook.stripe')
+    ->withoutMiddleware(['web', 'csrf']);
 

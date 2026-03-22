@@ -2,77 +2,173 @@
 
 namespace App\Http\Services\Payment;
 
+use Illuminate\Support\Facades\Log;
+use Stripe\Exception\ApiErrorException;
 use Stripe\StripeClient;
 
 class StripeService extends BasePaymentService
 {
-    public  $stripClient;
+    private StripeClient $stripeClient;
 
     public function __construct($method, $object)
     {
         parent::__construct($method, $object);
-        $this->stripClient = new StripeClient($this->gateway->key);
+        $this->stripeClient = new StripeClient($this->gateway->secret); // Secret key for API calls
     }
 
+    /**
+     * Initialize a payment checkout session
+     */
     public function makePayment($amount)
     {
         $this->setAmount($amount);
-        $data['success'] = false;
-        $data['redirect_url'] = '';
-        $data['payment_id'] = '';
-        $data['message'] = SOMETHING_WENT_WRONG;
-
-        $payment = $this->stripClient->checkout->sessions->create([
-            'success_url' => $this->callbackUrl,
-            'cancel_url' => $this->callbackUrl,
-            'line_items' => [
-                [
-                    'price_data' => [
-                        'currency' => $this->currency,
-                        'product_data' => [
-                            'name' => 'Amount',
-                        ],
-                        'unit_amount' => $this->amount * 100,
-                    ],
-                    'quantity' => 1,
-                ]
-            ],
-            'mode' => 'payment',
-        ]);
 
         try {
+            $session = $this->stripeClient->checkout->sessions->create([
+                'success_url' => $this->callbackUrl,
+                'cancel_url' => $this->callbackUrl . '&cancelled=true',
+                'payment_method_types' => ['card'],
+                'line_items' => [
+                    [
+                        'price_data' => [
+                            'currency' => strtolower($this->currency),
+                            'product_data' => [
+                                'name' => config('app.name', 'Alumni Platform') . ' Payment',
+                                'description' => 'Payment for services',
+                            ],
+                            'unit_amount' => (int) ($this->amount * 100), // Stripe expects cents
+                        ],
+                        'quantity' => 1,
+                    ],
+                ],
+                'mode' => 'payment',
+                'customer_email' => auth()->user()->email ?? null,
+                'metadata' => [
+                    'order_id' => request()->get('id'),
+                ],
+            ]);
 
-            if ($payment->status == 'open') {
-                $data['payment_id'] = $payment->payment_intent;
-                $data['success'] = true;
-                $data['redirect_url'] = $payment->url;
+            if ($session->status === 'open') {
+                Log::info('Stripe payment session created', [
+                    'session_id' => $session->id,
+                    'payment_intent' => $session->payment_intent,
+                    'amount' => $this->amount,
+                ]);
+
+                return [
+                    'success' => true,
+                    'redirect_url' => $session->url,
+                    'payment_id' => $session->payment_intent,
+                    'message' => 'Payment session created successfully',
+                ];
             }
 
-            return $data;
-        } catch (\Exception $ex) {
-            return $data['message'] = $ex->getMessage();
+            return [
+                'success' => false,
+                'redirect_url' => '',
+                'payment_id' => '',
+                'message' => 'Failed to create payment session',
+            ];
+
+        } catch (ApiErrorException $e) {
+            Log::error('Stripe API error: ' . $e->getMessage(), [
+                'code' => $e->getStripeCode(),
+            ]);
+
+            return [
+                'success' => false,
+                'redirect_url' => '',
+                'payment_id' => '',
+                'message' => 'Payment service error: ' . $e->getMessage(),
+            ];
+
+        } catch (\Exception $e) {
+            Log::error('Stripe payment error: ' . $e->getMessage());
+
+            return [
+                'success' => false,
+                'redirect_url' => '',
+                'payment_id' => '',
+                'message' => 'Payment service temporarily unavailable',
+            ];
         }
-        return $data;
     }
 
+    /**
+     * Verify a payment transaction
+     */
     public function paymentConfirmation($payment_id)
     {
-        $data['data'] = null;
-        $payment = $this->stripClient->paymentIntents->retrieve($payment_id, []);
-        if ($payment->status == 'succeeded') {
-            $data['success'] = true;
-            $data['data']['amount'] = $payment->amount_received;
-            $data['data']['currency'] = $payment->currency;
-            $data['data']['payment_status'] =  'success';
-            $data['data']['payment_method'] = STRIPE;
-        } else {
-            $data['success'] = false;
-            $data['data']['amount'] = $payment->amount;
-            $data['data']['currency'] = $payment->currency;
-            $data['data']['payment_status'] =  'unpaid';
-            $data['data']['payment_method'] = STRIPE;
-        }
+        try {
+            $paymentIntent = $this->stripeClient->paymentIntents->retrieve($payment_id);
 
-        return $data;
+            Log::info('Stripe payment verification', [
+                'payment_intent' => $payment_id,
+                'status' => $paymentIntent->status,
+            ]);
+
+            if ($paymentIntent->status === 'succeeded') {
+                return [
+                    'success' => true,
+                    'data' => [
+                        'amount' => $paymentIntent->amount_received / 100, // Convert from cents
+                        'currency' => strtoupper($paymentIntent->currency),
+                        'payment_status' => 'success',
+                        'payment_method' => STRIPE,
+                        'transaction_id' => $paymentIntent->id,
+                    ],
+                ];
+            }
+
+            return [
+                'success' => false,
+                'data' => [
+                    'amount' => $paymentIntent->amount / 100,
+                    'currency' => strtoupper($paymentIntent->currency),
+                    'payment_status' => 'unpaid',
+                    'payment_method' => STRIPE,
+                ],
+            ];
+
+        } catch (ApiErrorException $e) {
+            Log::error('Stripe verification API error: ' . $e->getMessage());
+
+            return [
+                'success' => false,
+                'data' => [
+                    'amount' => 0,
+                    'currency' => $this->currency,
+                    'payment_status' => 'error',
+                    'payment_method' => STRIPE,
+                ],
+            ];
+
+        } catch (\Exception $e) {
+            Log::error('Stripe verification error: ' . $e->getMessage());
+
+            return [
+                'success' => false,
+                'data' => [
+                    'amount' => 0,
+                    'currency' => $this->currency,
+                    'payment_status' => 'error',
+                    'payment_method' => STRIPE,
+                ],
+            ];
+        }
+    }
+
+    /**
+     * Verify Stripe webhook signature
+     */
+    public static function verifyWebhookSignature(string $payload, string $signature, string $endpointSecret): bool
+    {
+        try {
+            \Stripe\Webhook::constructEvent($payload, $signature, $endpointSecret);
+            return true;
+        } catch (\Exception $e) {
+            Log::warning('Stripe webhook signature verification failed: ' . $e->getMessage());
+            return false;
+        }
     }
 }

@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('user_packages', function (Blueprint $table) {
-            $table->tinyInteger('subscription_type')->after('end_date')->default(SUBSCRIPTION_TYPE_MONTHLY);
-        });
+        if (!Schema::hasColumn('user_packages', 'subscription_type')) {
+            Schema::table('user_packages', function (Blueprint $table) {
+                $table->tinyInteger('subscription_type')->after('end_date')->default(SUBSCRIPTION_TYPE_MONTHLY);
+            });
+        }
     }
 
     /**

@@ -5,31 +5,38 @@
 @endpush
 
 @section('content')
-    <div class="bg-gray-50 min-h-screen py-16 px-4">
-        <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-            <div class="bg-gold-50 px-8 py-6 border-b border-gold-100 flex items-center gap-4">
-                <div class="text-maroon-600 text-3xl">
-                    <i class="fas fa-bullhorn"></i>
+    <div class="pp-page">
+        <div style="padding:120px 24px 60px;max-width:900px;margin:0 auto;">
+            <!-- Notice Card -->
+            <div class="pp-detail__main">
+                <!-- Header -->
+                <div
+                    style="display:flex;align-items:center;gap:16px;padding-bottom:24px;margin-bottom:24px;border-bottom:1px solid var(--pp-border);">
+                    <div style="color:var(--pp-gold);font-size:2rem;">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <div>
+                        <h1
+                            style="font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:700;color:var(--pp-text-primary);margin-bottom:4px;">
+                            {{ $notice->title }}
+                        </h1>
+                        <p style="color:var(--pp-text-muted);font-size:0.85rem;font-family:'Inter',sans-serif;">
+                            {{ __('Posted on') }} {{ \Carbon\Carbon::parse($notice->created_at)->format('F d, Y') }}
+                        </p>
+                    </div>
                 </div>
-                <div>
-                    <h1 class="text-2xl font-serif font-bold text-gray-900 leading-tight">{{ $notice->title }}</h1>
-                    <p class="text-sm text-gray-500 mt-1 font-sans">Posted on
-                        {{ \Carbon\Carbon::parse($notice->created_at)->format('F d, Y') }}
-                    </p>
-                </div>
-            </div>
 
-            <div class="p-8 md:p-12">
-                <div class="prose prose-red max-w-none text-gray-700">
+                <!-- Content -->
+                <div class="prose pp-prose">
                     {!! $notice->details !!}
                 </div>
-            </div>
 
-            <div class="bg-gray-50 px-8 py-4 border-t border-gray-100 flex justify-between items-center">
-                <a href="{{ route('our.notice') }}"
-                    class="text-gray-500 font-bold hover:text-gray-900 transition-colors text-sm">
-                    <i class="fas fa-arrow-left mr-2"></i> All Notices
-                </a>
+                <!-- Footer -->
+                <div style="margin-top:40px;padding-top:20px;border-top:1px solid var(--pp-border);">
+                    <a href="{{ route('our.notice') }}" class="pp-link" style="color:var(--pp-text-muted);">
+                        <i class="fas fa-arrow-left"></i> {{ __('All Notices') }}
+                    </a>
+                </div>
             </div>
         </div>
     </div>

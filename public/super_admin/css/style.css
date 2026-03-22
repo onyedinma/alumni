@@ -33,7 +33,7 @@ body {
   font-size: 1.4em;
   font-weight: 500;
   line-height: 1.5;
-  color: $bColor;
+  color: var(--bColor);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -811,7 +811,7 @@ scrollUp
 .primary-form .form-top-text h4 {
   font-size: 1.6rem;
   font-weight: 400;
-  color: $bColor;
+  color: var(--bColor);
 }
 
 .primary-form .form-top-text h4 a {
@@ -856,7 +856,7 @@ scrollUp
   padding: 1rem 2.2rem;
   border-radius: 1.2rem;
   border: 1px solid var(--border-color);
-  color: $bColor;
+  color: var(--bColor);
   font-family: "Inter Tight", sans-serif;
   font-size: 1.4rem;
   font-weight: 500;
@@ -899,7 +899,7 @@ scrollUp
   z-index: 1;
   font-size: 1.2rem;
   font-weight: 400;
-  color: $bColor;
+  color: var(--bColor);
 }
 
 .or-continue-area .or-continue-title::before {
@@ -956,7 +956,7 @@ scrollUp
   display: inline-block;
   font-size: 1.2rem;
   font-weight: 400;
-  color: $bColor;
+  color: var(--bColor);
   transition: all 0.5s linear;
 }
 

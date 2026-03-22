@@ -5,7 +5,7 @@
         <div class="pb-22 d-flex justify-content-between align-items-center">
             <!-- User -->
             <div class="d-flex align-items-center cg-10">
-                <div class="flex-shrink-0 w-45 h-45 border-2 border-gold-500 rounded-circle overflow-hidden"><img
+                <div class="flex-shrink-0 w-45 h-45 rounded-circle overflow-hidden avatar-gold-ring"><img
                         src="{{ asset(getFileUrl($post->author->image)) }}" class="w-100" alt="{{ $post->author->name }}" />
                 </div>
                 <div class="">
@@ -104,6 +104,43 @@
                     @endforeach
                 </ul>
             @endif
+            {{-- Display external image URL --}}
+            @if($post->image_url)
+                <div class="mt-10 rounded-lg overflow-hidden">
+                    <img src="{{ $post->image_url }}" alt="Post image" class="w-100 rounded-lg"
+                        style="max-height: 400px; object-fit: cover;" />
+                </div>
+            @endif
+            {{-- Display external video URL (YouTube, Vimeo embed) --}}
+            @if($post->video_url)
+                @php
+                    $videoUrl = $post->video_url;
+                    $embedUrl = '';
+                    // YouTube
+                    if (preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/', $videoUrl, $matches)) {
+                        $embedUrl = 'https://www.youtube.com/embed/' . $matches[1];
+                    }
+                    // Vimeo
+                    elseif (preg_match('/vimeo\.com\/(\d+)/', $videoUrl, $matches)) {
+                        $embedUrl = 'https://player.vimeo.com/video/' . $matches[1];
+                    }
+                @endphp
+                <div class="mt-10 rounded-lg overflow-hidden" style="position: relative; padding-bottom: 56.25%; height: 0;">
+                    @if($embedUrl)
+                        <iframe src="{{ $embedUrl }}"
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 10px;"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    @else
+                        <a href="{{ $videoUrl }}" target="_blank"
+                            class="d-flex align-items-center gap-2 p-15 bg-[#1a1a1a] rounded-lg border border-gold-500/20 text-gold-400 hover:text-white transition-colors">
+                            <i class="bi bi-play-circle-fill" style="font-size: 24px;"></i>
+                            <span>{{ __('Watch Video') }}</span>
+                        </a>
+                    @endif
+                </div>
+            @endif
         </div>
         <!-- Footer -->
         <div class="like-comment-area like-comment-area-{{ $post->slug }}">
@@ -142,7 +179,7 @@
                 </div>
                 <!--  -->
                 <div class="d-flex align-items-start cg-8">
-                    <div class="flex-shrink-0 w-28 h-28 rounded-circle overflow-hidden border border-white/20">
+                    <div class="flex-shrink-0 w-28 h-28 rounded-circle overflow-hidden avatar-gold-ring">
                         <img class="w-100" src="{{ asset(getFileUrl(auth()->user()->image)) }}"
                             alt="{{ auth()->user()->name }}" />
                     </div>

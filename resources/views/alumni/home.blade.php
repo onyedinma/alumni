@@ -7,6 +7,43 @@
 @endpush
 @section('content')
     <div class="p-30">
+        <!-- Premium Welcome Banner -->
+        <div class="premium-welcome-banner">
+            <h2 class="welcome-greeting">
+                @php
+                    $hour = (int) date('H');
+                    if ($hour < 12)
+                        $greeting = __('Good Morning');
+                    elseif ($hour < 17)
+                        $greeting = __('Good Afternoon');
+                    else
+                        $greeting = __('Good Evening');
+                @endphp
+                {{ $greeting }}, <span class="user-name">{{ $user->name }}</span>
+            </h2>
+            <p class="welcome-subtitle">{{ __('Stay connected with your alumni community') }}</p>
+            <div class="welcome-stats">
+                @if(count($upcomingEvents))
+                    <div class="stat-chip">
+                        <i class="bi bi-calendar-event"></i>
+                        <span>{{ count($upcomingEvents) }} {{ __('Upcoming Events') }}</span>
+                    </div>
+                @endif
+                @if(count($latestJobs))
+                    <div class="stat-chip">
+                        <i class="bi bi-briefcase"></i>
+                        <span>{{ count($latestJobs) }} {{ __('Job Openings') }}</span>
+                    </div>
+                @endif
+                @if(count($latestNews))
+                    <div class="stat-chip">
+                        <i class="bi bi-newspaper"></i>
+                        <span>{{ count($latestNews) }} {{ __('Latest News') }}</span>
+                    </div>
+                @endif
+            </div>
+        </div>
+
         <section class="home-section">
             <!-- Posts -->
             <div class="home-content">
@@ -15,7 +52,7 @@
                         action="{{ route('posts.store') }}" data-handler="postResponse">
                         @csrf
                         <!-- Create Post -->
-                        <div class="p-25 bg-[#252525] border border-gold-500/20 rounded-xl shadow-lg">
+                        <div class="p-25 bg-[#252525] border border-gold-500/20 rounded-xl shadow-lg premium-create-post">
                             <!-- Title -->
                             <div class="d-flex align-items-center gap-3 pb-26">
                                 <div class="icon-box-gold"><i class="bi bi-pencil-square"></i></div>
@@ -23,8 +60,7 @@
                             </div>
                             <!-- User -->
                             <div class="d-flex align-items-center cg-10 pb-20">
-                                <div
-                                    class="flex-shrink-0 w-50 h-50 border-2 border-gold-500 rounded-circle overflow-hidden">
+                                <div class="flex-shrink-0 w-50 h-50 rounded-circle overflow-hidden avatar-gold-ring">
                                     <img src="{{ asset(getFileUrl($user->image)) }}" class="w-100"
                                         alt="{{ $user->name }}" />
                                 </div>
@@ -47,27 +83,47 @@
                                 <div class="d-flex justify-content-between align-items-center flex-wrap g-10">
                                     <!-- Add image/video -->
                                     <div class="d-flex align-items-center cg-15">
-                                        <p class="fs-16 lh-18 fw-500 text-gray-200">{{ __('Add to your post') }}:</p>
-                                        <div class="align-items-center cg-10 d-flex flex-shrink-0">
-                                            <label for="mAttachment1"
-                                                class="cursor-pointer opacity-70 hover:opacity-100 transition-opacity"><img
-                                                    src="{{ asset('assets/images/icon/post-photo.svg') }}" alt=""
-                                                    class="brightness-0 invert" /></label>
+                                        <p class="fs-14 lh-18 fw-500 text-gray-200">{{ __('Add to your post') }}:</p>
+                                        <div class="post-attachment-area">
+                                            <!-- Upload file -->
+                                            <label for="mAttachment1" title="{{ __('Upload Image/Video') }}">
+                                                <i class="bi bi-image text-gold-400" style="font-size: 18px;"></i>
+                                            </label>
                                             <input type="file" name="file[]"
                                                 accept=".png,.jpg,.svg,.jpeg,.gif,.mp4,.mov,.avi,.mkv,.webm,.flv"
                                                 id="mAttachment1" class="d-none" multiple />
-                                            <label for="mAttachment1"
-                                                class="cursor-pointer opacity-70 hover:opacity-100 transition-opacity"><img
-                                                    src="{{ asset('assets/images/icon/post-video.svg') }}" alt=""
-                                                    class="brightness-0 invert" /></label>
+                                            <!-- URL toggle button -->
+                                            <button type="button" id="toggleUrlFields"
+                                                title="{{ __('Add Image/Video URL') }}"
+                                                onclick="document.getElementById('urlFieldsSection').classList.toggle('d-none')">
+                                                <i class="bi bi-link-45deg text-gold-400" style="font-size: 18px;"></i>
+                                            </button>
                                         </div>
                                     </div>
                                     <!-- Post button -->
-                                    <button type="submit"
-                                        class="border-0 py-10 px-26 rounded-xl text-white font-medium transition-all shadow-md"
-                                        style="background-color: #701c1c !important; color: #ffffff !important;"
-                                        onmouseover="this.style.backgroundColor='#c5a059'"
-                                        onmouseout="this.style.backgroundColor='#701c1c'">{{ __('Post Now') }}</button>
+                                    <button type="submit" class="btn-post-now">
+                                        <i class="bi bi-send me-1"></i> {{ __('Post Now') }}
+                                    </button>
+                                </div>
+                                <!-- URL Fields Section (hidden by default) -->
+                                <div id="urlFieldsSection" class="d-none mt-15">
+                                    <div class="p-15 bg-[#1a1a1a] rounded-lg border border-gold-500/20">
+                                        <p class="fs-14 fw-500 text-gold-400 mb-10"><i
+                                                class="bi bi-link-45deg me-1"></i>{{ __('Add Media URLs') }}</p>
+                                        <div class="mb-10">
+                                            <label class="fs-12 text-gray-300 mb-5 d-block">{{ __('Image URL') }}</label>
+                                            <input type="url" name="image_url"
+                                                class="form-control bg-[#252525] border border-gold-500/30 text-white placeholder-gray-400 rounded-lg"
+                                                placeholder="https://example.com/image.jpg" />
+                                        </div>
+                                        <div>
+                                            <label
+                                                class="fs-12 text-gray-300 mb-5 d-block">{{ __('Video URL (YouTube, Vimeo, etc.)') }}</label>
+                                            <input type="url" name="video_url"
+                                                class="form-control bg-[#252525] border border-gold-500/30 text-white placeholder-gray-400 rounded-lg"
+                                                placeholder="https://youtube.com/watch?v=..." />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -82,17 +138,16 @@
                 <div class="d-flex flex-column rg-30">
                     <!-- Upcoming Events -->
                     @if (count($upcomingEvents))
-                        <div class="p-25 bg-[#252525] border border-gold-500/20 rounded-xl shadow-lg">
+                        <div class="premium-sidebar-card">
                             <!-- Title -->
-                            <div class="d-flex justify-content-between align-items-center pb-30">
-                                <div class="d-flex align-items-center gap-3">
+                            <div class="sidebar-card-header">
+                                <div class="card-title-group">
                                     <div class="icon-box-gold"><i class="bi bi-calendar-event"></i></div>
                                     <h4 class="fs-20 fw-600 lh-24 text-gold-400 font-serif">{{ __('Upcoming Events') }}</h4>
                                 </div>
-                                <a href="{{ route('event.all') }}"
-                                    class="flex-shrink-0 fs-14 fw-500 lh-17 text-ivory d-flex align-items-center cg-6 hover:text-gold-400 transition-colors">
+                                <a href="{{ route('event.all') }}" class="see-all-link">
                                     <span>{{ __('See All') }}</span>
-                                    <span><i class="fa-solid fa-arrow-right"></i></span>
+                                    <i class="fa-solid fa-arrow-right"></i>
                                 </a>
                             </div>
                             <!-- Content -->
@@ -141,17 +196,16 @@
                     @endif
                     <!-- Jobs -->
                     @if (count($latestJobs))
-                        <div class="p-25 bg-[#252525] border border-gold-500/20 rounded-xl shadow-lg">
+                        <div class="premium-sidebar-card">
                             <!-- Title -->
-                            <div class="d-flex justify-content-between align-items-center pb-30">
-                                <div class="d-flex align-items-center gap-3">
+                            <div class="sidebar-card-header">
+                                <div class="card-title-group">
                                     <div class="icon-box-gold"><i class="bi bi-briefcase"></i></div>
                                     <h4 class="fs-20 fw-600 lh-24 text-gold-400 font-serif">{{ __('Jobs') }}</h4>
                                 </div>
-                                <a href="{{ route('jobPost.all-job-post') }}"
-                                    class="flex-shrink-0 fs-14 fw-500 lh-17 text-ivory d-flex align-items-center cg-6 hover:text-gold-400 transition-colors">
+                                <a href="{{ route('jobPost.all-job-post') }}" class="see-all-link">
                                     <span>{{ __('See All') }}</span>
-                                    <span><i class="fa-solid fa-arrow-right"></i></span>
+                                    <i class="fa-solid fa-arrow-right"></i>
                                 </a>
                             </div>
                             <!-- Content -->
@@ -211,17 +265,16 @@
                     @endif
                     <!-- Notice -->
                     @if (count($latestNotice))
-                        <div class="p-25 bg-[#252525] border border-gold-500/20 rounded-xl shadow-lg">
+                        <div class="premium-sidebar-card">
                             <!-- Title -->
-                            <div class="d-flex justify-content-between align-items-center pb-30">
-                                <div class="d-flex align-items-center gap-3">
+                            <div class="sidebar-card-header">
+                                <div class="card-title-group">
                                     <div class="icon-box-gold"><i class="bi bi-megaphone"></i></div>
                                     <h4 class="fs-20 fw-600 lh-24 text-gold-400 font-serif">{{ __('Notice') }}</h4>
                                 </div>
-                                <a href="{{ route('all.notice') }}"
-                                    class="flex-shrink-0 fs-14 fw-500 lh-17 text-ivory d-flex align-items-center cg-6 hover:text-gold-400 transition-colors">
+                                <a href="{{ route('all.notice') }}" class="see-all-link">
                                     <span>{{ __('See All') }}</span>
-                                    <span><i class="fa-solid fa-arrow-right"></i></span>
+                                    <i class="fa-solid fa-arrow-right"></i>
                                 </a>
                             </div>
                             <!-- Content -->
@@ -258,17 +311,16 @@
                     @endif
                     <!-- Latest News -->
                     @if (count($latestNews))
-                        <div class="p-25 bg-[#252525] border border-gold-500/20 rounded-xl shadow-lg">
+                        <div class="premium-sidebar-card">
                             <!-- Title -->
-                            <div class="d-flex justify-content-between align-items-center pb-30">
-                                <div class="d-flex align-items-center gap-3">
+                            <div class="sidebar-card-header">
+                                <div class="card-title-group">
                                     <div class="icon-box-gold"><i class="bi bi-newspaper"></i></div>
                                     <h4 class="fs-20 fw-600 lh-24 text-gold-400 font-serif">{{ __('Latest News') }}</h4>
                                 </div>
-                                <a href="{{ route('all.news') }}"
-                                    class="flex-shrink-0 fs-14 fw-500 lh-17 text-ivory d-flex align-items-center cg-6 hover:text-gold-400 transition-colors">
+                                <a href="{{ route('all.news') }}" class="see-all-link">
                                     <span>{{ __('See All') }}</span>
-                                    <span><i class="fa-solid fa-arrow-right"></i></span>
+                                    <i class="fa-solid fa-arrow-right"></i>
                                 </a>
                             </div>
                             <!-- Content -->

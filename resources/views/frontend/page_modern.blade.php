@@ -5,19 +5,18 @@
 @endpush
 
 @section('content')
-    <!-- Header -->
-    <div class="bg-gold-50 py-16 px-4 sm:px-6 lg:px-8 text-center border-b border-gold-200">
-        <div class="max-w-4xl mx-auto">
-            <h1 class="text-3xl font-serif font-extrabold text-gray-900 sm:text-5xl mb-4">{{ $pageTitle }}</h1>
-            <div class="w-24 h-1 bg-maroon-600 mx-auto rounded-full"></div>
+    <div class="pp-page">
+        <!-- Hero -->
+        <div class="pp-hero">
+            <h1 class="pp-hero__title">{{ $pageTitle }}</h1>
         </div>
-    </div>
 
-    <!-- Content -->
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div class="bg-white rounded-sm shadow-lg p-8 md:p-12 border border-gray-100">
-            <div class="prose prose-lg prose-red max-w-none text-gray-600 font-sans">
-                {!! $description !!}
+        <!-- Content -->
+        <div class="pp-container pp-container--narrow">
+            <div class="pp-cms">
+                <div class="prose pp-prose">
+                    {!! $description !!}
+                </div>
             </div>
         </div>
     </div>

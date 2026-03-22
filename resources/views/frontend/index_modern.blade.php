@@ -7,62 +7,65 @@
 @section('content')
     <style>
         /* ====================================================
-                                                                                                                           REVOLUTIONARY HOMEPAGE DESIGN SYSTEM
-                                                                                                                           Philosophy: "Ethereal Elegance" - Unprecedented visual experience
-                                                                                                                           ====================================================  */
+                                                                                                                                                   REVOLUTIONARY HOMEPAGE DESIGN SYSTEM
+                                                                                                                                                   Philosophy: "Ethereal Elegance" - Unprecedented visual experience
+                                                                                                                                                   ====================================================  */
+
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
 
         /* -- Revolutionary Design Tokens -- */
         :root {
-            /* Primary Palette - Enhanced */
-            --hp-maroon: #751525;
-            --hp-maroon-dark: #5a1020;
-            --hp-maroon-glow: rgba(117, 21, 37, 0.6);
-            --hp-gold: #D4AF5A;
-            --hp-gold-light: #E8D4A8;
-            --hp-gold-dark: #B8934A;
-            --hp-gold-glow: rgba(212, 175, 90, 0.5);
+            /* Primary Palette - Enhanced Royal Deep Mode */
+            --hp-maroon: #6B1326; /* Deeper, richer Bordeaux */
+            --hp-maroon-light: #8A1A33;
+            --hp-maroon-dark: #450A17;
+            --hp-maroon-glow: rgba(107, 19, 38, 0.6);
+            --hp-gold: #D4AF37; /* Authentic Premium Gold */
+            --hp-gold-light: #F3E5AB;
+            --hp-gold-dark: #AA8C2C;
+            --hp-gold-glow: rgba(212, 175, 55, 0.45);
 
-            /* Obsidian Dark Mode */
-            --hp-obsidian: #0D0D0D;
-            --hp-charcoal: #1A1A2E;
-            --hp-slate: #2D2D44;
-            --hp-smoke: rgba(255, 255, 255, 0.08);
+            /* Obsidian Dark Mode - Deeper Contrast */
+            --hp-obsidian: #050505;
+            --hp-charcoal: #0F0F1A;
+            --hp-slate: #1A1A2E;
+            --hp-smoke: rgba(255, 255, 255, 0.05);
 
             /* Neutrals */
-            --hp-ivory: #FEFDFB;
-            --hp-cream: #FAF8F5;
-            --hp-gray-100: #F8F9FA;
-            --hp-gray-200: #E9ECEF;
-            --hp-gray-500: #6C757D;
-            --hp-gray-800: #343A40;
+            --hp-ivory: #FDFBFA;
+            --hp-cream: #FAF7F2;
+            --hp-gray-100: #F4F6F8;
+            --hp-gray-200: #E2E8F0;
+            --hp-gray-500: #64748B;
+            --hp-gray-800: #1E293B;
 
-            /* Revolutionary Shadows */
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
-            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.12);
-            --shadow-gold: 0 8px 32px rgba(212, 175, 90, 0.25);
-            --shadow-gold-intense: 0 0 60px rgba(212, 175, 90, 0.4);
-            --shadow-maroon: 0 8px 32px rgba(117, 21, 37, 0.3);
-            --shadow-3d: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            /* Revolutionary Shadows - Volumetric and Soft */
+            --shadow-sm: 0 4px 10px -1px rgba(0, 0, 0, 0.08), 0 2px 5px -1px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 12px 20px -3px rgba(0, 0, 0, 0.12), 0 6px 12px -2px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 24px 40px -8px rgba(0, 0, 0, 0.15), 0 12px 20px -5px rgba(0, 0, 0, 0.08);
+            --shadow-gold: 0 12px 35px rgba(212, 175, 55, 0.25);
+            --shadow-gold-intense: 0 0 60px rgba(212, 175, 55, 0.4);
+            --shadow-maroon: 0 15px 40px rgba(107, 19, 38, 0.3);
+            --shadow-3d: 0 40px 70px -15px rgba(0, 0, 0, 0.5);
+            --shadow-glass: 0 10px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
 
             /* Glassmorphism */
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-bg-light: rgba(255, 255, 255, 0.85);
-            --glass-border: rgba(212, 175, 90, 0.2);
-            --glass-blur: blur(20px);
+            --glass-bg: rgba(255, 255, 255, 0.04);
+            --glass-bg-light: rgba(255, 255, 255, 0.92);
+            --glass-border: rgba(212, 175, 55, 0.35);
+            --glass-blur: blur(30px);
 
             /* Transitions */
-            --transition-fast: 0.2s ease;
-            --transition-normal: 0.3s ease;
-            --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-bounce: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            --transition-magnetic: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-fast: 0.15s ease;
+            --transition-normal: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-bounce: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            --transition-magnetic: 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 
-            /* Aurora Effect Colors */
-            --aurora-1: rgba(117, 21, 37, 0.4);
-            --aurora-2: rgba(212, 175, 90, 0.3);
-            --aurora-3: rgba(26, 26, 46, 0.9);
+            /* Aurora Effect Colors - More harmonic */
+            --aurora-1: rgba(107, 19, 38, 0.4);
+            --aurora-2: rgba(212, 175, 55, 0.3);
+            --aurora-3: rgba(15, 15, 26, 0.95);
         }
 
         /* -- Typography -- */
@@ -70,8 +73,8 @@
             font-family: 'Playfair Display', Georgia, serif;
         }
 
-        .hp-font-body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        .hp-font-body, body, p, span, div, a {
+            font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         /* -- Utility Classes -- */
@@ -108,8 +111,8 @@
         }
 
         /* ====================================================
-                                                                                                                           REVOLUTIONARY ANIMATIONS
-                                                                                                                           ==================================================== */
+                                                                                                                                                   REVOLUTIONARY ANIMATIONS
+                                                                                                                                                   ==================================================== */
 
         /* Aurora Borealis Effect */
         @keyframes auroraShift {
@@ -235,8 +238,8 @@
         }
 
         /* ====================================================
-                                                                                                                           GLASSMORPHISM COMPONENTS
-                                                                                                                           ==================================================== */
+                                                                                                                                                   GLASSMORPHISM COMPONENTS
+                                                                                                                                                   ==================================================== */
         .hp-glass {
             background: var(--glass-bg);
             backdrop-filter: var(--glass-blur);
@@ -258,8 +261,8 @@
         }
 
         /* ====================================================
-                                                                                                                           3D TILT CARD SYSTEM
-                                                                                                                           ==================================================== */
+                                                                                                                                                   3D TILT CARD SYSTEM
+                                                                                                                                                   ==================================================== */
         .hp-tilt-card {
             transform-style: preserve-3d;
             transition: transform var(--transition-slow);
@@ -280,8 +283,8 @@
         }
 
         /* ====================================================
-                                                                                                                           MAGNETIC BUTTON EFFECT
-                                                                                                                           ==================================================== */
+                                                                                                                                                   MAGNETIC BUTTON EFFECT
+                                                                                                                                                   ==================================================== */
         .hp-magnetic {
             position: relative;
             transition: transform var(--transition-magnetic);
@@ -307,8 +310,8 @@
         }
 
         /* ====================================================
-                                                                                                                           HOLOGRAPHIC OVERLAY
-                                                                                                                           ==================================================== */
+                                                                                                                                                   HOLOGRAPHIC OVERLAY
+                                                                                                                                                   ==================================================== */
         .hp-holographic {
             position: relative;
             overflow: hidden;
@@ -335,8 +338,8 @@
         }
 
         /* ====================================================
-                                                                                                                           PARTICLE SYSTEM (CSS)
-                                                                                                                           ==================================================== */
+                                                                                                                                                   PARTICLE SYSTEM (CSS)
+                                                                                                                                                   ==================================================== */
         .hp-particles {
             position: absolute;
             inset: 0;
@@ -402,8 +405,8 @@
         }
 
         /* ====================================================
-                                                                                                                           SHARP CORNER STYLING (NEWS SECTION STYLE)
-                                                                                                                           ==================================================== */
+                                                                                                                                                   SHARP CORNER STYLING (NEWS SECTION STYLE)
+                                                                                                                                                   ==================================================== */
         .hp-sharp {
             border-radius: 4px !important;
         }
@@ -446,8 +449,8 @@
         }
 
         /* ====================================================
-                                                                                                                           HERO SECTION - Revolutionary Aurora Experience
-                                                                                                                           ==================================================== */
+                                                                                                                                                   HERO SECTION - Revolutionary Aurora Experience
+                                                                                                                                                   ==================================================== */
         .hp-hero {
             position: relative;
             min-height: 100vh;
@@ -525,38 +528,39 @@
             border-radius: 4px;
             /* Sharp corners like news section */
             color: var(--hp-gold);
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.25em;
             margin-bottom: 2.5rem;
-            box-shadow: 0 0 30px rgba(212, 175, 90, 0.2);
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.25);
             animation: pulseGlow 4s ease-in-out infinite;
         }
 
         /* 3D Floating Title */
         .hp-hero__title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-size: clamp(3rem, 8vw, 6rem);
             font-weight: 700;
             color: #fff;
             line-height: 1.1;
             margin-bottom: 1.5rem;
+            letter-spacing: -0.01em;
             text-shadow:
                 0 1px 0 rgba(0, 0, 0, 0.3),
                 0 2px 0 rgba(0, 0, 0, 0.25),
                 0 4px 0 rgba(0, 0, 0, 0.2),
                 0 8px 16px rgba(0, 0, 0, 0.4),
-                0 16px 32px rgba(0, 0, 0, 0.3);
+                0 16px 32px rgba(0, 0, 0, 0.5);
             transform-style: preserve-3d;
         }
 
         .hp-hero__title em {
-            font-style: normal;
+            font-style: italic;
             color: var(--hp-gold);
             text-shadow:
-                0 0 20px var(--hp-gold-glow),
-                0 0 40px rgba(212, 175, 90, 0.3);
+                0 0 25px var(--hp-gold-glow),
+                0 0 50px rgba(212, 175, 55, 0.4);
         }
 
         .hp-hero__subtitle {
@@ -634,14 +638,14 @@
             }
 
             50% {
-                opacity: 0;
-                transform: translateX(-50%) translateY(10px);
+                opacity: 0.4;
+                transform: translateX(-50%) translateY(12px);
             }
         }
 
         /* ====================================================
-                                                                                                                           BUTTONS - Revolutionary Magnetic Elements
-                                                                                                                           ==================================================== */
+                                                                                                                                                   BUTTONS - Revolutionary Magnetic Elements
+                                                                                                                                                   ==================================================== */
         .hp-btn {
             display: inline-flex;
             align-items: center;
@@ -681,50 +685,62 @@
         }
 
         .hp-btn--primary {
-            background: linear-gradient(135deg, var(--hp-gold) 0%, var(--hp-gold-dark) 100%);
-            color: var(--hp-charcoal);
+            background: linear-gradient(135deg, var(--hp-gold) 0%, #E6C252 50%, var(--hp-gold-dark) 100%);
+            color: var(--hp-charcoal) !important;
             border-color: var(--hp-gold);
-            box-shadow: 0 4px 15px rgba(212, 175, 90, 0.3);
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.35);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.95rem;
+            font-family: 'Outfit', sans-serif !important;
         }
 
         .hp-btn--primary:hover {
-            transform: translateY(-4px) scale(1.02);
+            transform: translateY(-5px) scale(1.03);
             box-shadow: var(--shadow-gold-intense);
-            color: var(--hp-charcoal);
+            color: #000 !important;
         }
 
         .hp-btn--outline {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            color: #fff;
-            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(212, 175, 55, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: var(--hp-gold) !important;
+            border-color: var(--hp-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.95rem;
+            font-family: 'Outfit', sans-serif !important;
         }
 
         .hp-btn--outline:hover {
-            background: rgba(212, 175, 90, 0.15);
-            border-color: var(--hp-gold);
-            color: var(--hp-gold);
-            transform: translateY(-4px);
-            box-shadow: 0 0 30px rgba(212, 175, 90, 0.2);
+            background: rgba(212, 175, 55, 0.15);
+            border-color: var(--hp-gold-light);
+            color: var(--hp-gold-light) !important;
+            transform: translateY(-5px);
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.25);
         }
 
         .hp-btn--maroon {
-            background: linear-gradient(135deg, var(--hp-maroon) 0%, var(--hp-maroon-dark) 100%);
-            color: #fff;
+            background: linear-gradient(135deg, var(--hp-maroon) 0%, var(--hp-maroon-light) 100%);
+            color: #fff !important;
             border-color: var(--hp-maroon);
-            box-shadow: 0 4px 15px rgba(117, 21, 37, 0.3);
+            box-shadow: 0 4px 20px rgba(107, 19, 38, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.95rem;
+            font-family: 'Outfit', sans-serif !important;
         }
 
         .hp-btn--maroon:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 8px 32px rgba(117, 21, 37, 0.4);
-            color: #fff;
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 40px rgba(107, 19, 38, 0.5);
+            color: #fff !important;
         }
 
         /* ====================================================
-                                                                                                                           SECTION BASE STYLES
-                                                                                                                           ==================================================== */
+                                                                                                                                                   SECTION BASE STYLES
+                                                                                                                                                   ==================================================== */
         .hp-section {
             padding: 6rem 0;
             position: relative;
@@ -805,22 +821,23 @@
         }
 
         /* ====================================================
-                                                                                                                           BENEFITS SECTION - Glassmorphic 3D Cards
-                                                                                                                           ==================================================== */
+                                                                                                                                                   BENEFITS SECTION - Glassmorphic 3D Cards
+                                                                                                                                                   ==================================================== */
         .hp-benefit-card {
-            background: var(--glass-bg-light);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 2.5rem 2rem;
-            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            padding: 3rem 2rem;
+            border-radius: 12px;
             /* Sharp corners */
             text-align: center;
             height: 100%;
-            border: 1px solid rgba(212, 175, 90, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.25);
             transition: all var(--transition-slow);
             position: relative;
             overflow: hidden;
             transform-style: preserve-3d;
+            box-shadow: var(--shadow-md);
         }
 
         /* Gradient border glow effect */
@@ -829,7 +846,7 @@
             position: absolute;
             inset: -2px;
             background: linear-gradient(135deg, var(--hp-maroon), var(--hp-gold), var(--hp-maroon));
-            border-radius: 10px;
+            border-radius: 14px;
             z-index: -1;
             opacity: 0;
             transition: opacity var(--transition-normal);
@@ -850,8 +867,8 @@
         }
 
         .hp-benefit-card:hover {
-            transform: translateY(-12px) perspective(1000px) rotateX(2deg);
-            box-shadow: var(--shadow-3d), 0 0 40px rgba(212, 175, 90, 0.15);
+            transform: translateY(-15px) perspective(1000px) rotateX(4deg) rotateY(-2deg);
+            box-shadow: var(--shadow-3d), 0 0 50px rgba(212, 175, 55, 0.2);
             border-color: transparent;
         }
 
@@ -941,8 +958,8 @@
         }
 
         /* ====================================================
-                                                                                                                           ABOUT SECTION - Two Column Layout
-                                                                                                                           ==================================================== */
+                                                                                                                                                   ABOUT SECTION - Two Column Layout
+                                                                                                                                                   ==================================================== */
         .hp-about__image-wrap {
             position: relative;
         }
@@ -1006,8 +1023,8 @@
         }
 
         /* ====================================================
-                                                                                                                           STATS SECTION - Liquid Gradient with Morphing Blobs
-                                                                                                                           ==================================================== */
+                                                                                                                                                   STATS SECTION - Liquid Gradient with Morphing Blobs
+                                                                                                                                                   ==================================================== */
         .hp-stats {
             background: linear-gradient(135deg, var(--hp-obsidian) 0%, var(--hp-charcoal) 50%, var(--hp-slate) 100%);
             padding: 6rem 0;
@@ -1086,9 +1103,9 @@
         }
 
         /* ====================================================
-                                                                                                                           EVENT CARDS
-                                                                                                                           - Holographic Sharp Design
-                                                                                                                           ==================================================== */
+                                                                                                                                                   EVENT CARDS
+                                                                                                                                                   - Holographic Sharp Design
+                                                                                                                                                   ==================================================== */
         .hp-event-card {
             background: #fff;
             border-radius: 8px;
@@ -1210,8 +1227,8 @@
         }
 
         /* ====================================================
-                                                                                                                           STORY CARDS - Sharp Editorial Design
-                                                                                                                           ==================================================== */
+                                                                                                                                                   STORY CARDS - Sharp Editorial Design
+                                                                                                                                                   ==================================================== */
         .hp-story-card {
             background: #fff;
             border-radius: 8px;
@@ -1302,8 +1319,8 @@
         }
 
         /* ====================================================
-                                                                                                                           ALUMNI CARDS - Ultramodern Premium Design
-                                                                                                                           ==================================================== */
+                                                                                                                                                   ALUMNI CARDS - Ultramodern Premium Design
+                                                                                                                                                   ==================================================== */
         .hp-alumni-section {
             background: linear-gradient(135deg, #1A0F0F 0%, #2D1A1A 50%, #1A0F0F 100%);
             position: relative;
@@ -1338,16 +1355,16 @@
         }
 
         .hp-alumni-card {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 16px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-radius: 20px;
             overflow: hidden;
             text-align: center;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             height: 100%;
-            border: 1px solid rgba(212, 175, 90, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.2);
             position: relative;
         }
 
@@ -1356,12 +1373,12 @@
             content: '';
             position: absolute;
             inset: -2px;
-            background: linear-gradient(135deg, #D4AF5A, transparent, #751525, transparent, #D4AF5A);
+            background: linear-gradient(135deg, #D4AF37, transparent, #8A1A33, transparent, #D4AF37);
             background-size: 300% 300%;
-            border-radius: 18px;
+            border-radius: 22px;
             z-index: -1;
             opacity: 0;
-            transition: opacity 0.4s ease;
+            transition: opacity 0.5s ease;
             animation: borderGlow 4s ease infinite;
         }
 
@@ -1385,16 +1402,17 @@
             left: 50%;
             width: 150%;
             height: 150%;
-            background: radial-gradient(circle, rgba(212, 175, 90, 0.1) 0%, transparent 60%);
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 60%);
             transform: translate(-50%, -50%) scale(0);
             transition: transform 0.6s ease;
             pointer-events: none;
         }
 
         .hp-alumni-card:hover {
-            transform: translateY(-16px) scale(1.02);
-            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4), 0 0 40px rgba(212, 175, 90, 0.15);
-            border-color: rgba(212, 175, 90, 0.4);
+            transform: translateY(-20px) scale(1.03);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 50px rgba(212, 175, 55, 0.2);
+            border-color: rgba(212, 175, 55, 0.5);
+            z-index: 10;
         }
 
         .hp-alumni-card:hover::before {
@@ -1402,7 +1420,7 @@
         }
 
         .hp-alumni-card:hover::after {
-            transform: translate(-50%, -50%) scale(1);
+            transform: translate(-50%, -50%) scale(1.2);
         }
 
         .hp-alumni-card__image {
@@ -1425,7 +1443,8 @@
         .hp-alumni-card__image img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover !important;
+            object-position: top !important;
             transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), filter 0.4s ease;
             filter: saturate(0.9);
         }
@@ -1464,15 +1483,15 @@
         .hp-alumni-card__badge {
             display: inline-block;
             padding: 0.5rem 1.25rem;
-            background: linear-gradient(135deg, #D4AF5A 0%, #B8934A 100%);
-            color: #1A0F0F;
-            font-size: 0.7rem;
+            background: linear-gradient(135deg, var(--hp-gold) 0%, var(--hp-gold-dark) 100%);
+            color: var(--hp-charcoal);
+            font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.12em;
+            letter-spacing: 0.15em;
             border-radius: 4px;
-            box-shadow: 0 4px 12px rgba(212, 175, 90, 0.35);
-            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .hp-alumni-card:hover .hp-alumni-card__badge {
@@ -1511,8 +1530,8 @@
 
 
         /* ====================================================
-                                                                                                                           GALLERY
-                                                                                                                           ==================================================== */
+                                                                                                                                                   GALLERY
+                                                                                                                                                   ==================================================== */
         .hp-gallery-item {
             border-radius: 16px;
             overflow: hidden;
@@ -1573,22 +1592,24 @@
         }
 
         /* ====================================================
-                                                                                                                           NEWS CARDS - Editorial Style
-                                                                                                                           ==================================================== */
+                                                                                                                                                   NEWS CARDS - Editorial Style
+                                                                                                                                                   ==================================================== */
         .hp-news-card {
             background: #fff;
             border-radius: 20px;
             overflow: hidden;
             box-shadow: var(--shadow-sm);
-            transition: all var(--transition-normal);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             height: 100%;
             display: flex;
             flex-direction: column;
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .hp-news-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 5px 15px rgba(212, 175, 55, 0.15);
+            border-color: rgba(212, 175, 55, 0.2);
         }
 
         .hp-news-card__image {
@@ -1686,8 +1707,8 @@
         }
 
         /* ====================================================
-                                                                                                                           READ MORE LINK
-                                                                                                                           ==================================================== */
+                                                                                                                                                   READ MORE LINK
+                                                                                                                                                   ==================================================== */
         .hp-link {
             display: inline-flex;
             align-items: center;
@@ -1712,8 +1733,8 @@
         }
 
         /* ====================================================
-                                                                                                                           SWIPER CUSTOMIZATION
-                                                                                                                           ==================================================== */
+                                                                                                                                                   SWIPER CUSTOMIZATION
+                                                                                                                                                   ==================================================== */
         .hp-swiper-nav {
             display: flex;
             justify-content: center;
@@ -1754,31 +1775,203 @@
         }
 
         /* ====================================================
-                                                                                                                           RESPONSIVE
-                                                                                                                           ==================================================== */
+                                                                                                                                                   RESPONSIVE
+                                                                                                                                                   ==================================================== */
         @media (max-width: 991px) {
             .hp-about__content {
                 padding-left: 0;
-                margin-top: 4rem;
+                margin-top: 3rem;
+                text-align: center;
+            }
+            
+            .hp-about__content .hp-section__title,
+            .hp-about__content .hp-section__desc {
+                text-align: center !important;
             }
 
             .hp-about__stat-card {
-                right: 1rem;
-                bottom: -1.5rem;
+                right: 50%;
+                transform: translateX(50%);
+                bottom: -2rem;
             }
         }
 
         @media (max-width: 767px) {
             .hp-section {
-                padding: 4rem 0;
+                padding: 5rem 0;
+            }
+
+            .hp-hero {
+                padding-top: 80px;
+                min-height: 90vh;
             }
 
             .hp-hero__title {
-                font-size: 2.25rem;
+                font-size: 2.75rem;
+                letter-spacing: -0.02em;
+            }
+
+            .hp-hero__subtitle {
+                font-size: 1.1rem;
+                line-height: 1.6;
+                margin-bottom: 2.5rem !important;
+            }
+
+            .hp-hero__actions {
+                flex-direction: column;
+                padding: 0 1rem;
+            }
+
+            .hp-btn {
+                width: 100%;
+                justify-content: center;
             }
 
             .hp-stat-item__number {
-                font-size: 3rem;
+                font-size: 3.5rem;
+            }
+
+            .hp-section__title {
+                font-size: 2.25rem;
+            }
+            
+            .hp-benefit-card__icon {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .hp-benefit-card__icon img {
+                width: 70px;
+                height: 70px;
+            }
+        }
+
+        /* ====================================================
+                                                                                                                                                   REUNION COUNTDOWN SECTION
+                                                                                                                                                   ==================================================== */
+        .hp-countdown-section {
+            position: relative;
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--hp-charcoal) 0%, #1A1A2E 50%, var(--hp-maroon-dark) 100%);
+            overflow: hidden;
+        }
+
+        .hp-countdown-overlay {
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF5A' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .hp-countdown-wrapper {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 90, 0.3);
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 40px rgba(212, 175, 90, 0.15);
+        }
+
+        .hp-countdown-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.25rem;
+            background: rgba(212, 175, 90, 0.2);
+            color: var(--hp-gold);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 50px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hp-countdown-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.75rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hp-countdown-location {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .hp-countdown-location i {
+            color: var(--hp-gold);
+            margin-right: 0.5rem;
+        }
+
+        .hp-countdown-timer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .hp-countdown-item {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(212, 175, 90, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            min-width: 100px;
+            transition: all 0.3s ease;
+        }
+
+        .hp-countdown-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--hp-gold);
+            box-shadow: 0 10px 30px rgba(212, 175, 90, 0.2);
+        }
+
+        .hp-countdown-number {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: var(--hp-gold);
+            line-height: 1;
+            text-shadow: 0 0 20px rgba(212, 175, 90, 0.3);
+        }
+
+        .hp-countdown-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 0.5rem;
+        }
+
+        .hp-countdown-separator {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: rgba(255, 255, 255, 0.3);
+            font-weight: bold;
+            padding: 0 0.25rem;
+        }
+
+        @media (max-width: 767px) {
+            .hp-countdown-wrapper {
+                padding: 2rem 1.5rem;
+            }
+
+            .hp-countdown-item {
+                padding: 1rem 1.25rem;
+                min-width: 70px;
+            }
+
+            .hp-countdown-separator {
+                font-size: 1.5rem;
+                padding: 0 0.1rem;
             }
         }
     </style>
@@ -1802,10 +1995,13 @@
             <span class="hp-particle"></span>
         </div>
 
-        <div class="hp-hero__content" data-aos="fade-up" data-aos-duration="1000">
-            <span class="hp-hero__badge">
-                <i class="fa-solid fa-sparkles"></i>
-                {{ __('Welcome to the Community') }}
+        <!-- Massive Glowing Orb for undeniable visual impact -->
+        <div style="position: absolute; top: 50%; left: 50%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%); transform: translate(-50%, -50%); border-radius: 50%; filter: blur(40px); pointer-events: none; z-index: 1;"></div>
+
+        <div class="hp-hero__content" data-aos="fade-up" data-aos-duration="1000" style="position: relative; z-index: 10;">
+            <span class="hp-hero__badge" style="background: rgba(0,0,0,0.6); border: 2px solid #D4AF37; box-shadow: 0 0 60px rgba(212, 175, 55, 0.8); font-size: 1rem; padding: 1rem 2.5rem; border-radius: 50px;">
+                <i class="fa-solid fa-gem fa-bounce" style="color: #D4AF37; margin-right: 12px; font-size: 1.2rem;"></i>
+                <span style="letter-spacing: 0.3em; color: #fff;">{{ __('ELITE ALUMNI NETWORK') }}</span>
             </span>
 
             <h1 class="hp-hero__title">
@@ -1833,6 +2029,56 @@
             <div class="hp-hero__scroll-mouse"></div>
         </a>
     </section>
+
+    <!-- ======================== REUNION COUNTDOWN ======================== -->
+    @if(getOption('reunion_countdown_enabled') && getOption('reunion_date'))
+        @php
+            $reunionDate = getOption('reunion_date');
+            $reunionTitle = getOption('reunion_title', 'Annual Alumni Reunion');
+            $reunionLocation = getOption('reunion_location', '');
+        @endphp
+        <section class="hp-countdown-section">
+            <div class="hp-countdown-overlay"></div>
+            <div class="container position-relative" style="z-index: 10;">
+                <div class="hp-countdown-wrapper" data-aos="fade-up">
+                    <span class="hp-countdown-badge">
+                        <i class="bi bi-calendar-event"></i> {{ __('Upcoming Event') }}
+                    </span>
+                    <h2 class="hp-countdown-title">{{ $reunionTitle }}</h2>
+                    @if($reunionLocation)
+                        <p class="hp-countdown-location">
+                            <i class="bi bi-geo-alt"></i> {{ $reunionLocation }}
+                        </p>
+                    @endif
+                    <div class="hp-countdown-timer" id="reunionCountdown" data-target="{{ $reunionDate }}">
+                        <div class="hp-countdown-item">
+                            <div class="hp-countdown-number" id="countdown-days">00</div>
+                            <div class="hp-countdown-label">{{ __('Days') }}</div>
+                        </div>
+                        <div class="hp-countdown-separator">:</div>
+                        <div class="hp-countdown-item">
+                            <div class="hp-countdown-number" id="countdown-hours">00</div>
+                            <div class="hp-countdown-label">{{ __('Hours') }}</div>
+                        </div>
+                        <div class="hp-countdown-separator">:</div>
+                        <div class="hp-countdown-item">
+                            <div class="hp-countdown-number" id="countdown-minutes">00</div>
+                            <div class="hp-countdown-label">{{ __('Minutes') }}</div>
+                        </div>
+                        <div class="hp-countdown-separator">:</div>
+                        <div class="hp-countdown-item">
+                            <div class="hp-countdown-number" id="countdown-seconds">00</div>
+                            <div class="hp-countdown-label">{{ __('Seconds') }}</div>
+                        </div>
+                    </div>
+                    <a href="{{ route('all.event') }}" class="hp-btn hp-btn--primary mt-4">
+                        {{ __('View All Events') }}
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    @endif
 
     <!-- ======================== WHY JOIN US ======================== -->
     <section class="hp-section hp-section--cream" id="why-join-us">
@@ -1911,16 +2157,77 @@
                         <div class="hp-section__desc text-start mx-0 mb-4">
                             {!! getOption('about_us_description') ?: __('We are a community of proud graduates committed to supporting each other and giving back to our alma mater.') !!}
                         </div>
-                        <a href="{{ route('register') }}" class="hp-btn hp-btn--maroon">
-                            {{ __('Join Our Community') }}
-                            <i class="fa-solid fa-user-plus"></i>
-                        </a>
+                        <div class="d-flex flex-column flex-sm-row gap-3">
+                            <a href="{{ route('register') }}" class="hp-btn hp-btn--maroon">
+                                {{ __('Join Our Community') }}
+                                <i class="fa-solid fa-user-plus"></i>
+                            </a>
+                            <a href="{{ route('our.history') }}" class="hp-btn hp-btn--outline">
+                                {{ __('Read Our Full History') }}
+                                <i class="fa-solid fa-book-open"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+
+    <!-- ======================== EXECUTIVES ======================== -->
+    @if(isset($excos) && count($excos) > 0)
+        <section class="hp-section hp-alumni-section" id="executives">
+            <div class="container position-relative" style="z-index: 10;">
+                <div class="hp-section__header" data-aos="fade-up">
+                    <span class="hp-section__badge">{{ __('Leadership') }}</span>
+                    <h2 class="hp-section__title">{{ __('Our Executives') }}</h2>
+                    <p class="hp-section__desc">
+                        {{ __('Meet the dedicated individuals currently leading our alumni association.') }}
+                        @if(!empty($currentTenorName))
+                            <br><span style="color: var(--hp-gold); font-weight: 600;" class="mt-2 d-inline-block">{{ $currentTenorName }}</span>
+                        @endif
+                    </p>
+                </div>
+
+                <div class="row g-4 justify-content-center">
+                    @foreach($excos->take(8) as $exco)
+                        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
+                            <div class="hp-alumni-card">
+                                <div class="hp-alumni-card__image">
+                                    @if($exco->photo)
+                                        <img src="{{ asset($exco->photo) }}" alt="{{ $exco->name }}">
+                                    @else
+                                        <div class="w-100 h-100 d-flex align-items-center justify-content-center" style="background: rgba(0,0,0,0.2);">
+                                            <i class="fa-solid fa-user text-secondary" style="font-size: 3rem; opacity: 0.5;"></i>
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="hp-alumni-card__body">
+                                    <h4 class="hp-alumni-card__name">{{ $exco->name }}</h4>
+                                    <div class="hp-alumni-card__dept" style="color: var(--hp-gold);">{{ $exco->position }}</div>
+                                    <span class="hp-alumni-card__badge">{{ __('Exco') }}</span>
+                                    
+                                    @if($exco->bio)
+                                        <div class="d-block w-100"></div>
+                                        <a href="{{ route('excos') }}" class="hp-alumni-card__link">
+                                            {{ __('View Profile') }} <i class="fa-solid fa-arrow-right"></i>
+                                        </a>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+                <div class="text-center mt-5" data-aos="fade-up">
+                    <a href="{{ route('excos') }}" class="hp-btn hp-btn--outline">
+                        {{ __('Meet the Full Team') }}
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    @endif
 
     <!-- ======================== UPCOMING EVENTS ======================== -->
     @if (count($upcomingEvents ?? []))
@@ -2126,6 +2433,199 @@
         </section>
     @endif
 
+    <!-- ======================== DID YOU KNOW? ======================== -->
+    @php
+        $showFunFacts = getOption('fun_facts_status') && getOption('fun_facts_list');
+        $showPoll = isset($activePoll) && $activePoll;
+    @endphp
+
+    @if($showFunFacts || $showPoll)
+        <section class="hp-section hp-section--dark">
+            <div class="container">
+                <div class="row {{ ($showFunFacts && $showPoll) ? '' : 'justify-content-center' }} g-5">
+                    
+                    {{-- FUN FACTS --}}
+                    @if($showFunFacts)
+                        <div class="{{ $showPoll ? 'col-lg-6' : 'col-lg-10' }}">
+                            <div class="d-flex flex-column h-100">
+                                <div class="mb-4">
+                                    <span class="hp-section__badge">{{ __('School Trivia') }}</span>
+                                    <h2 class="hp-section__title text-start text-white mb-2">{{ __('Did You Know?') }}</h2>
+                                    <p class="hp-section__desc text-start mx-0">
+                                        {{ __('Interesting facts and historical tidbits about our beloved alma mater.') }}
+                                    </p>
+                                </div>
+                                
+                                <div class="hp-fact-card flex-grow-1 d-flex flex-column justify-content-center" 
+                                    style="background: rgba(255,255,255,0.05); border: 1px solid rgba(212, 175, 90, 0.2); border-radius: 20px; padding: 3rem; position: relative;">
+                                    <i class="fa-solid fa-lightbulb" style="position: absolute; top: 2rem; right: 2rem; font-size: 3rem; color: var(--hp-gold); opacity: 0.1;"></i>
+                                    <div id="fun-fact-display" style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #fff; line-height: 1.6; min-height: 100px; display: flex; align-items: center;">
+                                        <!-- Fact will load here -->
+                                    </div>
+                                    <div class="mt-4">
+                                        <button id="next-fact-btn" class="btn btn-outline-light btn-sm rounded-pill px-4">
+                                            <i class="fa-solid fa-sync-alt me-2"></i> {{ __('Next Fact') }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
+                    {{-- MINI POLL --}}
+                    @if($showPoll)
+                        <div class="{{ $showFunFacts ? 'col-lg-6' : 'col-lg-8' }}">
+                            <div class="d-flex flex-column h-100">
+                                <div class="mb-4">
+                                    <span class="hp-section__badge">{{ __('Your Voice') }}</span>
+                                    <h2 class="hp-section__title text-start text-white mb-2">{{ __('Community Poll') }}</h2>
+                                    <p class="hp-section__desc text-start mx-0">
+                                        {{ __('Participate in our latest community poll.') }}
+                                    </p>
+                                </div>
+
+                                <div class="hp-poll-card" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(212, 175, 90, 0.2); border-radius: 20px; padding: 3rem;">
+                                    <h4 class="text-white mb-4" style="font-family: 'Playfair Display', serif;">{{ $activePoll->question }}</h4>
+                                    
+                                    <div id="poll-area">
+                                        @if(isset($hasVoted) && $hasVoted)
+                                            <!-- Results View -->
+                                            <div class="poll-results">
+                                                @php 
+                                                    $totalVotes = $activePoll->votes()->count(); 
+                                                @endphp
+                                                @foreach($activePoll->options as $option)
+                                                    @php 
+                                                        $percent = $totalVotes > 0 ? round(($option->vote_count / $totalVotes) * 100) : 0; 
+                                                    @endphp
+                                                    <div class="mb-3">
+                                                        <div class="d-flex justify-content-between text-white-50 mb-1">
+                                                            <span>{{ $option->option_text }}</span>
+                                                            <span>{{ $percent }}%</span>
+                                                        </div>
+                                                        <div class="progress" style="height: 6px; background: rgba(255,255,255,0.1);">
+                                                            <div class="progress-bar bg-gold" role="progressbar" style="width: {{ $percent }}%; background-color: var(--hp-gold);"></div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                                <p class="text-white-50 mt-3 small"><i class="fa-solid fa-check-circle text-success me-1"></i> {{ __('You have voted in this poll.') }}</p>
+                                            </div>
+                                        @else
+                                            <!-- Voting Form -->
+                                            <form id="mini-poll-form">
+                                                <input type="hidden" name="poll_id" value="{{ $activePoll->id }}">
+                                                @foreach($activePoll->options as $option)
+                                                    <div class="form-check mb-3 custom-radio">
+                                                        <input class="form-check-input" type="radio" name="option_id" id="opt-{{ $option->id }}" value="{{ $option->id }}">
+                                                        <label class="form-check-label text-white" for="opt-{{ $option->id }}" style="cursor: pointer;">
+                                                            {{ $option->option_text }}
+                                                        </label>
+                                                    </div>
+                                                @endforeach
+                                                <button type="submit" class="btn btn-primary mt-2">{{ __('Submit Vote') }}</button>
+                                            </form>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </section>
+
+        @push('script')
+            @if($showFunFacts)
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const factsRaw = `{!! addslashes(getOption('fun_facts_list')) !!}`;
+                    const facts = factsRaw.split('\n').filter(line => line.trim() !== '');
+                    const display = document.getElementById('fun-fact-display');
+                    const btn = document.getElementById('next-fact-btn');
+
+                    if (facts.length > 0 && display) {
+                        function showRandomFact() {
+                            const random = facts[Math.floor(Math.random() * facts.length)];
+                            display.style.opacity = 0;
+                            setTimeout(() => {
+                                display.innerText = random;
+                                display.style.opacity = 1;
+                            }, 300);
+                        }
+                        showRandomFact();
+                        btn.addEventListener('click', function () {
+                            const icon = this.querySelector('i');
+                            icon.classList.add('fa-spin');
+                            showRandomFact();
+                            setTimeout(() => icon.classList.remove('fa-spin'), 500);
+                        });
+                        display.style.transition = 'opacity 0.3s ease';
+                    } else if(display) {
+                        display.innerText = "No facts available.";
+                    }
+                });
+            </script>
+            @endif
+
+            @if($showPoll)
+            <script>
+                $(document).ready(function() {
+                    $('#mini-poll-form').on('submit', function(e) {
+                        e.preventDefault();
+                        const form = $(this);
+                        const btn = form.find('button[type="submit"]');
+                        const data = form.serialize();
+
+                        if(!form.find('input[name="option_id"]:checked').length) {
+                            toastr.error("{{ __('Please select an option') }}");
+                            return;
+                        }
+
+                        btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i>');
+
+                        $.ajax({
+                            url: "{{ route('mini-poll.vote') }}",
+                            type: "POST",
+                            data: data + "&_token={{ csrf_token() }}",
+                            success: function(res) {
+                                toastr.success(res.message);
+                                renderResults(res.data.results);
+                            },
+                            error: function(err) {
+                                btn.prop('disabled', false).text("{{ __('Submit Vote') }}");
+                                if(err.responseJSON && err.responseJSON.message) {
+                                    toastr.error(err.responseJSON.message);
+                                } else {
+                                    toastr.error("{{ __('Something went wrong') }}");
+                                }
+                            }
+                        });
+                    });
+
+                    function renderResults(data) {
+                        let html = '<div class="poll-results">';
+                        data.options.forEach(opt => {
+                            html += `
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between text-white-50 mb-1">
+                                        <span>${opt.text}</span>
+                                        <span>${opt.percent}%</span>
+                                    </div>
+                                    <div class="progress" style="height: 6px; background: rgba(255,255,255,0.1);">
+                                        <div class="progress-bar bg-gold" role="progressbar" style="width: ${opt.percent}%; background-color: var(--hp-gold);"></div>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        html += '<p class="text-white-50 mt-3 small"><i class="fa-solid fa-check-circle text-success me-1"></i> {{ __("Thank you for voting!") }}</p></div>';
+                        $('#poll-area').html(html);
+                    }
+                });
+            </script>
+            @endif
+        @endpush
+    @endif
+
     @push('style')
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     @endpush
@@ -2187,6 +2687,45 @@
                     counter.dataset.target = counter.innerText;
                     observer.observe(counter);
                 });
+            });
+        </script>
+
+        <!-- Reunion Countdown Script -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const countdown = document.getElementById('reunionCountdown');
+                if (!countdown) return;
+
+                const targetDate = countdown.dataset.target;
+                if (!targetDate) return;
+
+                const target = new Date(targetDate).getTime();
+
+                function updateCountdown() {
+                    const now = new Date().getTime();
+                    const diff = target - now;
+
+                    if (diff <= 0) {
+                        document.getElementById('countdown-days').textContent = '00';
+                        document.getElementById('countdown-hours').textContent = '00';
+                        document.getElementById('countdown-minutes').textContent = '00';
+                        document.getElementById('countdown-seconds').textContent = '00';
+                        return;
+                    }
+
+                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                    document.getElementById('countdown-days').textContent = days.toString().padStart(2, '0');
+                    document.getElementById('countdown-hours').textContent = hours.toString().padStart(2, '0');
+                    document.getElementById('countdown-minutes').textContent = minutes.toString().padStart(2, '0');
+                    document.getElementById('countdown-seconds').textContent = seconds.toString().padStart(2, '0');
+                }
+
+                updateCountdown();
+                setInterval(updateCountdown, 1000);
             });
         </script>
     @endpush

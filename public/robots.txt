@@ -1,2 +1,26 @@
+# https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Disallow: /admin/
+Disallow: /super-admin/
+Disallow: /alumni/
+Disallow: /login
+Disallow: /register
+Disallow: /password/
+Disallow: /webhook/
+
+# Allow public pages
+Allow: /
+Allow: /all-alumni
+Allow: /our-history
+Allow: /all-event
+Allow: /our-news
+Allow: /all-stories
+Allow: /all-job
+Allow: /donate
+Allow: /hall-of-fame
+Allow: /in-memoriam
+Allow: /contact-us
+Allow: /gallery
+
+# Sitemap
+# Sitemap: https://yourdomain.com/sitemap.xml

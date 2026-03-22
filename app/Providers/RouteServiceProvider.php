@@ -49,7 +49,7 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::domain($domain)
                 ->namespace($this->namespace)
-                ->middleware([ 'web', 'auth', 'user', 'is_email_verify', '2fa_verify', 'common'])
+                ->middleware(['web', 'auth', 'user', 'is_email_verify', '2fa_verify', 'common'])
                 ->group(base_path('routes/alumni.php'));
 
             Route::middleware(['installed', 'web', 'auth', 'version.update', 'addon', 'super-admin', 'is_email_verify', '2fa_verify'])
@@ -81,10 +81,10 @@ class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
 
         $this->routes(function () {
-            if(isAddonInstalled('ALUSAAS') && isCentralDomain()){
+            if (isAddonInstalled('ALUSAAS') && isCentralDomain()) {
                 $this->mapApiRoutes();
                 $this->mapWebRoutes();
-            }else{
+            } else {
                 $this->allApiRoutes();
                 $this->allWebRoutes();
             }
@@ -101,12 +101,12 @@ class RouteServiceProvider extends ServiceProvider
             ->as('super_admin.')
             ->group(base_path('routes/super_admin.php'));
 
-        Route::middleware(['installed', 'web', 'auth', 'admin',  'version.update', 'addon', 'is_email_verify', '2fa_verify'])
+        Route::middleware(['installed', 'web', 'auth', 'admin', 'version.update', 'addon', 'is_email_verify', '2fa_verify'])
             ->prefix('admin')
             ->as('admin.')
             ->group(base_path('routes/admin.php'));
 
-        Route::middleware([ 'installed', 'web', 'auth', 'user', 'version.update', 'addon', 'is_email_verify', '2fa_verify', 'common'])
+        Route::middleware(['installed', 'web', 'auth', 'user', 'version.update', 'addon', 'is_email_verify', '2fa_verify', 'common', 'sanitize.html'])
             ->group(base_path('routes/alumni.php'));
 
         Route::middleware(['installed', 'web', 'version.update', 'addon'])
@@ -129,6 +129,27 @@ class RouteServiceProvider extends ServiceProvider
     {
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
+        });
+
+        // Limit login/register attempts to prevent brute-force attacks
+        RateLimiter::for('auth', function (Request $request) {
+            return Limit::perMinute(5)->by($request->ip())->response(function () {
+                return back()->withErrors([
+                    'email' => __('Too many attempts. Please try again in a minute.'),
+                ]);
+            });
+        });
+
+        // Limit contact form submissions to prevent spam
+        RateLimiter::for('contact', function (Request $request) {
+            return Limit::perMinute(3)->by($request->ip())->response(function () {
+                return back()->with('error', __('Too many messages. Please wait before sending another.'));
+            });
+        });
+
+        // Limit donation/payment attempts
+        RateLimiter::for('donation', function (Request $request) {
+            return Limit::perMinute(10)->by($request->ip());
         });
     }
 }

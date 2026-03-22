@@ -356,7 +356,6 @@ if (!function_exists('setCustomerAddonBuildVersion')) {
 if (!function_exists('getAddonCodeCurrentVersion')) {
     function getAddonCodeCurrentVersion($appCode)
     {
-        Artisan::call("optimize:clear");
         return config('Addon.' . $appCode . '.current_version', 0);
     }
 }
@@ -364,7 +363,6 @@ if (!function_exists('getAddonCodeCurrentVersion')) {
 if (!function_exists('getAddonCodeBuildVersion')) {
     function getAddonCodeBuildVersion($appCode)
     {
-        Artisan::call("optimize:clear");
         return config('Addon.' . $appCode . '.build_version', 0);
     }
 }
@@ -1004,7 +1002,18 @@ if (!function_exists('centralDomain')) {
 if (!function_exists('gatewaySettings')) {
     function gatewaySettings()
     {
-        return '{"paypal":[{"label":"Url","name":"url","is_show":0},{"label":"Client ID","name":"key","is_show":1},{"label":"Secret","name":"secret","is_show":1}],"stripe":[{"label":"Url","name":"url","is_show":0},{"label":"Public Key","name":"key","is_show":1},{"label":"Secret Key","name":"secret","is_show":0}],"razorpay":[{"label":"Url","name":"url","is_show":0},{"label":"Key","name":"key","is_show":1},{"label":"Secret","name":"secret","is_show":1}],"instamojo":[{"label":"Url","name":"url","is_show":0},{"label":"Api Key","name":"key","is_show":1},{"label":"Auth Token","name":"secret","is_show":1}],"mollie":[{"label":"Url","name":"url","is_show":0},{"label":"Mollie Key","name":"key","is_show":1},{"label":"Secret","name":"secret","is_show":0}],"paystack":[{"label":"Url","name":"url","is_show":0},{"label":"Public Key","name":"key","is_show":1},{"label":"Secret Key","name":"secret","is_show":0}],"mercadopago":[{"label":"Url","name":"url","is_show":0},{"label":"Client ID","name":"key","is_show":1},{"label":"Client Secret","name":"secret","is_show":1}],"sslcommerz":[{"label":"Url","name":"url","is_show":0},{"label":"Store ID","name":"key","is_show":1},{"label":"Store Password","name":"secret","is_show":1}],"flutterwave":[{"label":"Hash","name":"url","is_show":1},{"label":"Public Key","name":"key","is_show":1},{"label":"Client Secret","name":"secret","is_show":1}],"coinbase":[{"label":"Hash","name":"url","is_show":0},{"label":"API Key","name":"key","is_show":1},{"label":"Client Secret","name":"secret","is_show":0}]}';
+        return '{
+            "paypal":[{"label":"Url","name":"url","is_show":0},{"label":"Client ID","name":"key","is_show":1},{"label":"Secret","name":"secret","is_show":1}],
+            "stripe":[{"label":"Url","name":"url","is_show":0},{"label":"Publishable Key","name":"key","is_show":1},{"label":"Secret Key","name":"secret","is_show":1}],
+            "razorpay":[{"label":"Url","name":"url","is_show":0},{"label":"Key","name":"key","is_show":1},{"label":"Secret","name":"secret","is_show":1}],
+            "instamojo":[{"label":"Url","name":"url","is_show":0},{"label":"Api Key","name":"key","is_show":1},{"label":"Auth Token","name":"secret","is_show":1}],
+            "mollie":[{"label":"Url","name":"url","is_show":0},{"label":"Mollie Key","name":"key","is_show":1},{"label":"Secret","name":"secret","is_show":0}],
+            "paystack":[{"label":"Url","name":"url","is_show":0},{"label":"Public Key","name":"key","is_show":1},{"label":"Secret Key","name":"secret","is_show":1}],
+            "mercadopago":[{"label":"Url","name":"url","is_show":0},{"label":"Client ID","name":"key","is_show":1},{"label":"Client Secret","name":"secret","is_show":1}],
+            "sslcommerz":[{"label":"Url","name":"url","is_show":0},{"label":"Store ID","name":"key","is_show":1},{"label":"Store Password","name":"secret","is_show":1}],
+            "flutterwave":[{"label":"Encryption Key","name":"url","is_show":1},{"label":"Public Key","name":"key","is_show":1},{"label":"Secret Key","name":"secret","is_show":1}],
+            "coinbase":[{"label":"Hash","name":"url","is_show":0},{"label":"API Key","name":"key","is_show":1},{"label":"Client Secret","name":"secret","is_show":0}]
+        }';
     }
 }
 

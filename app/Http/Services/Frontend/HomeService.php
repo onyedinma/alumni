@@ -70,4 +70,25 @@ class HomeService
     }
 
 
+    public function getPhotoGalleriesWithFilter($decade = null)
+    {
+        $query = PhotoGallery::where('photo_galleries.tenant_id', getTenantId())
+            ->where('status', STATUS_ACTIVE);
+
+        if ($decade) {
+            $query->where('decade', $decade);
+        }
+
+        return $query->orderBy('id', 'DESC')->get();
+    }
+
+    public function getGalleryDecades()
+    {
+        return PhotoGallery::where('tenant_id', getTenantId())
+            ->where('status', STATUS_ACTIVE)
+            ->whereNotNull('decade')
+            ->distinct()
+            ->orderBy('decade', 'desc')
+            ->pluck('decade');
+    }
 }

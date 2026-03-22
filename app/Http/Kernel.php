@@ -90,5 +90,6 @@ class Kernel extends HttpKernel
         'addon' => AddonMiddleware::class,
         'tenancy' => TenancyMiddleware::class,
         'subscription' => SubscriptionMiddleware::class,
+        'sanitize.html' => \App\Http\Middleware\SanitizeHtml::class,
     ];
 }

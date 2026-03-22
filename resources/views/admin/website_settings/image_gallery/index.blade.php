@@ -400,6 +400,8 @@
         </div>
     </div>
     <!-- Edit Modal section end -->
+
+    @include('admin.website_settings.partials.upload-preview-script')
 @endsection
 @push('script')
     <script src="{{ asset('admin/js/photo-gallery.js') }}"></script>

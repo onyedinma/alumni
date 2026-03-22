@@ -12,5 +12,7 @@ class PhotoGallery extends Model
         'caption',
         'photo',
         'status',
+        'decade',
+        'is_historical',
     ];
 }

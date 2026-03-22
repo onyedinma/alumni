@@ -1,3 +1,6 @@
+@php
+    /** @var \Illuminate\Support\ViewErrorBag $errors */
+@endphp
 @extends('auth.layouts.app')
 
 @push('title')
@@ -7,8 +10,8 @@
 @push('style')
     <style>
         /* ============================================
-       LOGIN PAGE REDESIGN - PREMIUM DARK THEME
-       ============================================ */
+           LOGIN PAGE REDESIGN - PREMIUM DARK THEME
+           ============================================ */
 
         /* Main Container */
         .login-redesign {

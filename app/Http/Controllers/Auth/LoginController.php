@@ -83,33 +83,54 @@ class LoginController extends Controller
         $remember = request('remember');
 
         if (!Auth::attempt($credentials, $remember)) {
-            return redirect("login")->withInput()->with('error',  __('Email or password is incorrect'));
+            return redirect("login")->withInput()->with('error', __('Email or password is incorrect'));
         }
 
         $user = auth()->user();
-        if($user->tenant_id != tenant('id') && (isCentralDomain() && !in_array($user->role, [USER_ROLE_ADMIN, USER_ROLE_SUPER_ADMIN]))){
+        if (isAddonInstalled('ALUSAAS') && $user->tenant_id != tenant('id') && (isCentralDomain() && !in_array($user->role, [USER_ROLE_ADMIN, USER_ROLE_SUPER_ADMIN]))) {
             Auth::logout();
-            return redirect("login")->withInput()->with('error',  __('Email or password is incorrect'));
+            return redirect("login")->withInput()->with('error', __('Email or password is incorrect'));
         }
 
-        if ($user->email_verification_status == STATUS_ACTIVE) {
-            if ($user->status == STATUS_SUSPENDED) {
-                Auth::logout();
-                return redirect("login")->withInput()->with('error', __('Your account is suspended Please contact our support center'));
-            } elseif ($user->deleted_at != null) {
-                Auth::logout();
-                return redirect("login")->withInput()->with('error', __('Your account has been deleted'));
-            }
-
-            if (isset($user) && ($user->status == STATUS_PENDING)) {
-                Auth::logout();
-                return redirect("login")->with('error', __('Your account is under approval. Please wait for approval'));
-            } else if (isset($user) && ($user->status == STATUS_REJECT)) {
-                Auth::logout();
-                return redirect("login")->withInput()->with('error', __('Your account is inactive. Please contact with admin'));
-            } else {
-                return redirect('login');
-            }
+        // Check user status first
+        if ($user->status == STATUS_SUSPENDED) {
+            Auth::logout();
+            return redirect("login")->withInput()->with('error', __('Your account is suspended. Please contact our support center'));
         }
+
+        if ($user->deleted_at != null) {
+            Auth::logout();
+            return redirect("login")->withInput()->with('error', __('Your account has been deleted'));
+        }
+
+        if ($user->status == STATUS_PENDING) {
+            Auth::logout();
+            return redirect("login")->with('error', __('Your account is under approval. Please wait for approval'));
+        }
+
+        if ($user->status == STATUS_REJECT) {
+            Auth::logout();
+            return redirect("login")->withInput()->with('error', __('Your account is inactive. Please contact with admin'));
+        }
+
+        // All checks passed - redirect to appropriate dashboard
+        if ($user->role == USER_ROLE_ADMIN || $user->role == USER_ROLE_SUPER_ADMIN) {
+            return redirect()->route('admin.dashboard');
+        }
+
+        return redirect()->route('dashboard');
+    }
+
+    public function logout(Request $request)
+    {
+        if (Auth::check()) {
+            User::where('id', Auth::user()->id)->update(['last_seen' => now()->subMinutes(10)]);
+        }
+
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login');
     }
 }

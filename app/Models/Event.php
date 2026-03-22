@@ -32,11 +32,13 @@ class Event extends Model
         'date' => 'datetime:Y-m-d H:i:s',
     ];
 
-    public function author(){
+    public function author()
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(EventCategory::class, 'event_category_id');
     }
 
@@ -45,7 +47,21 @@ class Event extends Model
         return $this->morphMany(Payment::class, 'paymentable');
     }
 
-    public function eventTicket(){
+    public function eventTicket()
+    {
         return $this->hasMany(EventTicket::class);
+    }
+
+    public function eventTickets()
+    {
+        return $this->hasMany(EventTicket::class);
+    }
+
+    /**
+     * Scope to current tenant.
+     */
+    public function scopeTenant($query)
+    {
+        return $query->where('tenant_id', getTenantId());
     }
 }

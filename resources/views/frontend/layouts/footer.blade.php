@@ -212,9 +212,11 @@
                 <h4 class="hp-footer__title">{{ __('Quick Links') }}</h4>
                 <ul class="hp-footer__links">
                     <li><a href="{{ route('pages', 'about-us') }}">{{ __('About Us') }}</a></li>
-                    <li><a href="{{ route('pages', 'constitution') }}">{{ __('Constitution') }}</a></li>
+                    <li><a href="{{ route('school.identity') }}">{{ __('School Identity') }}</a></li>
+                    <li><a href="{{ route('gallery') }}">{{ __('Photo Gallery') }}</a></li>
+                    <li><a href="{{ route('hall-of-fame') }}">{{ __('Hall of Fame') }}</a></li>
+                    <li><a href="{{ route('in-memoriam') }}">{{ __('In Memoriam') }}</a></li>
                     <li><a href="{{ route('all.event') }}">{{ __('Events') }}</a></li>
-                    <li><a href="{{ route('all.stories') }}">{{ __('Stories') }}</a></li>
                     <li><a href="{{ route('contact_us') }}">{{ __('Contact') }}</a></li>
                 </ul>
             </div>
@@ -246,7 +248,8 @@
         <!-- Bottom -->
         <div class="hp-footer__bottom">
             <p class="hp-footer__copyright">© {{ date('Y') }} {{ getOption('app_name') }}.
-                {{ __('All rights reserved.') }}</p>
+                {{ __('All rights reserved.') }}
+            </p>
         </div>
     </div>
 </footer>

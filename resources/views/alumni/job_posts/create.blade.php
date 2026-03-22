@@ -123,6 +123,57 @@
             color: var(--text-secondary, #B4BCC8);
             font-size: 12px;
         }
+
+        /* Mobile Responsive Adjustments */
+        @media (max-width: 767px) {
+            .create-job-section {
+                padding: 20px 0;
+            }
+
+            .premium-job-card {
+                padding: 20px;
+                border-radius: 16px;
+                box-shadow: none;
+                border: 1px solid rgba(255, 255, 255, 0.05);
+            }
+
+            .premium-job-card::before {
+                border-radius: 16px 16px 0 0;
+            }
+
+            .form-title {
+                font-size: 22px;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+
+            .premium-label {
+                font-size: 13px;
+            }
+
+            .btn-premium-gold {
+                width: 100%;
+                padding: 14px 20px;
+            }
+
+            .col-md-6 {
+                margin-bottom: 16px;
+            }
+
+            /* Fix Summernote on mobile */
+            .note-editor.note-frame {
+                border-radius: 12px !important;
+            }
+
+            .note-toolbar {
+                padding: 5px !important;
+            }
+
+            .note-btn {
+                padding: 5px 8px !important;
+                font-size: 12px !important;
+            }
+        }
     </style>
 
     <div class="create-job-section">

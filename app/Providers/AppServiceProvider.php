@@ -36,17 +36,21 @@ class AppServiceProvider extends ServiceProvider
             $connection = DB::connection()->getPdo();
             if ($connection) {
                 $allOptions = [];
-                if(getAddonCodeBuildVersion('ALUSAAS')){
+                if (getAddonCodeBuildVersion('ALUSAAS')) {
                     $host = request()->getHost();
                     $domain = Domain::where('domain', $host)->first();
-                }else{
+                } else {
                     $domain = Domain::first();
                 }
 
-                $allOptions['settings'] = Setting::where('tenant_id', $domain->tenant_id ?? NULL)->get()->pluck('option_value', 'option_key')->toArray();
-                $superAdminOptions['settings'] = Setting::where('tenant_id', NULL)->whereIn('option_key', superAdminSetting())->get()->pluck('option_value', 'option_key')->toArray();
+                $tenantId = $domain->tenant_id ?? 'central';
+                $cacheKey = 'app_settings_' . $tenantId;
 
-                $allOptions['settings'] = array_merge($allOptions['settings'],$superAdminOptions['settings']);
+                $allOptions['settings'] = \Illuminate\Support\Facades\Cache::remember($cacheKey, 3600, function () use ($domain) {
+                    $settings = Setting::where('tenant_id', $domain->tenant_id ?? NULL)->get()->pluck('option_value', 'option_key')->toArray();
+                    $superAdminSettings = Setting::where('tenant_id', NULL)->whereIn('option_key', superAdminSetting())->get()->pluck('option_value', 'option_key')->toArray();
+                    return array_merge($settings, $superAdminSettings);
+                });
 
                 config($allOptions);
 
@@ -71,7 +75,7 @@ class AppServiceProvider extends ServiceProvider
                 config(['app.currencySymbol' => getCurrencySymbol($domain->tenant_id ?? NULL)]);
                 config(['app.isoCode' => getIsoCode($domain->tenant_id ?? NULL)]);
                 config(['app.currencyPlacement' => getCurrencyPlacement($domain->tenant_id ?? NULL)]);
-                config(['app.debug' => getOption('app_debug', true)]);
+                config(['app.debug' => getOption('app_debug', false)]);
                 config(['app.timezone' => getOption('app_timezone', 'UTC')]);
 
                 config(['services.google.client_id' => getOption('google_client_id')]);

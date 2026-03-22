@@ -162,6 +162,8 @@
             background-color: var(--bg-primary, #0B0E11) !important;
             border: 1px solid var(--border-dark, #1F2630) !important;
             color: var(--text-primary, #E6EAF0) !important;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .primary-form-control:focus {
@@ -256,7 +258,8 @@
                                     </div>
                                 </td>
                                 <td>{{ $gateway->title }}</td>
-                                <td>{{ $gateway->slug }}</td>
+                                <td style="max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+                                    title="{{ $gateway->slug }}">{{ $gateway->slug }}</td>
                                 <td>
                                     @if ($gateway->status == ACTIVE)
                                         <div class="status-btn status-btn-green font-13 radius-4">
@@ -302,7 +305,8 @@
                     style="background: var(--bg-elevated, #171C23); border-bottom: 1px solid var(--gold, #D4AF5A);">
                     <h4 class="modal-title" id="editModalLabel"
                         style="color: var(--gold, #D4AF5A) !important; font-family: 'Playfair Display', serif;">
-                        {{ __('Edit Gateway') }}</h4>
+                        {{ __('Edit Gateway') }}
+                    </h4>
                     <button type="button" class="border-0 btn-close" data-bs-dismiss="modal" aria-label="Close"
                         style="filter: invert(1);"></button>
                 </div>
@@ -324,9 +328,11 @@
                             </div>
                             <div>
                                 <h5 class="mb-1" style="color: var(--text-primary, #E6EAF0); font-weight: 600;">
-                                    {{ __('Gateway Settings') }}</h5>
+                                    {{ __('Gateway Settings') }}
+                                </h5>
                                 <p class="mb-0 small" style="color: var(--text-secondary, #B4BCC8);">
-                                    {{ __('Configure keys and access settings.') }}</p>
+                                    {{ __('Configure keys and access settings.') }}
+                                </p>
                             </div>
                         </div>
 

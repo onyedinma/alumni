@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUndefinedMethodInspection */
+
 namespace App\Http\Services;
 
 use App\Http\Repositories\AdminSettingRepository;

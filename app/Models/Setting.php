@@ -14,4 +14,15 @@ class Setting extends Model
         'option_key',
         'option_value'
     ];
+
+    protected static function booted()
+    {
+        static::saved(function ($setting) {
+            \Illuminate\Support\Facades\Cache::forget('app_settings_' . $setting->tenant_id);
+        });
+
+        static::deleted(function ($setting) {
+            \Illuminate\Support\Facades\Cache::forget('app_settings_' . $setting->tenant_id);
+        });
+    }
 }

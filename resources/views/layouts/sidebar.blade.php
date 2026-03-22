@@ -223,6 +223,22 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('election.index') }}"
+                        class="d-flex align-items-center cg-10 {{ $activeElection ?? '' }}">
+                        <div class="d-flex">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 14L9 16L13 12" stroke="white" stroke-opacity="0.7" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <rect x="3" y="6" width="18" height="15" rx="2" stroke="white" stroke-opacity="0.7"
+                                    stroke-width="1.5" />
+                                <path d="M8 6V4C8 3.44772 8.44772 3 9 3H15C15.5523 3 16 3.44772 16 4V6" stroke="white"
+                                    stroke-opacity="0.7" stroke-width="1.5" />
+                            </svg>
+                        </div>
+                        <span>{{ __('Elections') }}</span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('chats.index') }}" class="{{ $activeMessage ?? '' }} d-flex align-items-center cg-10">
                         <div class="d-flex">
                             <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -318,6 +334,106 @@
                                 </li>
                             </ul>
                         </div>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.elections.index') }}"
+                            class="{{ $activeAdminElection ?? '' }} d-flex align-items-center cg-10">
+                            <div class="d-flex">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 14L9 16L13 12" stroke="white" stroke-opacity="0.7" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <rect x="3" y="6" width="18" height="15" rx="2" stroke="white" stroke-opacity="0.7"
+                                        stroke-width="1.5" />
+                                    <path d="M8 6V4C8 3.44772 8.44772 3 9 3H15C15.5523 3 16 3.44772 16 4V6" stroke="white"
+                                        stroke-opacity="0.7" stroke-width="1.5" />
+                                </svg>
+                            </div>
+                            <span class="">{{ __('Manage Elections') }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.bank-transfers.index') }}"
+                            class="{{ $activeBankTransfer ?? '' }} d-flex align-items-center cg-10">
+                            <div class="d-flex">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="2" y="5" width="20" height="14" rx="2" stroke="white" stroke-opacity="0.7"
+                                        stroke-width="1.5" />
+                                    <path d="M2 10H22" stroke="white" stroke-opacity="0.7" stroke-width="1.5" />
+                                    <path d="M6 15H10" stroke="white" stroke-opacity="0.7" stroke-width="1.5"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </div>
+                            <span class="">{{ __('Bank Transfers') }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.financial-dashboard') }}"
+                            class="{{ $activeFinancialDashboard ?? '' }} d-flex align-items-center cg-10">
+                            <div class="d-flex">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 3V21H21" stroke="white" stroke-opacity="0.7" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M7 14L11 10L15 14L21 8" stroke="white" stroke-opacity="0.7" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <span class="">{{ __('Financial Dashboard') }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.in-memoriam.index') }}"
+                            class="{{ $activeInMemoriam ?? '' }} d-flex align-items-center cg-10">
+                            <div class="d-flex">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z"
+                                        stroke="white" stroke-opacity="0.7" stroke-width="1.5" />
+                                    <path d="M12 8V12L15 15" stroke="white" stroke-opacity="0.7" stroke-width="1.5"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </div>
+                            <span class="">{{ __('In Memoriam') }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.hall-of-fame.index') }}"
+                            class="{{ $activeHallOfFame ?? '' }} d-flex align-items-center cg-10">
+                            <div class="d-flex">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
+                                        stroke="white" stroke-opacity="0.7" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <span class="">{{ __('Hall of Fame') }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.excos.index') }}"
+                            class="{{ $activeExcos ?? '' }} d-flex align-items-center cg-10">
+                            <div class="d-flex">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17 21V19C17 16.7909 15.2091 15 13 15H11C8.79086 15 7 16.7909 7 19V21M12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7C16 9.20914 14.2091 11 12 11ZM21 21V19C21 17.394 20.0526 15.9984 18.6655 15.3405M16 3.13156C17.4727 3.55598 18.5 4.90994 18.5 6.5C18.5 8.09006 17.4727 9.44402 16 9.86844M4.5 15.3405C3.11286 15.9984 2.16547 17.394 2.16547 19V21M8 9.86844C6.52731 9.44402 5.5 8.09006 5.5 6.5C5.5 4.90994 6.52731 3.55598 8 3.13156" stroke="white" stroke-opacity="0.7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <span class="">{{ __('Excos') }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.event-check-in.index') }}"
+                            class="{{ $activeEventCheckIn ?? '' }} d-flex align-items-center cg-10">
+                            <div class="d-flex">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M3 7V5C3 3.89543 3.89543 3 5 3H19C20.1046 3 21 3.89543 21 5V7M3 7H21M3 7V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V7"
+                                        stroke="white" stroke-opacity="0.7" stroke-width="1.5" stroke-linecap="round" />
+                                    <path d="M9 14L11 16L15 12" stroke="white" stroke-opacity="0.7" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <span class="">{{ __('Event Check-In') }}</span>
+                        </a>
                     </li>
                     <li>
                         <a href="#membership-admin" data-bs-toggle="collapse" role="button"
@@ -490,7 +606,7 @@
                                 </li>
                                 <li><a class="{{ $activeConfigurationSetting ?? '' }}"
                                         href="{{ route('admin.setting.configuration-settings') }}">{{ __('Configurations
-                                                                                                                                                                Settings') }}</a>
+                                                                                                                                                                                                                                Settings') }}</a>
                                 </li>
                                 <li><a class="{{ $activeCurrenciesSetting ?? '' }}"
                                         href="{{ route('admin.setting.currencies.index') }}">{{ __('Currency Settings') }}</a>

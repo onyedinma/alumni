@@ -8,6 +8,7 @@ use App\Models\PostComment;
 use App\Traits\ResponseTrait;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use App\Http\Services\AdminNotificationService;
 
 class PostService
 {
@@ -20,14 +21,16 @@ class PostService
             $user = auth()->user();
             $post = new Post();
             $post->body = htmlspecialchars($request->body);
-            $post->slug = getSlug(getSubText($request->body, 40)).rand(1000, 999999);
+            $post->slug = getSlug(getSubText($request->body, 40)) . rand(1000, 999999);
             $post->tenant_id = getTenantId();
             $post->created_by = $user->id;
+            $post->image_url = $request->image_url;
+            $post->video_url = $request->video_url;
             $post->save();
 
             //post media
-            foreach($request->file ?? [] as $index => $media){
-                if ($request->hasFile('file.'.$index)) {
+            foreach ($request->file ?? [] as $index => $media) {
+                if ($request->hasFile('file.' . $index)) {
 
                     $new_file = new FileManager();
                     $uploaded = $new_file->upload('posts', $media);
@@ -37,6 +40,9 @@ class PostService
                     ]);
                 }
             }
+
+            // Notify admins of new post
+            AdminNotificationService::newPost($post, $user);
 
             DB::commit();
 
@@ -56,19 +62,21 @@ class PostService
 
             $post = Post::where('created_by', auth()->id())->where('tenant_id', getTenantId())->where('slug', $request->slug)->first();
 
-            if(is_null($post)){
+            if (is_null($post)) {
                 return $this->error([], __('This post not found'));
             }
 
             $post->body = htmlspecialchars($request->body);
+            $post->image_url = $request->image_url;
+            $post->video_url = $request->video_url;
             $post->save();
 
             //post media
 
             $oldFiles = $request->oldFiles ?? [];
 
-            foreach($request->file ?? [] as $index => $media){
-                if ($request->hasFile('file.'.$index)) {
+            foreach ($request->file ?? [] as $index => $media) {
+                if ($request->hasFile('file.' . $index)) {
 
                     $new_file = new FileManager();
                     $uploaded = $new_file->upload('posts', $media);
@@ -96,7 +104,7 @@ class PostService
 
     public function getBySlug($slug)
     {
-        return Post::whereSlug($slug)->where('tenant_id', getTenantId())->with(['comments', 'likes:id', 'author', 'media.file_manager'])->withCount('replies')->first();
+        return Post::where('slug', $slug)->where('tenant_id', getTenantId())->with(['comments', 'likes:id', 'author', 'media.file_manager'])->withCount('replies')->first();
     }
 
     public function deleteBySlug($request)
@@ -106,14 +114,14 @@ class PostService
             DB::beginTransaction();
             $post = Post::where('created_by', auth()->id())->where('tenant_id', getTenantId())->where('slug', $request->slug)->first();
 
-            if(is_null($post)){
+            if (is_null($post)) {
                 return $this->error([], __('This post not found'));
             }
             $post->delete();
             DB::commit();
             $message = getMessage(DELETED_SUCCESSFULLY);
             return $this->success([], $message);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             $message = getErrorMessage($e, $e->getMessage());
             return $this->error([], $message);
@@ -126,18 +134,18 @@ class PostService
             DB::beginTransaction();
             $post = Post::where('slug', $request->slug)->where('tenant_id', getTenantId())->first();
 
-            if(is_null($post)){
+            if (is_null($post)) {
                 return $this->error([], __('This post not found'));
             }
-            if($post->likes()->where('id', auth()->id())->first()){
+            if ($post->likes()->where('id', auth()->id())->first()) {
                 $message = __('Dislike successfully');
-            }else{
+            } else {
                 $message = __('Like successfully');
             }
             $post->likes()->toggle([auth()->id()]);
             DB::commit();
             return $this->success([], $message);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             $message = getErrorMessage($e, $e->getMessage());
             return $this->error([], $message);
@@ -152,7 +160,7 @@ class PostService
 
             $post = Post::where('slug', $request->slug)->where('tenant_id', getTenantId())->first();
 
-            if(is_null($post)){
+            if (is_null($post)) {
                 return $this->error([], __('This post not found'));
             }
 
@@ -180,7 +188,7 @@ class PostService
         try {
 
             $comment = PostComment::where('id', $request->id)->where('user_id', auth()->id())->where('tenant_id', getTenantId())->first();
-            if(is_null($comment)){
+            if (is_null($comment)) {
                 return $this->error([], __('This post not found'));
             }
 
@@ -203,7 +211,7 @@ class PostService
         try {
 
             $comment = PostComment::where('id', $request->id)->where('user_id', auth()->id())->where('tenant_id', getTenantId())->first();
-            if(is_null($comment)){
+            if (is_null($comment)) {
                 return $this->error([], __('This post not found'));
             }
 

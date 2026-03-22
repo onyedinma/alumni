@@ -15,7 +15,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        // Send birthday wishes daily at 6:00 AM
+        $schedule->command('birthdays:send-wishes')->dailyAt('06:00');
+
+        // Update exchange rates daily at 1:00 AM
+        $schedule->command('rates:update')->dailyAt('01:00');
     }
 
     /**
@@ -25,7 +29,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

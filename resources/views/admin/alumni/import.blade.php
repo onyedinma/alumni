@@ -1,3 +1,6 @@
+@php
+    /** @var \Illuminate\Support\ViewErrorBag $errors */
+@endphp
 @extends('layouts.app')
 @push('title')
     {{ $title }}
@@ -168,6 +171,17 @@
                                     required>
                                 <small class="text-muted-light">Allowed types: .csv, .txt</small>
                             </div>
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="update_existing"
+                                        id="update_existing" value="1"
+                                        style="background-color: var(--bg-primary); border-color: var(--gold);">
+                                    <label class="form-check-label text-muted-light" for="update_existing">
+                                        <strong class="text-gold">Update existing records</strong> - If an email already
+                                        exists, update their profile instead of skipping
+                                    </label>
+                                </div>
+                            </div>
                             <button type="submit" class="premium-btn">
                                 <i class="fa fa-upload me-2"></i> Import Alumni
                             </button>
@@ -187,7 +201,10 @@
                                 found, it may be ignored.</li>
                             <li><strong>Houses:</strong> Use the exact names like "Red House", "Green House".</li>
                             <li><strong>Dates:</strong> Use format YYYY-MM-DD (e.g., 1990-01-01).</li>
-                            <li><strong>Emails:</strong> Must be unique. Duplicate emails will be skipped.</li>
+                            <li><strong>Emails:</strong> Must be unique. Duplicate emails will be skipped unless "Update
+                                existing records" is checked.</li>
+                            <li><strong>Update Mode:</strong> When checked, existing alumni profiles will be updated with
+                                new data from the CSV.</li>
                         </ul>
                     </div>
                 </div>

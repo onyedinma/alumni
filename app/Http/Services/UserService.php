@@ -135,7 +135,7 @@ class UserService
 
             if ($request->hasFile('image')) {
                 $new_file = new FileManager();
-                $uploaded = $new_file->upload('user', $request->image);
+                $uploaded = $new_file->upload('users', $request->image);
                 $userData['image'] = $uploaded->id;
             }
 

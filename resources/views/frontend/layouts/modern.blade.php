@@ -9,6 +9,17 @@
     <title>{{ getOption('app_name') }} - @stack('title')</title>
     <link rel="icon" href="{{ getSettingImage('app_logo') }}" type="image/png">
 
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="@stack('meta_description', getOption('app_name') . ' - Alumni Association')">
+    <meta property="og:title" content="{{ getOption('app_name') }} - @stack('title')">
+    <meta property="og:description"
+        content="@stack('meta_description', getOption('app_name') . ' - Alumni Association')">
+    <meta property="og:image" content="@stack('meta_image', getSettingImage('app_logo'))">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta name="twitter:card" content="summary_large_image">
+    @stack('meta')
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,6 +33,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/public-premium.css') }}" rel="stylesheet">
 
     <!-- Retain existing styles for plugins if needed, but try to override with Tailwind -->
     @stack('style')
@@ -118,7 +130,7 @@
     </style>
 </head>
 
-<body class="font-sans antialiased text-gray-800 bg-gray-50">
+<body class="font-sans antialiased" style="background-color: #0B0E11; color: #E6EAF0;">
 
     @if (getOption('app_preloader_status', 0) == STATUS_ACTIVE)
         <div id="preloader">
@@ -137,6 +149,9 @@
 
         @include('frontend.layouts.modern-footer')
     </div>
+
+    <!-- WhatsApp Widget -->
+    @include('frontend.partials.whatsapp')
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>

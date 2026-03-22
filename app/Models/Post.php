@@ -11,8 +11,11 @@ class Post extends Model
 
     protected $fillable = [
         'tenant_id',
+        'type',
         'slug',
         'body',
+        'image_url',
+        'video_url',
         'status',
         'created_by'
     ];

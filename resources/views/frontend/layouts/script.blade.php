@@ -24,8 +24,21 @@
         toastr.warning("{{ session('warning') }}");
     @endif
 
-    @if (@$errors->any())
-        @foreach ($errors->all() as $error)
+    @php
+        $allErrors = [];
+        if (isset($errors)) {
+            if (is_array($errors)) {
+                $allErrors = $errors;
+            } elseif ($errors instanceof \Illuminate\Support\MessageBag) {
+                $allErrors = $errors->all();
+            } elseif (method_exists($errors, 'all')) {
+                $allErrors = $errors->all();
+            }
+        }
+    @endphp
+
+    @if (count($allErrors) > 0)
+        @foreach ($allErrors as $error)
             toastr.error("{{ $error }}");
         @endforeach
     @endif

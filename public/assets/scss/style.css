@@ -2149,8 +2149,8 @@ Version: 1.0
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1rem;
-  color: var(--text-black);
-  background-color: var(--color15);
+  color: #FFFFFF !important;
+  background-color: #8B2635 !important;
 }
 
 .zBadge-free {

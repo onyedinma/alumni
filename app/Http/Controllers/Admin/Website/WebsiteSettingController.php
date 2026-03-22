@@ -86,6 +86,14 @@ class WebsiteSettingController extends Controller
         return view('admin.website_settings.constitution')->with($data);
     }
 
+    public function ourHistory()
+    {
+        $data['title'] = __("Our History");
+        $data['activeManageWebsiteSetting'] = 'active';
+        $data['ourHistoryActiveClass'] = 'active-color-one';
+        return view('admin.website_settings.our-history')->with($data);
+    }
+
     public function contactUs(Request $request)
     {
         if ($request->ajax()) {

@@ -51,6 +51,15 @@
         <link rel="shortcut icon" href="{{ getSettingImage('app_fav_icon') }}" type="image/x-icon">
         <link rel="shortcut icon" href="{{ getSettingImage('app_fav_icon') }}">
     @endif
+
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
+    <meta name="theme-color" content="#6366f1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="{{ getOption('app_name') }}">
+    <link rel="apple-touch-icon" href="{{ asset('assets/images/pwa/icon-192x192.png') }}">
+
     <!-- fonts file -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

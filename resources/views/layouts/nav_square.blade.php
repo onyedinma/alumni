@@ -15,15 +15,39 @@
     <!-- Right Top Bar -->
     <div class="flex items-center space-x-6">
 
+        <!-- Messages -->
+        <div class="relative group">
+            <a href="{{ route('chats.index') }}"
+                class="text-gray-400 hover:text-[var(--gold,#D4AF5A)] transition-all duration-300 relative block p-2 rounded-full hover:bg-[var(--maroon,#8B2635)] hover:bg-opacity-10"
+                title="{{ __('Messages') }}">
+                <i class="fas fa-comment-dots text-xl"></i>
+                @if(userMessageUnseen() > 0)
+                    <span class="absolute top-1 right-1 flex h-4 w-4">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--maroon,#8B2635)] opacity-75"></span>
+                        <span
+                            class="relative inline-flex rounded-full h-4 w-4 bg-[var(--maroon,#8B2635)] text-white text-[9px] font-bold items-center justify-center border border-[var(--bg-surface,#12161C)]">
+                            {{ userMessageUnseen() }}
+                        </span>
+                    </span>
+                @endif
+            </a>
+        </div>
+
         <!-- Notifications -->
-        <div class="dropdown relative">
-            <button class="text-gray-400 hover:text-[var(--gold,#D4AF5A)] transition-colors relative" type="button"
-                data-bs-toggle="dropdown" aria-expanded="false">
+        <div class="dropdown relative group">
+            <button
+                class="text-gray-400 hover:text-[var(--gold,#D4AF5A)] transition-all duration-300 relative block p-2 rounded-full hover:bg-[var(--maroon,#8B2635)] hover:bg-opacity-10"
+                type="button" data-bs-toggle="dropdown" aria-expanded="false" title="{{ __('Notifications') }}">
                 <i class="fas fa-bell text-xl"></i>
                 @if(count(userNotification('unseen')) > 0)
-                    <span
-                        class="absolute -top-2 -right-2 bg-[var(--maroon,#8B2635)] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full border border-[var(--bg-surface,#12161C)]">
-                        {{ count(userNotification('unseen')) }}
+                    <span class="absolute top-1 right-1 flex h-4 w-4">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--gold,#D4AF5A)] opacity-75"></span>
+                        <span
+                            class="relative inline-flex rounded-full h-4 w-4 bg-[var(--gold,#D4AF5A)] text-black text-[9px] font-bold items-center justify-center border border-[var(--bg-surface,#12161C)]">
+                            {{ count(userNotification('unseen')) }}
+                        </span>
                     </span>
                 @endif
             </button>
@@ -47,7 +71,8 @@
                 @endforeach
                 @if(count(userNotification('unseen')) == 0)
                     <li class="px-4 py-6 text-center text-[var(--text-secondary,#B4BCC8)] text-sm">
-                        {{ __('No new notifications') }}</li>
+                        {{ __('No new notifications') }}
+                    </li>
                 @endif
             </ul>
         </div>

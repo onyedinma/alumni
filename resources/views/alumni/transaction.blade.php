@@ -187,11 +187,87 @@
             opacity: 0.5;
         }
 
-        /* Modal Styling */
         .premium-modal {
             background: var(--bg-surface, #12161C) !important;
             border: 1px solid var(--gold, #D4AF5A) !important;
             color: var(--text-primary, #E6EAF0) !important;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 767px) {
+            .premium-transaction-list {
+                padding: 16px 0;
+            }
+
+            .premium-transaction-card {
+                padding: 16px;
+                border-radius: 16px;
+            }
+
+            .page-header {
+                justify-content: center;
+                margin-bottom: 20px !important;
+            }
+
+            .page-header h4 {
+                font-size: 22px !important;
+            }
+
+            .page-header .header-icon {
+                font-size: 22px !important;
+            }
+
+            /* DataTables mobile */
+            .dataTables_wrapper .dataTables_length,
+            .dataTables_wrapper .dataTables_filter {
+                float: none !important;
+                text-align: center !important;
+                margin-bottom: 12px !important;
+                width: 100% !important;
+            }
+
+            .dataTables_wrapper .dataTables_filter input {
+                width: 100% !important;
+                margin-left: 0 !important;
+                display: block;
+                margin-top: 8px;
+            }
+
+            .dataTables_wrapper .dataTables_info,
+            .dataTables_wrapper .dataTables_paginate {
+                float: none !important;
+                text-align: center !important;
+                margin-top: 12px !important;
+            }
+
+            /* Expanded rows */
+            table.dataTable>tbody>tr.child ul.dtr-details {
+                display: block;
+                width: 100%;
+            }
+
+            table.dataTable>tbody>tr.child ul.dtr-details>li {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            table.dataTable>tbody>tr.child span.dtr-title {
+                font-weight: 600;
+                color: var(--gold, #D4AF5A);
+            }
+
+            /* Invoice modal */
+            .modal-dialog.modal-lg {
+                margin: 10px !important;
+                max-width: calc(100% - 20px) !important;
+            }
+
+            .premium-modal {
+                padding: 16px !important;
+                border-radius: 16px !important;
+            }
         }
     </style>
 

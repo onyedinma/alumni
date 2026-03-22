@@ -223,6 +223,103 @@
         .zModalTwo-body h4 {
             color: var(--gold, #D4AF5A) !important;
         }
+
+        /* Mobile Responsive */
+        @media (max-width: 767px) {
+            .premium-alumni-list {
+                padding: 8px 0;
+            }
+
+            .premium-alumni-list .container {
+                max-width: 100% !important;
+                padding-left: 8px !important;
+                padding-right: 8px !important;
+            }
+
+            .premium-alumni-card {
+                padding: 12px;
+                border-radius: 12px;
+            }
+
+            /* Filter section */
+            .alumniFilter {
+                padding: 16px !important;
+                border-radius: 12px !important;
+            }
+
+            .alumniFilter .filterOptions {
+                flex-direction: column !important;
+                gap: 12px !important;
+            }
+
+            .alumniFilter .filterOptions .item {
+                width: 100% !important;
+            }
+
+            .alumniFilter .advance-filter {
+                width: 100% !important;
+                text-align: center;
+            }
+
+            /* DataTables mobile */
+            .dataTables_wrapper .dataTables_length,
+            .dataTables_wrapper .dataTables_filter {
+                float: none !important;
+                text-align: center !important;
+                margin-bottom: 12px !important;
+                width: 100% !important;
+            }
+
+            .dataTables_wrapper .dataTables_filter input {
+                width: 100% !important;
+                margin-left: 0 !important;
+                display: block;
+                margin-top: 8px;
+            }
+
+            .dataTables_wrapper .dataTables_info,
+            .dataTables_wrapper .dataTables_paginate {
+                float: none !important;
+                text-align: center !important;
+                margin-top: 12px !important;
+            }
+
+            /* Expanded rows */
+            table.dataTable>tbody>tr.child ul.dtr-details {
+                display: block;
+                width: 100%;
+            }
+
+            table.dataTable>tbody>tr.child ul.dtr-details>li {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            table.dataTable>tbody>tr.child span.dtr-title {
+                font-weight: 600;
+                color: var(--gold, #D4AF5A);
+            }
+
+            /* Action buttons */
+            .action-btn {
+                width: 40px !important;
+                height: 40px !important;
+            }
+
+            /* Modal fixes */
+            .modal-dialog {
+                margin: 10px !important;
+                max-width: calc(100% - 20px) !important;
+            }
+
+            .show-phone,
+            .show-email {
+                font-size: 22px !important;
+                word-break: break-all;
+            }
+        }
     </style>
 
     <!-- Page content area start -->
@@ -356,7 +453,7 @@
                     <button
                         class="bg-cdef84 border-0 bd-ra-12 py-13 px-26 fs-15 fw-500 lh-25 text-black hover-bg-one advance-filter">{{__('Search Now')}}</button>
                     <!-- <div class="item">
-                                                              </div> -->
+                                                                      </div> -->
                 </div>
             </div>
         </div>
